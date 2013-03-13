@@ -1,15 +1,15 @@
 {
   "name": "reload",
   "version": "0.0.1",
-  "description": "",
+  "description": "Node.js module to refresh and reload your code in your browser when your code changes. Only use during development.",
   "homepage": [
     ""
   ],
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "git@github.com:jprichardson/node-reload.git"
   },
-  "keywords": [],
+  "keywords": ["reload", "refresh", "http", "express", "development"],
   "author": "JP Richardson <jprichardson@gmail.com>",
   "licenses": [
     {
