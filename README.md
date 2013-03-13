@@ -44,17 +44,14 @@ app.configure(function() {
   app.use(express.static(clientDir)) //should cache static assets
 })
 
-app.configure('development', function(){
-  app.use(express.errorHandler());
-})
-
 app.get('/', function(req, res) {
   res.sendfile(path.join(publicDir, 'index.html'))
 })
 
 var server = http.createServer(app)
 
-reload(server, app, 300)
+//reload code here
+reload(server, app)
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
