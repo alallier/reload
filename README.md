@@ -72,6 +72,11 @@ server.listen(app.get('port'), function(){
 <h1>Hello!</h1>
 ```
 
+install supervisor:
+```
+npm install -g supervisor
+```
+
 reload on any html or js file change:
 ```
 supervisor -e 'html|js' node server.js
