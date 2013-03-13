@@ -87,7 +87,7 @@ supervisor -e 'html|js' node server.js
 How does it work?
 -----------------
 
-It's actually stupidly simple. We leverage `supervisor` to restart the server if file changes. The client side keeps a websocket open, once the websocket closes, the client sets a timeout to reload in approximately 300 ms. Simple huh?
+It's actually stupidly simple. We leverage `supervisor` to restart the server if any file changes. The client side keeps a websocket open, once the websocket closes, the client sets a timeout to reload in approximately 300 ms. Simple huh?
 
 
 API
