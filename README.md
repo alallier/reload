@@ -67,6 +67,7 @@ server.listen(app.get('port'), function(){
 <meta charset="utf-8">
 <title>My sweet app!</title>
 
+<!-- all you have to do is include the reload script -->
 <script src="/reload/reload.js"></script>
 
 <h1>Hello!</h1>
