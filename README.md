@@ -41,7 +41,7 @@ app.configure(function() {
   app.use(express.logger('dev'))
   app.use(express.bodyParser()) //parses json, multi-part (file), url-encoded
   app.use(app.router) //need to be explicit, (automatically adds it if you forget)
-  app.use(express.static(clientDir)) //should cache static assets
+  app.use(express.static(publicDir)) //should cache static assets
 })
 
 app.get('/', function(req, res) {
