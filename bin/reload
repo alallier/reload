@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+var program = require('commander')
+  , supervisor = require('supervisor')
+  , path = require('path')
+  , ON_DEATH = require('death')
+  , os = require('os')
+  , fs = require('fs')
+  , clc = require('cli-color')
+
+program.version(require('../package.json').version)
+  .option('-b, --browser', 'Open in the browser automatically.')
+  .option('-d, --dir [dir]', 'The directory to serve up. Defaults to current dir.', process.cwd())
+  .option('-e, --exts [extensions]', 'Extensions separated by commas or pipes. Defaults to html,js,css.', 'html|js|css')
+  .option('-p, --port [port]', 'The port to bind to. Can be set with PORT env variable as well. Defaults to 8080', '8080')
+  .option('-t, --time [delay]', 'How long (ms) should the browser wait before reconnecting? Defaults to 300 ms.', '300')
+  .parse(process.argv)
+
+var runFile = path.join(os.tmpdir(), 'reload-' + Math.random().toString().slice(2))
+var serverFile = path.join(__dirname, '../lib/reload-server.js')
+
+if (program.exts.indexOf(','))
+  program.exts = program.exts.replace(/\,/g,'|') //replace comma for pipe, that's what supervisor likes 
+
+var args = ['-e', 'html|js|css', '-q', '--', serverFile, program.port, program.dir, !!program.browser, runFile, program.time]
+supervisor.run(args)
+
+console.log("\n  Reload web server:")
+console.log("    listening on port " + clc.blue.bold(program.port))
+console.log("    monitoring dir " + clc.green.bold(program.dir))
+

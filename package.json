@@ -9,7 +9,13 @@
     "type": "git",
     "url": "git@github.com:jprichardson/node-reload.git"
   },
-  "keywords": ["reload", "refresh", "http", "express", "development"],
+  "keywords": [
+    "reload",
+    "refresh",
+    "http",
+    "express",
+    "development"
+  ],
   "author": "JP Richardson <jprichardson@gmail.com>",
   "licenses": [
     {
@@ -18,7 +24,13 @@
     }
   ],
   "dependencies": {
-    "sockjs": "~0.3.5"
+    "sockjs": "~0.3.5",
+    "supervisor": "~0.5.6",
+    "commander": "~2.0.0",
+    "express": "~3.4.0",
+    "cli-color": "~0.2.3",
+    "open": "0.0.4",
+    "death": "~0.1.0"
   },
   "devDependencies": {},
   "main": "./lib/reload.js",
