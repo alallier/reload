@@ -2,12 +2,9 @@
   "name": "reload",
   "version": "0.1.0",
   "description": "Node.js module to refresh and reload your code in your browser when your code changes. No browser plugins required.",
-  "homepage": [
-    ""
-  ],
   "repository": {
     "type": "git",
-    "url": "git@github.com:jprichardson/node-reload.git"
+    "url": "git@github.com:jprichardson/reload.git"
   },
   "keywords": [
     "reload",
@@ -36,5 +33,8 @@
   "main": "./lib/reload.js",
   "scripts": {
     "test": "mocha test"
+  },
+  "bin": {
+    "reload": "./bin/reload"
   }
 }
