@@ -1,24 +1,25 @@
 Node.js - reload
 ================
 
-Node.js module to refresh and reload your code in your browser when your code changes. Only use during development.
+Node.js module to refresh and reload your code in your browser when your code changes. No browser plugins required.
 
 
 Why?
 ----
 
-Restarting your Http server and refresing your browser is annoying.
+Restarting your Http server and refreshing your browser is annoying.
 
 
 
 Installation
 ------------
 
-    npm install reload
+    npm install [-g] [--save-dev] reload
 
 
-Example
-------
+
+Example for Node.js and browser development
+--------------------------------------------
 
 Use in conjunction with [supervisor](https://github.com/isaacs/node-supervisor), [nodemon](https://github.com/remy/nodemon), or [forever](https://github.com/nodejitsu/forever).
 
@@ -84,10 +85,43 @@ supervisor -e 'html|js' node server.js
 ```
 
 
+
+Example for browser development only
+-------------------------------------
+
+You should install `reload` globally like `npm install -g reload`. Then you can use the `reload` command in your directory without modifying any of your HTML.
+
+Usage:
+
+```
+
+Usage: reload [options]
+
+Options:
+
+  -h, --help               output usage information
+  -V, --version            output the version number
+  -b, --browser            Open in the browser automatically.
+  -d, --dir [dir]          The directory to serve up. Defaults to current dir.
+  -e, --exts [extensions]  Extensions separated by commas or pipes. Defaults to html,js,css.
+  -p, --port [port]        The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
+  -t, --time [delay]       How long (ms) should the browser wait before reconnecting? Defaults to 300 ms.
+
+```
+
+Navigate to your html directory:
+
+    reload -b
+
+this will open your `index.html` file in the browser. Any changes that you make will now reload in the browser. You don't need to modify your HTML at all.
+
+
+
 How does it work?
 -----------------
 
 It's actually stupidly simple. We leverage `supervisor` to restart the server if any file changes. The client side keeps a websocket open, once the websocket closes, the client sets a timeout to reload in approximately 300 ms. Simple huh?
+
 
 
 API
@@ -98,6 +132,7 @@ API
 - `httpServer`: The Node.js http server from the module `http`.
 - `expressApp`: The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
 - `timeout_millis`: The client side refresh time in milliseconds. Default is `300`.
+
 
 
 License

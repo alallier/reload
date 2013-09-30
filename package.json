@@ -1,7 +1,7 @@
 {
   "name": "reload",
   "version": "0.0.2",
-  "description": "Node.js module to refresh and reload your code in your browser when your code changes. Only use during development.",
+  "description": "Node.js module to refresh and reload your code in your browser when your code changes. No browser plugins required.",
   "homepage": [
     ""
   ],
