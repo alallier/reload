@@ -1,7 +1,8 @@
-Node.js - reload
-================
+reload
+=======
 
-Node.js module to refresh and reload your code in your browser when your code changes. No browser plugins required.
+Refresh and reload your code in your browser when your code changes. No browser plugins required. Use with Node.js if you like.
+
 
 
 Why?
