@@ -26,6 +26,7 @@ Use in conjunction with [supervisor](https://github.com/isaacs/node-supervisor),
 
 I recommend `supervisor`, since `nodedemon` time to poll for file changes is too slow and not configurable. Supervisor will feel fast. `forever` tries to do too much. Whenever I look at the docs, I get frustrated and give up.
 
+To avoid hard coding the reload.js link, use `connect-body-rewrite` to inject into the head of all html files...
 
 **server.js:**
 ```javascript
@@ -54,7 +55,7 @@ server.listen(8080, function(){
 
 ```
 
-**public/index.html:** (very valid HTML5, watch the YouTube video)
+**public/index.html:**
 ```html
 <!doctype html>
 <html lang="en">
