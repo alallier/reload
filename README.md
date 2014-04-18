@@ -29,50 +29,45 @@ I recommend `supervisor`, since `nodedemon` time to poll for file changes is too
 
 **server.js:**
 ```javascript
-var express = require('express')
-  , http = require('http')
-  , path = require('path')
-  , reload = require('reload')
+var http = require('http');
+var express = require('express');
+var reload = require('reload');
 
 var app = express()
+  .use(require('connect-body-rewrite')({
+    accept: function (res) {
+      return res.getHeader('content-type').match(/text\/html/);
+    },
+    rewrite: function (body) {
+      return body.replace(/<\/head>/, '<script src="/reload/reload.js"></script>');
+    }
+  }))
+  .use(express.static('public'));
 
-var publicDir = path.join(__dirname, 'public')
+var server = http.createServer(app);
 
-app.configure(function() {
-  app.set('port', process.env.PORT || 3000)
-  app.use(express.logger('dev'))
-  app.use(express.bodyParser()) //parses json, multi-part (file), url-encoded
-  app.use(app.router) //need to be explicit, (automatically adds it if you forget)
-  app.use(express.static(publicDir)) //should cache static assets
-})
+reload(server, app);
 
-app.get('/', function(req, res) {
-  res.sendfile(path.join(publicDir, 'index.html'))
-})
-
-var server = http.createServer(app)
-
-//reload code here
-reload(server, app)
-
-server.listen(app.get('port'), function(){
-  console.log("Web server listening on port " + app.get('port'));
+server.listen(8080, function(){
+  console.log('server started on port 8080')
 });
+
 ```
 
 **public/index.html:** (very valid HTML5, watch the YouTube video)
 ```html
-<!-- 
-  watch this: http://www.youtube.com/watch?v=WxmcDoAxdoY 
--->
 <!doctype html>
-<meta charset="utf-8">
-<title>My sweet app!</title>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
 
-<!-- all you have to do is include the reload script -->
-<script src="/reload/reload.js"></script>
+hello world!
 
-<h1>Hello!</h1>
+</body>
+</html>
 ```
 
 install supervisor:
