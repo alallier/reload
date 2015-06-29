@@ -10,7 +10,12 @@ Why?
 
 Restarting your Http server and refreshing your browser is annoying.
 
+Express version support
+-----------------------
 
+To use reload with Express 4 support, use reload version `^0.2.0`.
+
+To use reload with Express 3 support, use reload version `~0.1.0`.
 
 Installation
 ------------
@@ -26,6 +31,46 @@ Use in conjunction with [supervisor](https://github.com/isaacs/node-supervisor),
 
 I recommend `supervisor`, since `nodedemon` time to poll for file changes is too slow and not configurable. Supervisor will feel fast. `forever` tries to do too much. Whenever I look at the docs, I get frustrated and give up.
 
+Using reload with Express 4
+---------------------------
+
+*Reload version `^0.2.0`.*
+
+**server.js:**
+```javascript
+var express = require('express')
+  , http = require('http')
+  , path = require('path')
+  , reload = require('reload')
+  , bodyParser = require('body-parser')
+  , logger = require('morgan')
+ 
+var app = express()
+ 
+var publicDir = path.join(__dirname, '')
+
+app.set('port', process.env.PORT || 3000)
+app.use(logger('dev'))
+app.use(bodyParser.json()) //parses json, multi-part (file), url-encoded 
+
+app.get('/', function(req, res) {
+  res.sendFile(path.join(publicDir, 'index.html'))
+})
+ 
+var server = http.createServer(app)
+
+//reload code here 
+reload(server, app)
+ 
+server.listen(app.get('port'), function(){
+  console.log("Web server listening on port " + app.get('port'));
+});
+```
+
+Using reload with Express 3
+---------------------------
+
+*Reload version `~0.1.0`.*
 
 **server.js:**
 ```javascript
