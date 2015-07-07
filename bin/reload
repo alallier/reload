@@ -20,7 +20,7 @@ var runFile = path.join(os.tmpdir(), 'reload-' + Math.random().toString().slice(
 var serverFile = path.join(__dirname, '../lib/reload-server.js')
 
 if (program.exts.indexOf(','))
-  program.exts = program.exts.replace(/\,/g,'|') //replace comma for pipe, that's what supervisor likes 
+  program.exts = program.exts.replace(/\,/g,'|') //replace comma for pipe, that's what supervisor likes
 
 var args = ['-e', 'html|js|css', '-q', '--', serverFile, program.port, program.dir, !!program.browser, runFile, program.time]
 supervisor.run(args)
