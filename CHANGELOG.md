@@ -1,3 +1,7 @@
+0.3.0 / 2015-07-17
+------------------
+- added option for start page. See: https://github.com/jprichardson/reload/pull/20
+
 0.2.0 / 2015-06-29
 ------------------
 * Added Express 4 Support
