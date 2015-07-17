@@ -14,6 +14,7 @@ program.version(require('../package.json').version)
   .option('-e, --exts [extensions]', 'Extensions separated by commas or pipes. Defaults to html,js,css.', 'html|js|css')
   .option('-p, --port [port]', 'The port to bind to. Can be set with PORT env variable as well. Defaults to 8080', '8080')
   .option('-t, --time [delay]', 'How long (ms) should the browser wait before reconnecting? Defaults to 300 ms.', '300')
+  .option('-s, --start-page [start-page]', 'Specify a start page. Defaults to index.html', 'index.html')
   .parse(process.argv)
 
 var runFile = path.join(os.tmpdir(), 'reload-' + Math.random().toString().slice(2))
@@ -22,7 +23,7 @@ var serverFile = path.join(__dirname, '../lib/reload-server.js')
 if (program.exts.indexOf(','))
   program.exts = program.exts.replace(/\,/g,'|') //replace comma for pipe, that's what supervisor likes
 
-var args = ['-e', 'html|js|css', '-q', '--', serverFile, program.port, program.dir, !!program.browser, runFile, program.time]
+var args = ['-e', 'html|js|css', '-q', '--', serverFile, program.port, program.dir, !!program.browser, runFile, program.time, program.startPage]
 supervisor.run(args)
 
 console.log("\n  Reload web server:")
