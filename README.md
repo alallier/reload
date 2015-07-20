@@ -154,7 +154,7 @@ Options:
   -d, --dir [dir]               The directory to serve up. Defaults to current dir.
   -e, --exts [extensions]       Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]             The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -t, --time [delay]            How long (ms) should the browser wait before reconnecting? Defaults to 300 ms.
+  -d, --delay [delay]           How long (ms) should the browser wait before reconnecting? Defaults to 300 ms.
   -s, --start-page [start-page] Specify a start page. Defaults to index.html.
 
 
