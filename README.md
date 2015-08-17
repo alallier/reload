@@ -59,7 +59,8 @@ app.get('/', function(req, res) {
  
 var server = http.createServer(app)
 
-//reload code here 
+//reload code here
+//optional server delay argument can be given to reload, refer to API below
 reload(server, app)
  
 server.listen(app.get('port'), function(){
@@ -98,6 +99,7 @@ app.get('/', function(req, res) {
 var server = http.createServer(app)
 
 //reload code here
+//optional server delay argument can be given to reload, refer to API below
 reload(server, app)
 
 server.listen(app.get('port'), function(){
@@ -145,14 +147,16 @@ Usage: reload [options]
 
 Options:
 
+
   -h, --help                    Output usage information
   -V, --version                 Output the version number
   -b, --browser                 Open in the browser automatically.
   -d, --dir [dir]               The directory to serve up. Defaults to current dir.
   -e, --exts [extensions]       Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]             The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -t, --time [delay]            How long (ms) should the browser wait before reconnecting? Defaults to 300 ms.
+  -d, --delay [delay]           How long (ms) should the browser wait before reconnecting? You can also specify true, if you would like reload to wait until the server comes back up before reloading the page. Defaults to 300 ms.
   -s, --start-page [start-page] Specify a start page. Defaults to index.html.
+
 
 ```
 
@@ -174,11 +178,11 @@ It's actually stupidly simple. We leverage `supervisor` to restart the server if
 API
 ---
 
-### reload(httpServer, expressApp, [timeout_millis])
+### reload(httpServer, expressApp, [delay])
 
 - `httpServer`: The Node.js http server from the module `http`.
 - `expressApp`: The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
-- `timeout_millis`: The client side refresh time in milliseconds. Default is `300`.
+- `delay`: The client side refresh time in milliseconds. Default is `300`. You can also specify true, if you would like reload to wait until the server comes back up before reloading the page.
 
 
 
