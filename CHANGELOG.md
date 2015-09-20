@@ -1,6 +1,6 @@
 0.4.0 / 2015-08-17
 ------------------
-- add `true` option to `delay` so that it weights indefinitely until server is up https://github.com/jprichardson/reload/pull/21
+- add `true` option to `delay` so that it waits indefinitely until server is up https://github.com/jprichardson/reload/pull/21
 - express 4 routes, https://github.com/jprichardson/reload/pull/24
 
 0.3.0 / 2015-07-17
