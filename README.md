@@ -154,7 +154,8 @@ Options:
   -d, --dir [dir]                    The directory to serve up. Defaults to current dir.
   -e, --exts [extensions]            Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]                  The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -r, --reload-delay [reload-delay] How long (ms) should the browser wait before reconnecting? You can also specify true, if you would like reload to wait until the server comes back up before reloading the page. Defaults to 300 ms.
+  -r, --reload-delay [reload-delay]  The client side refresh time in milliseconds. Default is `300`. If wait is specified as true this delay becomes the delay of how long the pages waits to reload after the socket is reopened.
+  -w, --wait [wait]                  Specify true, if you would like reload to wait until the server comes back up before reloading the page.
   -s, --start-page [start-page]      Specify a start page. Defaults to index.html.
 
 
@@ -178,11 +179,12 @@ It's actually stupidly simple. We leverage `supervisor` to restart the server if
 API
 ---
 
-### reload(httpServer, expressApp, [reloadDelay])
+### reload(httpServer, expressApp, [reloadDelay], [wait])
 
 - `httpServer`: The Node.js http server from the module `http`.
 - `expressApp`: The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
-- `reloadDelay`: The client side refresh time in milliseconds. Default is `300`. You can also specify true, if you would like reload to wait until the server comes back up before reloading the page.
+- `reloadDelay`: The client side refresh time in milliseconds. Default is `300`. If --wait is true, then this delay is used to determine how long to wait before attempting to reopen after web socket opens.
+- `wait`: If wait is specified as true reload will wait until the server comes back up before reloading the page.
 
 
 
@@ -192,5 +194,4 @@ License
 (MIT License)
 
 Copyright 2013, JP Richardson  <jprichardson@gmail.com>
-
 
