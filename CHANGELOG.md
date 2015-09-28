@@ -1,3 +1,8 @@
+0.5.0 / 2015-09-28
+------------------
+- renamed `delay` flag to `reloadDelay`. See: https://github.com/jprichardson/reload/pull/26
+- added `wait` flag. See: https://github.com/jprichardson/reload/pull/26
+
 0.4.0 / 2015-08-17
 ------------------
 - add `true` option to `delay` so that it waits indefinitely until server is up https://github.com/jprichardson/reload/pull/21
