@@ -1,3 +1,7 @@
+0.6.0 / 2015-10-12
+------------------
+- added `hostname/ -h` flag. See: https://github.com/jprichardson/reload/issues/14 and https://github.com/jprichardson/reload/pull/28
+
 0.5.0 / 2015-09-28
 ------------------
 - renamed `delay` flag to `reloadDelay`. See: https://github.com/jprichardson/reload/pull/26
