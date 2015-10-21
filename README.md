@@ -155,8 +155,8 @@ Options:
   -d, --dir [dir]                    The directory to serve up. Defaults to current dir.
   -e, --exts [extensions]            Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]                  The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -r, --reload-delay [reload-delay]  The client side refresh time in milliseconds. Default is `300`. If wait is specified as true this delay becomes the delay of how long the pages waits to reload after the socket is reopened.
-  -w, --wait [wait]                  Specify true, if you would like reload to wait until the server comes back up before reloading the page.
+  -r, --reload-delay [reload-delay]  The client side refresh time in milliseconds. Default is `300`. If wait is specified as true (which is by default, see below) this delay becomes the delay of how long the pages waits to reload after the socket is reopened.
+  -w, --wait [wait]                  Specify true, if you would like reload to wait until the server comes back up before reloading the page. Defaults to true
   -s, --start-page [start-page]      Specify a start page. Defaults to index.html.
 
 
@@ -173,7 +173,7 @@ this will open your `index.html` file in the browser. Any changes that you make 
 How does it work?
 -----------------
 
-It's actually stupidly simple. We leverage `supervisor` to restart the server if any file changes. The client side keeps a websocket open, once the websocket closes, the client sets a timeout to reload in approximately 300 ms (or any other time you'd like, refer to [API](https://github.com/jprichardson/reload#api) below. Simple huh?
+It's actually stupidly simple. We leverage `supervisor` to restart the server if any file changes. The client side keeps a websocket open, once the websocket closes, the client sets a timeout to reload in approximately 300 ms (or any other time you'd like, refer to [API](https://github.com/jprichardson/reload#api) below). Simple huh?
 
 
 
@@ -182,10 +182,10 @@ API
 
 ### reload(httpServer, expressApp, [reloadDelay], [wait])
 
-- `httpServer`: The Node.js http server from the module `http`.
-- `expressApp`: The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
-- `reloadDelay`: The client side refresh time in milliseconds. Default is `300`. If --wait is true, then this delay is used to determine how long to wait before attempting to reopen after web socket opens.
-- `wait`: If wait is specified as true reload will wait until the server comes back up before reloading the page.
+- `httpServer`:  The Node.js http server from the module `http`.
+- `expressApp`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
+- `reloadDelay`: The client side refresh time in milliseconds. Default is `300`. If wait is specified as true (which it is be default, see below) this delay becomes the delay of how long the pages waits to reload after the socket is reopened.
+- `wait`:        If wait is specified as true reload will wait until the server comes back up before reloading the page. Defaults to true.
 
 
 
