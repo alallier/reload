@@ -1,3 +1,7 @@
+0.7.0 / 2015-10-21
+------------------
+- fixed `wait` flag: https://github.com/jprichardson/reload/pull/27
+
 0.6.0 / 2015-10-12
 ------------------
 - added `hostname/ -h` flag. See: https://github.com/jprichardson/reload/issues/14 and https://github.com/jprichardson/reload/pull/28
