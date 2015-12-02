@@ -25,7 +25,7 @@ var serverFile = path.join(__dirname, '../lib/reload-server.js')
 if (program.exts.indexOf(','))
   program.exts = program.exts.replace(/\,/g,'|') //replace comma for pipe, that's what supervisor likes
 
-var args = ['-e', 'html|js|css', '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.reloadDelay, program.wait, program.startPage]
+var args = ['-e', program.exts, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.reloadDelay, program.wait, program.startPage]
 supervisor.run(args)
 
 console.log("\n  Reload web server:")
