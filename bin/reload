@@ -10,7 +10,7 @@ var program = require('commander')
 
 program.version(require('../package.json').version)
   .option('-b, --browser', 'Open in the browser automatically.')
-  .option('-h, --hostname [hostname]', 'If -b flag is being used, this allows for custom hostnames. Defaults to localhost.', 'localhost')
+  .option('-ho, --hostname [hostname]', 'If -b flag is being used, this allows for custom hostnames. Defaults to localhost.', 'localhost')
   .option('-d, --dir [dir]', 'The directory to serve up. Defaults to current dir.', process.cwd())
   .option('-e, --exts [extensions]', 'Extensions separated by commas or pipes. Defaults to html,js,css.', 'html|js|css')
   .option('-p, --port [port]', 'The port to bind to. Can be set with PORT env variable as well. Defaults to 8080', '8080')
