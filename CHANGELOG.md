@@ -1,3 +1,8 @@
+0.8.0 / 2015-12-21
+------------------
+- fixed `hostname` flag. See: https://github.com/jprichardson/reload/pull/34
+- use `exts` from command line. See: https://github.com/jprichardson/reload/pull/32
+
 0.7.0 / 2015-10-21
 ------------------
 - fixed `wait` flag: https://github.com/jprichardson/reload/pull/27
