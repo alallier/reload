@@ -1,6 +1,8 @@
 reload
 =======
 
+[![build status](https://api.travis-ci.org/jprichardson/reload.svg)](http://travis-ci.org/jprichardson/reload)
+
 Refresh and reload your code in your browser when your code changes. No browser plugins required. Use with Node.js if you like.
 
 
