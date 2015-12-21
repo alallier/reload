@@ -14,12 +14,7 @@
     "development"
   ],
   "author": "JP Richardson <jprichardson@gmail.com>",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "http://github.com/jprichardson/reload/blob/master/LICENSE"
-    }
-  ],
+  "license": "MIT",
   "dependencies": {
     "sockjs": "~0.3.5",
     "supervisor": "~0.5.6",
