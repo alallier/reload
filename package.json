@@ -24,12 +24,20 @@
     "open": "0.0.4",
     "death": "~0.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "standard": "^5.4.1"
+  },
   "main": "./lib/reload.js",
   "scripts": {
-    "test": "mocha test"
+    "standard": "standard",
+    "test": "npm run standard"
   },
   "bin": {
     "reload": "./bin/reload"
+  },
+  "standard": {
+    "ignore": [
+      "/lib/sockjs-0.3-min.js"
+    ]
   }
 }
