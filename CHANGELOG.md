@@ -1,3 +1,7 @@
+0.8.1 / 2016-06-05
+------------------
+- Allow reload from node server. See: https://github.com/jprichardson/reload/pull/38
+
 0.8.0 / 2015-12-21
 ------------------
 - fixed `hostname` flag. See: https://github.com/jprichardson/reload/pull/34

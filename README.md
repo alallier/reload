@@ -177,7 +177,17 @@ How does it work?
 
 It's actually stupidly simple. We leverage `supervisor` to restart the server if any file changes. The client side keeps a websocket open, once the websocket closes, the client sets a timeout to reload in approximately 300 ms (or any other time you'd like, refer to [API](https://github.com/jprichardson/reload#api) below). Simple huh?
 
+Reload on your terms
+---
+If you would like to fire the reload event on your own terms you can use fire a reload event by calling `reload()` yourself. An example is shown below:
 
+```
+reloadServer = reload(server, app, 1000);
+watch.watchTree(__dirname + "/public", function (f, curr, prev) {
+    console.log("Trying to reload...");
+    reloadServer.reload();
+});
+```
 
 API
 ---
