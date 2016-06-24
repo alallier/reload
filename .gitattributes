@@ -1,0 +1,2 @@
+# Fix bug on POSIX systems with CRLF line endings (see: https://github.com/npm/npm/issues/2097)
+* text eol=lf
