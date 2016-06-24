@@ -2,54 +2,60 @@ reload
 =======
 
 [![build status](https://api.travis-ci.org/jprichardson/reload.svg)](http://travis-ci.org/jprichardson/reload)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![NPM version](https://img.shields.io/npm/v/reload.svg?style=flat-square)](https://www.npmjs.com/package/reload)
 
-Refresh and reload your code in your browser when your code changes. No browser plugins required. Use with Node.js if you like.
-
-
+Automatically refresh and reload your code in your browser when your code changes. No browser plugins required.
 
 Why?
 ----
 
-Restarting your Http server and refreshing your browser is annoying.
+Restarting your HTTP server and refreshing your browser is annoying.
 
-Express version support
------------------------
+How does it work?
+----------
 
-To use reload with Express 4 support, use reload version `^0.2.0`.
+Reload works in two different ways depending on if you're using it:
 
-To use reload with Express 3 support, use reload version `~0.1.0`.
+1. In an existing Express application in which it creates a server side route for reload or,
+2. As a command line tool which starts its own Express application to monitor the file you're editing for changes and to serve `reload-client.js` to the browser.
+
+Once reload-server and reload-client are connected, the client side code opens a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) to the server and waits for the WebSocket to close, once it closes, reload waits for the server to come back up (waiting for a socket on open event), once the socket opens we reload the page.
 
 Installation
-------------
+---
 
     npm install [-g] [--save-dev] reload
 
 
+Two ways to use reload
+---
 
-Example for Node.js and browser development
---------------------------------------------
+There are two different ways to use reload.
 
-Use in conjunction with [supervisor](https://github.com/isaacs/node-supervisor), [nodemon](https://github.com/remy/nodemon), or [forever](https://github.com/nodejitsu/forever).
+1. In an [Express](http://expressjs.com/) application, allowing your whole project to utilize reload when the code is altered
+2. As a command line application to serve up static HTML files and be able to reload when the code is altered
 
-I recommend `supervisor`, since `nodedemon` time to poll for file changes is too slow and not configurable. Supervisor will feel fast. `forever` tries to do too much. Whenever I look at the docs, I get frustrated and give up.
+Using reload in Express
+---
+When used with Express reload creates a new Express route for reload. When you restart the server, the client will detect the server being restarted and automatically refresh the page.
 
-Using reload with Express 4
----------------------------
+Reload can be used in conjunction with tools that allow for automatically restarting the server such as [supervisor](https://github.com/isaacs/node-supervisor) (recommended), [nodemon](https://github.com/remy/nodemon), [forever](https://github.com/nodejitsu/forever), etc.
 
-*Reload version `^0.2.0`.*
+### Express Example
 
-**server.js:**
+**`server.js`:**
 ```javascript
 var express = require('express')
-  , http = require('http')
-  , path = require('path')
-  , reload = require('reload')
-  , bodyParser = require('body-parser')
-  , logger = require('morgan')
+    http = require('http')
+    path = require('path')
+    reload = require('reload')
+    bodyParser = require('body-parser')
+    logger = require('morgan')
 
 var app = express()
 
-var publicDir = path.join(__dirname, '')
+var publicDir = path.join(__dirname, 'public')
 
 app.set('port', process.env.PORT || 3000)
 app.use(logger('dev'))
@@ -61,149 +67,94 @@ app.get('/', function(req, res) {
 
 var server = http.createServer(app)
 
-//reload code here
-//optional reload delay and wait argument can be given to reload, refer to [API](https://github.com/jprichardson/reload#api) below
-reload(server, app, [reloadDelay], [wait])
+// Reload code here
+reload(server, app)
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
 });
 ```
 
-Using reload with Express 3
----------------------------
-
-*Reload version `~0.1.0`.*
-
-**server.js:**
-```javascript
-var express = require('express')
-  , http = require('http')
-  , path = require('path')
-  , reload = require('reload')
-
-var app = express()
-
-var publicDir = path.join(__dirname, 'public')
-
-app.configure(function() {
-  app.set('port', process.env.PORT || 3000)
-  app.use(express.logger('dev'))
-  app.use(express.bodyParser()) //parses json, multi-part (file), url-encoded
-  app.use(app.router) //need to be explicit, (automatically adds it if you forget)
-  app.use(express.static(publicDir)) //should cache static assets
-})
-
-app.get('/', function(req, res) {
-  res.sendfile(path.join(publicDir, 'index.html'))
-})
-
-var server = http.createServer(app)
-
-//reload code here
-//optional reload delay and wait argument can be given to reload, refer to [API](https://github.com/jprichardson/reload#api) below
-reload(server, app, [reloadDelay], [wait])
-
-server.listen(app.get('port'), function(){
-  console.log("Web server listening on port " + app.get('port'));
-});
-```
-
-**public/index.html:** (very valid HTML5, watch the YouTube video)
+**`public/index.html`:**
 ```html
-<!--
-  watch this: http://www.youtube.com/watch?v=WxmcDoAxdoY
--->
 <!doctype html>
-<meta charset="utf-8">
-<title>My sweet app!</title>
-
-<!-- all you have to do is include the reload script -->
-<script src="/reload/reload.js"></script>
-
-<h1>Hello!</h1>
+<html>
+  <head>
+    <title>Reload Express Sample App</title>
+  </head>
+  <body>
+  	<h1>Reload Express Sample App12</h1>
+    <!-- All you have to do is include the reload script and have it be on every page of your project -->
+    <script src="/reload/reload.js"></script>
+  </body>
+</html>
 ```
 
-install supervisor:
-```
-npm install -g supervisor
-```
+**Refer to the [reload express sample app](https://github.com/jprichardson/reload/tree/master/expressSampleApp) for this working example.**
 
-reload on any html or js file change:
-```
-supervisor -e 'html|js' node server.js
-```
+### Manually firing server-side reload events
 
+You can manually call a reload event by calling `reload()` yourself. An example is shown below:
 
-
-Example for browser development only
--------------------------------------
-
-You should install `reload` globally like `npm install -g reload`. Then you can use the `reload` command in your directory without modifying any of your HTML.
-
-Usage:
-
+```javascript
+reloadServer = reload(server, app);
+watch.watchTree(__dirname + "/public", function (f, curr, prev) {
+    // Fire server-side reload event
+    reloadServer.reload();
+});
 ```
 
-Usage: reload [options]
-
-Options:
-
-
-  -h, --help                         Output usage information
-  -V, --version                      Output the version number
-  -b, --browser                      Open in the browser automatically.
-  -n, --hostname                     If -b flag is being used, this allows for custom hostnames. Defaults to localhost.
-  -d, --dir [dir]                    The directory to serve up. Defaults to current dir.
-  -e, --exts [extensions]            Extensions separated by commas or pipes. Defaults to html,js,css.
-  -p, --port [port]                  The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -r, --reload-delay [reload-delay]  The client side refresh time in milliseconds. Default is `300`. If wait is specified as true (which is by default, see below) this delay becomes the delay of how long the pages waits to reload after the socket is reopened.
-  -w, --wait [wait]                  Specify true, if you would like reload to wait until the server comes back up before reloading the page. Defaults to true
-  -s, --start-page [start-page]      Specify a start page. Defaults to index.html.
-
+### API for Express
 
 ```
+reload(httpServer, expressApp, [verbose])
+```
+
+- `httpServer`:  The Node.js http server from the module `http`.
+- `expressApp`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
+- `verbose`:     If set to true, will show logging on the server and client side
+
+Using reload as a command line application
+---
+
+There are two ways to use the command line application.
+
+1. In a directory serving blank static HTML files or
+2. In a project with a `package.json` file
+
+Each will require different modes of installing.
+
+In case one you should install reload globally with `npm install reload -g`. Also with reload installed globally you can go to any directory with an HTML file and use the command reload to constantly watch it and reload it while you make changes.
+
+In case two you should install locally with `npm install --save-dev`, since this tool is to aid in development you should install it as a dev dependency.
 
 Navigate to your html directory:
 
     reload -b
 
-this will open your `index.html` file in the browser. Any changes that you make will now reload in the browser. You don't need to modify your HTML at all.
+This will open your `index.html` file in the browser. Any changes that you make will now reload in the browser. You don't need to modify your HTML at all.
 
-
-
-How does it work?
------------------
-
-It's actually stupidly simple. We leverage `supervisor` to restart the server if any file changes. The client side keeps a websocket open, once the websocket closes, the client sets a timeout to reload in approximately 300 ms (or any other time you'd like, refer to [API](https://github.com/jprichardson/reload#api) below). Simple huh?
-
-Reload on your terms
----
-If you would like to fire the reload event on your own terms you can use fire a reload event by calling `reload()` yourself. An example is shown below:
+### Usage for Command Line Application
 
 ```
-reloadServer = reload(server, app, 1000);
-watch.watchTree(__dirname + "/public", function (f, curr, prev) {
-    console.log("Trying to reload...");
-    reloadServer.reload();
-});
+Usage: reload [options]
+
+Options:
+
+  -h, --help                        Output usage information
+  -V, --version                     Output the version number
+  -b, --browser                     Open in the browser automatically.
+  -n, --hostname                    If -b flag is being used, this allows for custom hostnames. Defaults to localhost.
+  -d, --dir [dir]                   The directory to serve up. Defaults to current dir.
+  -e, --exts [extensions]           Extensions separated by commas or pipes. Defaults to html,js,css.
+  -p, --port [port]                 The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
+  -s, --start-page [start-page]		Specify a start page. Defaults to index.html.
+  -v, --verbose						Turns on logging on the server and client side. Defaults to false.
 ```
-
-API
----
-
-### reload(httpServer, expressApp, [reloadDelay], [wait])
-
-- `httpServer`:  The Node.js http server from the module `http`.
-- `expressApp`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
-- `reloadDelay`: The client side refresh time in milliseconds. Default is `300`. If wait is specified as true (which it is be default, see below) this delay becomes the delay of how long the pages waits to reload after the socket is reopened.
-- `wait`:        If wait is specified as true reload will wait until the server comes back up before reloading the page. Defaults to true.
-
-
 
 License
--------
+---
 
 (MIT License)
 
-Copyright 2013, JP Richardson  <jprichardson@gmail.com>
+Copyright 2016, JP Richardson  <jprichardson@gmail.com>
