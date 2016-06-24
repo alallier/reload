@@ -1,3 +1,21 @@
+1.0.0 / 2016-06-24
+------------------
+Added
+- Two new badges to the README (code-style and npm version)
+- Verbose mode as option for both Express and command line usage
+- A sample app for express
+
+Modified
+- Re-wrote the README to reflect all of these changes
+- Updated dependencies to their latest version’s
+- Fixed race condition that caused reload to spam the server when using sockets for automatic reloading
+
+Removed
+- All delays (wait, normal, and socket) (Reload is now all automatic using web sockets (no delays at all))
+- Client side sockjs web sockets (removed sockjs) (Now using native web sockets on the client side and ws on server side)
+
+See: https://github.com/jprichardson/reload/pull/41
+
 0.8.2 / 2016-06-24
 ------------------
 - Fixed regression caused by Windows line endings. See: https://github.com/jprichardson/reload/pull/40
