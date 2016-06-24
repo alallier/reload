@@ -1,3 +1,7 @@
+0.8.2 / 2016-06-24
+------------------
+- Fixed regression caused by Windows line endings. See: https://github.com/jprichardson/reload/pull/40
+
 0.8.1 / 2016-06-05
 ------------------
 - Allow reload from node server. See: https://github.com/jprichardson/reload/pull/38
