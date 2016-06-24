@@ -47,11 +47,11 @@ Reload can be used in conjunction with tools that allow for automatically restar
 **`server.js`:**
 ```javascript
 var express = require('express')
-    http = require('http')
-    path = require('path')
-    reload = require('reload')
-    bodyParser = require('body-parser')
-    logger = require('morgan')
+var http = require('http')
+var path = require('path')
+var reload = require('reload')
+var bodyParser = require('body-parser')
+var logger = require('morgan')
 
 var app = express()
 
