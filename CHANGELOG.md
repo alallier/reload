@@ -1,3 +1,7 @@
+1.0.1 / 2016-07-15
+------------------
+Fixed onbeforeunload event not firing in reload-client See: https://github.com/jprichardson/reload/pull/46
+
 1.0.0 / 2016-06-24
 ------------------
 Added
