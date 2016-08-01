@@ -83,7 +83,7 @@ server.listen(app.get('port'), function(){
     <title>Reload Express Sample App</title>
   </head>
   <body>
-  	<h1>Reload Express Sample App12</h1>
+    <h1>Reload Express Sample App12</h1>
     <!-- All you have to do is include the reload script and have it be on every page of your project -->
     <script src="/reload/reload.js"></script>
   </body>
@@ -141,15 +141,16 @@ Usage: reload [options]
 
 Options:
 
-  -h, --help                        Output usage information
-  -V, --version                     Output the version number
-  -b, --browser                     Open in the browser automatically.
-  -n, --hostname                    If -b flag is being used, this allows for custom hostnames. Defaults to localhost.
-  -d, --dir [dir]                   The directory to serve up. Defaults to current dir.
-  -e, --exts [extensions]           Extensions separated by commas or pipes. Defaults to html,js,css.
-  -p, --port [port]                 The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -s, --start-page [start-page]		Specify a start page. Defaults to index.html.
-  -v, --verbose						Turns on logging on the server and client side. Defaults to false.
+  -b, --browser                  Open in the browser automatically.
+  -n, --hostname [hostname]      If -b flag is being used, this allows for custom hostnames. Defaults to localhost.
+  -d, --dir [dir]                The directory to serve up. Defaults to current dir.
+  -p, --port [port]              The port to bind to. Can be set with PORT env variable as well. Defaults to 8080.
+  -s, --start-page [start-page]  Specify a start page. Defaults to index.html.
+  -v, --verbose [verbose]        Turning on logging on the server and client side. Defaults to false.
+  -w, --watch [watchItems]       A comma-delimited list of folders to watch for changes. Defaults to ..
+  -e, --exts [extensions]        Extensions to watch, separated by commas or pipes. Defaults to html,js,css.
+  -p, --poll-interval [ms]',     How often to poll watched files for changes. Defaults to 1000.
+  --force-watch                  Use fs.watch instead of fs.watchFile. This may be useful if you see a high cpu load on a windows machine.
 ```
 
 License
