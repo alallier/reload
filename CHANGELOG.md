@@ -1,3 +1,7 @@
+1.1.0 / 2016-11-12
+------------------
+Added client end web socket support for https. See: https://github.com/jprichardson/reload/pull/54
+
 1.0.2 / 2016-10-31
 ------------------
 Added error handling to websocket send. See: https://github.com/jprichardson/reload/pull/49
