@@ -1,3 +1,7 @@
+1.1.1 / 2017-01-28
+------------------
+Fixed undefined error log on send message. See: https://github.com/jprichardson/reload/pull/59
+
 1.1.0 / 2016-11-12
 ------------------
 Added client end web socket support for https. See: https://github.com/jprichardson/reload/pull/54
