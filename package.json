@@ -19,23 +19,17 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "supervisor": "~0.11.0",
-    "commander": "~2.9.0",
-    "express": "~4.14.0",
-    "cli-color": "~1.1.0",
+    "node-static": "^0.7.9",
     "open": "~0.0.5",
-    "death": "~1.0.0",
-    "ws": "~1.1.1",
-    "minimist": "~1.2.0"
+    "prompt": "^1.0.0",
+    "watch": "^1.0.2",
+    "ws": "~1.1.1"
   },
   "devDependencies": {
     "standard": "^7.1.2"
   },
   "main": "./lib/reload.js",
-  "scripts": {
-    "standard": "standard",
-    "test": "npm run standard"
-  },
+  "scripts": {},
   "bin": {
     "reload": "./bin/reload"
   }
