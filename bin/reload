@@ -56,7 +56,7 @@ options.startPage = startPageArgIndex>=0 ? process.argv[startPageArgIndex+1] : '
 let extsArgIndex = process.argv.indexOf('-e')
 if(!extsArgIndex<0)extsArgIndex = process.argv.indexOf('--exts')
 options.exts = extsArgIndex>=0 ? process.argv[extsArgIndex+1] : 'js|css|html'
-options.filter = filterMaker( options.exts.replace(/\|/g,',').split(',') )
+options.filter = filterMaker.apply(filterMaker, options.exts.replace(/\|/g,',').split(','))
 
 let verboseArgIndex = process.argv.indexOf('-v')
 if(!verboseArgIndex<0)verboseArgIndex = process.argv.indexOf('--verbose')
