@@ -1,9 +1,10 @@
 2.0.0 / 2017-02-17
 ------------------
-Remove a great amount of weight in dependencies. Package is far simplier to use and weighs far less
+Faster by using updated NodeJs ECMA6 syntax
+Removed a great amount of weight in dependencies. Package is far simplier to use and weighs far less
 Removed Express as a dependency
 Watching files is more intuitive and actually included outside of CLI
-Better verbose logging where outside library can manidate how logging occurs
+Better verbose logging where outside library can mandate how logging occurs
 Added EADDRINUSE to cli-prompt where if port is in use, another port can be supplied to start server on another open port
 Made more functional for all types of servers and not just an express server
 

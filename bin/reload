@@ -7,9 +7,9 @@ let log = require('../lib/log.function')
 
 let help = process.argv.indexOf('-h')>=0
 if(!help)help = process.argv.indexOf('--help')>=0
-if(help)help()
+if(help)runHelp()
 
-function help(){
+function runHelp(){
   console.log()
   console.log('  Usage: reload [options]')
   console.log()
@@ -27,12 +27,8 @@ function help(){
 
 const options = {log:log}
 
-let help = process.argv.indexOf('-h')>=0
-if(!help)help = process.argv.indexOf('--help')>=0
-if(help)help()
-
-let dirArgIndex = process.argv.indexOf('-v')
-if(!dirArgIndex<0)dirArgIndex = process.argv.indexOf('--verbose')
+let dirArgIndex = process.argv.indexOf('-d')
+if(!dirArgIndex<0)dirArgIndex = process.argv.indexOf('--dir')
 let dir = dirArgIndex>=0 ? process.argv[dirArgIndex+1] : process.cwd()
 if(!path.isAbsolute(dir)){
   dir = path.join(process.cwd(), dir)
@@ -42,24 +38,24 @@ options.browser = process.argv.indexOf('-b')>=0
 if(!options.browser)options.browser = process.argv.indexOf('--browser')>=0
 
 let hostArgIndex = process.argv.indexOf('-h')
-if(!hostArgIndex<0)hostArgIndex = process.argv.indexOf('--hostname')
+if(hostArgIndex<0)hostArgIndex = process.argv.indexOf('--hostname')
 options.hostname = hostArgIndex>=0 ? process.argv[hostArgIndex+1] : 'localhost'
 
 let portArgIndex = process.argv.indexOf('-p')
-if(!portArgIndex<0)portArgIndex = process.argv.indexOf('--port')
-options.port = portArgIndex>=0 ? process.argv[portArgIndex+1] : 8080
+if(portArgIndex<0)portArgIndex = process.argv.indexOf('--port')
+options.port = portArgIndex>=0 ? process.argv[portArgIndex+1] : getDefaultPort()
 
 let startPageArgIndex = process.argv.indexOf('-s')
-if(!startPageArgIndex<0)startPageArgIndex = process.argv.indexOf('--start-page')
+if(startPageArgIndex<0)startPageArgIndex = process.argv.indexOf('--start-page')
 options.startPage = startPageArgIndex>=0 ? process.argv[startPageArgIndex+1] : ''
 
 let extsArgIndex = process.argv.indexOf('-e')
-if(!extsArgIndex<0)extsArgIndex = process.argv.indexOf('--exts')
-options.exts = extsArgIndex>=0 ? process.argv[extsArgIndex+1] : 'js|css|html'
+if(extsArgIndex<0)extsArgIndex = process.argv.indexOf('--exts')
+options.exts = extsArgIndex>=0 ? process.argv[extsArgIndex+1] : 'js,css,html'
 options.filter = filterMaker.apply(filterMaker, options.exts.replace(/\|/g,',').split(','))
 
 let verboseArgIndex = process.argv.indexOf('-v')
-if(!verboseArgIndex<0)verboseArgIndex = process.argv.indexOf('--verbose')
+if(verboseArgIndex<0)verboseArgIndex = process.argv.indexOf('--verbose')
 const verbose = verboseArgIndex>=0 ? JSON.parse(process.argv[verboseArgIndex+1]) : true
 
 if(!verbose){
@@ -70,7 +66,11 @@ reload(dir,options)
 
 if(verbose){
   log("Reload web server:")
-  log("listening on port " + clc.blue.bold(program.port))
-  log("monitoring dir " + clc.green.bold(program.dir))
+  log("listening on port " + options.port)
+  log("monitoring dir " + options.dir)
 }
 
+function getDefaultPort(){
+  if(process.env.NODE_ENV&&process.env.NODE_ENV.PORT)return process.env.NODE_ENV.PORT
+  return 8080
+}

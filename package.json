@@ -15,7 +15,8 @@
   ],
   "author": "JP Richardson <jprichardson@gmail.com>",
   "contributors": [
-    "Alexander J. Lallier <alexanderlallier@aol.com>"
+    "Alexander J. Lallier <alexanderlallier@aol.com>",
+    "Acker Dawn Apple"
   ],
   "license": "MIT",
   "dependencies": {
@@ -25,10 +26,11 @@
     "watch": "^1.0.2",
     "ws": "~1.1.1"
   },
-  "devDependencies": {
-  },
   "main": "./lib/reload.js",
-  "scripts": {},
+  "scripts": {
+    "test": "node ./bin/reload -b -d expressSampleApp/public",
+    "help": "node ./bin/reload -h"
+  },
   "bin": {
     "reload": "./bin/reload"
   }

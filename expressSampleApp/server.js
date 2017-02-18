@@ -13,14 +13,15 @@ app.set('port', process.env.PORT || 3000)
 app.use(logger('dev'))
 app.use(bodyParser.json()) // Parses json, multi-part (file), url-encoded
 
+/*
 app.get('/', function (req, res) {
   res.sendFile(path.join(publicDir, 'index.html'))
-})
+})*/
 
 var server = http.createServer(app)
 
 // Reload code here
-reload(server, app)
+app.use( reload.middleware(publicDir) )
 
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))

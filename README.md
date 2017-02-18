@@ -15,12 +15,49 @@ Restarting your HTTP server and refreshing your browser is annoying.
 How does it work?
 ----------
 
-Reload works in two different ways depending on if you're using it:
+Reload works in three different ways depending on if you're using it:
 
-1. In an existing Express application in which it creates a server side route for reload or,
-2. As a command line tool which starts its own Express application to monitor the file you're editing for changes and to serve `reload-client.js` to the browser.
+1. In a NodeJs process in which either a reload-server
+2. You can use reload middleware to "attach" reload to a existing server route
+3. As a command line tool which starts its own Server to monitor the file(s) you're editing for changes and to serve `reload-client.js` to the browser.
 
 Once reload-server and reload-client are connected, the client side code opens a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) to the server and waits for the WebSocket to close, once it closes, reload waits for the server to come back up (waiting for a socket on open event), once the socket opens we reload the page.
+
+### Upgrading from v1 to v2
+The following major changes have taken place
+
+- Faster by using updated NodeJs ECMA6 syntax
+- Removed a great amount of weight in dependencies. Package is far simplier to use and weighs far less
+- Removed Express as a dependency
+- Watching files is more intuitive and actually included outside of CLI
+- Better verbose logging where outside library can mandate how logging occurs
+- Added EADDRINUSE to cli-prompt where if port is in use, another port can be supplied to start server on another open port
+- Made more functional for all types of servers and not just an express server
+
+> Express app v1
+```
+var app = express()
+var publicDir = path.join(__dirname, 'public')
+
+app.get('/', function (req, res) {
+  res.sendFile(path.join(publicDir, 'index.html'))
+})
+
+var server = http.createServer(app)
+
+reload(server, app)
+```
+
+> Express app v2
+```
+var app = express()
+var publicDir = path.join(__dirname, 'public')
+
+app.use(reload.middleware(publicDir))
+
+http.createServer(app)
+```
+
 
 Installation
 ---
@@ -28,12 +65,13 @@ Installation
     npm install [-g] [--save-dev] reload
 
 
-Two ways to use reload
+Three ways to use reload
 ---
 
-There are two different ways to use reload.
+There are three different ways to use reload.
 
-1. In an [Express](http://expressjs.com/) application, allowing your whole project to utilize reload when the code is altered
+1. As a server, allowing reload to host your whole project
+2. As middleware, allowing your exsting server project to utilize reload
 2. As a command line application to serve up static HTML files and be able to reload when the code is altered
 
 Using reload in Express
@@ -41,6 +79,15 @@ Using reload in Express
 When used with Express reload creates a new Express route for reload. When you restart the server, the client will detect the server being restarted and automatically refresh the page.
 
 Reload can be used in conjunction with tools that allow for automatically restarting the server such as [supervisor](https://github.com/isaacs/node-supervisor) (recommended), [nodemon](https://github.com/remy/nodemon), [forever](https://github.com/nodejitsu/forever), etc.
+
+### Stand-Alone Example
+
+**`server.js`:**
+```javascript
+var reload = require('reload')
+var publicDir = path.join(__dirname, 'public')
+reload(publicDir,{port:3000})
+```
 
 ### Express Example
 
@@ -61,14 +108,10 @@ app.set('port', process.env.PORT || 3000)
 app.use(logger('dev'))
 app.use(bodyParser.json()) //parses json, multi-part (file), url-encoded
 
-app.get('/', function(req, res) {
-  res.sendFile(path.join(publicDir, 'index.html'))
-})
-
 var server = http.createServer(app)
 
 // Reload code here
-reload(server, app)
+app.use( reload(publicDir) )
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
@@ -83,9 +126,11 @@ server.listen(app.get('port'), function(){
     <title>Reload Express Sample App</title>
   </head>
   <body>
-  	<h1>Reload Express Sample App12</h1>
-    <!-- All you have to do is include the reload script and have it be on every page of your project -->
-    <script src="/reload/reload.js"></script>
+    <h1>Reload Express Sample App</h1>
+    <br />
+    <div>Current Time: <script>document.write(Date.now())</script></div>
+    <br />
+    <div>Script Time: <script src="www/outputTime.js"></script></div>
   </body>
 </html>
 ```
@@ -97,22 +142,37 @@ server.listen(app.get('port'), function(){
 You can manually call a reload event by calling `reload()` yourself. An example is shown below:
 
 ```javascript
-reloadServer = reload(server, app);
+var publicDir = path.join(__dirname, 'public')
+var reload = require('reload')
+var server = http.createServer( reload.middleware(publicDir) )
+
+reloadServer = reload.reloadSocketByHttp(publicDir, server);
+
 watch.watchTree(__dirname + "/public", function (f, curr, prev) {
     // Fire server-side reload event
-    reloadServer.reload();
+    reloadServer();
 });
 ```
 
 ### API for Express
 
 ```
-reload(httpServer, expressApp, [verbose])
+reload.middleware(pathTo, options)
 ```
 
-- `httpServer`:  The Node.js http server from the module `http`.
-- `expressApp`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
-- `verbose`:     If set to true, will show logging on the server and client side
+- `pathTo`:  Folder to watch and serve. Defaults to current dir
+- `options`: 
+  - `port` Number
+  - `log` Function = console.log
+  - `open` Boolean = true - open a browser window
+  - `message` String - when port is in use, tailor prompt messages label
+  - `open` Boolean = true - Open in the browser automatically.
+  - `hostname` String = localhost - This allows for custom hostnames. Defaults to localhost.
+  - `filter` Function - function(pathTo,stat) when function returns true, file will be watched.
+  - `port` Number = 8080 - The port to bind to. Can be set with PORT env variable as well.
+  - `startPage` String - Specify a start page. Defaults to index.html.
+  - `log` Function = console.log - Method to process logging info.
+
 
 Using reload as a command line application
 ---
@@ -149,7 +209,7 @@ Options:
   -e, --exts [extensions]           Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]                 The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
   -s, --start-page [start-page]		Specify a start page. Defaults to index.html.
-  -v, --verbose						Turns on logging on the server and client side. Defaults to false.
+  -v, --verbose						Turns on logging on the server and client side. Defaults to true.
 ```
 
 License
