@@ -23,7 +23,7 @@ Restarting your HTTP server and refreshing your browser is annoying.
   - [Advanced Full Featured Example](#advanced-full-featured-example)
 - [API](#api)
   - [Middlware](#middlware)
-  - [options](#options)
+  - [Arguments](#arguments)
 - [Commands](#commands)
 - [License](#license)
 
@@ -217,10 +217,21 @@ require('reload')(__dirname,{
 ### Middlware
 
 ```
-reload.middleware(pathTo, options)
+var midware = reload.middleware(pathTo)
+
+require('http').createServer(function(req,res){
+  midware(req,res)
+})
+.listen(8080,function(){
+  if(err){
+    console.log(err)
+  }else{
+    console.log('server started')
+  }
+})
 ```
 
-### options
+### Arguments
 
 - `pathTo`:  Folder to watch and serve. Defaults to current dir
 - `options`: 
@@ -228,7 +239,6 @@ reload.middleware(pathTo, options)
   - `log` Function = console.log
   - `open` Boolean = true - open a browser window
   - `message` String - when port is in use, tailor prompt messages label
-  - `open` Boolean = true - Open in the browser automatically.
   - `hostname` String = localhost - This allows for custom hostnames. Defaults to localhost.
   - `filter` Function - function(pathTo,stat) when function returns true, file will be watched.
   - `port` Number = 8080 - The port to bind to. Can be set with PORT env variable as well.
