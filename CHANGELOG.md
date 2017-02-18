@@ -1,7 +1,7 @@
 2.0.0 / 2017-02-17
 ------------------
 Faster by using updated NodeJs ECMA6 syntax
-Removed a great amount of weight in dependencies. Package is far simplier to use and weighs far less
+Removed a great amount of weight in dependencies. Package is far simpler to use and weighs far less
 Removed Express as a dependency
 Watching files is more intuitive and actually included outside of CLI
 Better verbose logging where outside library can mandate how logging occurs

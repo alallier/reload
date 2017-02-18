@@ -26,13 +26,16 @@ Once reload-server and reload-client are connected, the client side code opens a
 ### Upgrading from v1 to v2
 The following major changes have taken place
 
-- Faster by using updated NodeJs ECMA6 syntax
-- Removed a great amount of weight in dependencies. Package is far simplier to use and weighs far less
-- Removed Express as a dependency
-- Watching files is more intuitive and actually included outside of CLI
-- Better verbose logging where outside library can mandate how logging occurs
-- Added EADDRINUSE to cli-prompt where if port is in use, another port can be supplied to start server on another open port
-- Made more functional for all types of servers and not just an express server
+- EADDRINUSE prompt
+  - Added EADDRINUSE catcher that starts a cli-prompt when desired port is in use. Another port can be supplied to start server on another open port.
+- Watching Files
+  - Watching files is more intuitive and actually available outside of just the CLI
+- Better Logging
+  - Better verbose logging where an outside library can mandate how logging occurs
+- Weight loss
+  - Removed a great amount of weight in dependencies. Package is far simpler to use and weighs far less
+- More ways to implement
+  - Connect to any server, not just an express server. The non-cli reload.js is far more functional and easier to integrate into other projects.
 
 > Express app v1
 ```
