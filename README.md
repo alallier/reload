@@ -31,8 +31,8 @@ Restarting your HTTP server and refreshing your browser is annoying.
 
 Reload works in three different ways depending on if you're using it:
 
-1. In a NodeJs process in which either a reload-server
-2. You can use reload middleware to "attach" reload to a existing server route
+1. Run reload in NodeJs process with full API control using config options
+2. Use reload middleware to "attach" reload to a existing server route
 3. As a command line tool which starts its own Server to monitor the file(s) you're editing for changes and to serve `reload-client.js` to the browser.
 
 Once reload-server and reload-client are connected, the client side code opens a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) to the server and waits for the WebSocket to close, once it closes, reload waits for the server to come back up (waiting for a socket on open event), once the socket opens we reload the page.
@@ -149,10 +149,10 @@ app.use(bodyParser.json()) //parses json, multi-part (file), url-encoded
 
 var server = http.createServer(app)
 
-// Reload code here
-app.use( reload.middleware(publicDir) )
+// Reload code only on www url-path from public folder path
+app.use("/www" reload.middleware(publicDir) )
 
-// Another Reload code here
+// Another Reload code here only on admin url-path to admin folder path
 var adminPath = path.join(__dirname,'admin')
 app.use("/admin", reload.middleware(adminPath))
 
@@ -161,6 +161,7 @@ server.listen(app.get('port'), function(){
 });
 ```
 
+A demo template that has a change with every reload
 **`public/index.html`:**
 ```html
 <!doctype html>
@@ -189,9 +190,9 @@ var publicDir = path.join(__dirname, 'public')
 var reload = require('reload')
 var server = http.createServer( reload.middleware(publicDir) )
 
-reloadServer = reload.reloadSocketByHttp(publicDir, server);
+var reloadServer = reload.reloadSocketByHttp(publicDir, server);
 
-//force reload every 10 seconds
+//force reload every 10 seconds of all browser websocket connections
 setInterval(reloadServer, 10000);
 ```
 
@@ -207,7 +208,7 @@ require('reload')(__dirname,{
   filter:function(pathTo, stat){
     return stat.isDirectory() || pathTo.search(/\.(js|css|html)$/)>=0
   },
-  startPage:'index2.html',
+  startPage:'index2.html'
 })
 ```
 
