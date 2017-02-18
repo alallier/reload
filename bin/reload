@@ -3,6 +3,7 @@
 var filterMaker = require('../lib/filterMaker.function')
 var reload = require('../lib/reload')
 var path = require('path')
+var isAbsolute = require('./isPathAbsolute.function')
 var log = require('../lib/log.function')
 
 var help = process.argv.indexOf('-h')>=0
@@ -30,7 +31,7 @@ var options = {log:log}
 var dirArgIndex = process.argv.indexOf('-d')
 if(!dirArgIndex<0)dirArgIndex = process.argv.indexOf('--dir')
 var dir = dirArgIndex>=0 ? process.argv[dirArgIndex+1] : process.cwd()
-if(!path.isAbsolute(dir)){
+if(!isAbsolute(dir)){
   dir = path.join(process.cwd(), dir)
 }
 
