@@ -7,6 +7,7 @@ Watching files is more intuitive and actually included outside of CLI
 Better verbose logging where outside library can mandate how logging occurs
 Added EADDRINUSE to cli-prompt where if port is in use, another port can be supplied to start server on another open port
 Made more functional for all types of servers and not just an express server
+reload package auto appends client script to all html requests
 
 1.1.1 / 2017-01-28
 ------------------

@@ -12,8 +12,22 @@ Why?
 
 Restarting your HTTP server and refreshing your browser is annoying.
 
-How does it work?
-----------
+### Table of Contents
+- [How does it work?](#how-does-it-work)
+- [Upgrading from v1 to v2](#upgrading-from-v1-to-v2)
+- [Installation](#installation)
+- [Examples](#examples)
+  - [Stand-Alone Example](#stand-alone-example)
+  - [Express Example](#express-example)
+  - [Manually Reloading](#manually-reloading)
+  - [Advanced Full Featured Example](#advanced-full-featured-example)
+- [API](#api)
+  - [Middlware](#middlware)
+  - [options](#options)
+- [Commands](#commands)
+- [License](#license)
+
+## How does it work?
 
 Reload works in three different ways depending on if you're using it:
 
@@ -38,8 +52,11 @@ The following major changes have taken place
   - Better verbose logging where an outside library can mandate how logging occurs
 - Weight loss
   - Removed a great amount of weight in dependencies. Package is far simpler to use and weighs far less
+  - Express no longer a dependency
 - More ways to implement
   - Connect to any server, not just an express server. The non-cli reload.js is far more functional and easier to integrate into other projects.
+- Better Client Script Inclusion
+  - reload package auto appends client script to all html requests
 
 Express app v1
 ```
@@ -51,8 +68,8 @@ app.get('/', function (req, res) {
 })
 
 var server = http.createServer(app)
-
 reload(server, app)
+server.listen(3000)
 ```
 
 Express app v2
@@ -60,17 +77,29 @@ Express app v2
 var app = express()
 var publicDir = path.join(__dirname, 'public')
 
-app.use(reload.middleware(publicDir))
+app.use( reload.middleware(publicDir) )
 
-http.createServer(app)
+http.createServer(app).listen(3000)
 ```
 
 
-Installation
----
+## Installation
 
-    npm install [-g] [--save-dev] reload
+```
+npm install [-g] [--save-dev] reload
+```
 
+#### Typical Package Installation
+```
+npm install --save-dev reload
+```
+
+#### Typical Global Installation
+```
+npm install -g reload
+```
+
+## Examples
 
 Three ways to use reload
 ---
@@ -88,15 +117,18 @@ When used with Express reload creates a new Express route for reload. When you r
 Reload can be used in conjunction with tools that allow for automatically restarting the server such as [supervisor](https://github.com/isaacs/node-supervisor) (recommended), [nodemon](https://github.com/remy/nodemon), [forever](https://github.com/nodejitsu/forever), etc.
 
 ### Stand-Alone Example
+Serve and watch a folder all in one
 
 **`server.js`:**
 ```javascript
 var reload = require('reload')
 var publicDir = path.join(__dirname, 'public')
+
 reload(publicDir,{port:3000})
 ```
 
 ### Express Example
+Serve and watch a folder on an existing server
 
 **`server.js`:**
 ```javascript
@@ -118,7 +150,11 @@ app.use(bodyParser.json()) //parses json, multi-part (file), url-encoded
 var server = http.createServer(app)
 
 // Reload code here
-app.use( reload(publicDir) )
+app.use( reload.middleware(publicDir) )
+
+// Another Reload code here
+var adminPath = path.join(__dirname,'admin')
+app.use("/admin", reload.middleware(adminPath))
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
@@ -144,7 +180,7 @@ server.listen(app.get('port'), function(){
 
 **Refer to the [reload express sample app](https://github.com/jprichardson/reload/tree/master/expressSampleApp) for this working example.**
 
-### Manually firing server-side reload events
+### Manually Reloading
 
 You can manually call a reload event by calling `reload()` yourself. An example is shown below:
 
@@ -155,17 +191,36 @@ var server = http.createServer( reload.middleware(publicDir) )
 
 reloadServer = reload.reloadSocketByHttp(publicDir, server);
 
-watch.watchTree(__dirname + "/public", function (f, curr, prev) {
-    // Fire server-side reload event
-    reloadServer();
-});
+//force reload every 10 seconds
+setInterval(reloadServer, 10000);
 ```
 
-### API for Express
+### Advanced Full Featured Example
+
+```
+require('reload')(__dirname,{
+  port:8080,
+  log:console.log.bind(console),
+  open:true,
+  message:'reload',
+  hostname:'127.0.0.1',
+  filter:function(pathTo, stat){
+    return stat.isDirectory() || pathTo.search(/\.(js|css|html)$/)>=0
+  },
+  startPage:'index2.html',
+})
+```
+
+
+## API
+
+### Middlware
 
 ```
 reload.middleware(pathTo, options)
 ```
+
+### options
 
 - `pathTo`:  Folder to watch and serve. Defaults to current dir
 - `options`: 
@@ -180,6 +235,7 @@ reload.middleware(pathTo, options)
   - `startPage` String - Specify a start page. Defaults to index.html.
   - `log` Function = console.log - Method to process logging info.
 
+## Commands
 
 Using reload as a command line application
 ---
@@ -219,8 +275,7 @@ Options:
   -v, --verbose						Turns on logging on the server and client side. Defaults to true.
 ```
 
-License
----
+## License
 
 (MIT License)
 
