@@ -28,7 +28,7 @@
   },
   "main": "./lib/reload.js",
   "scripts": {
-    "test": "node ./bin/reload -b -d expressSampleApp/public",
+    "test": "node ./bin/reload -b -d expressSampleApp/public --test",
     "help": "node ./bin/reload -h"
   },
   "bin": {

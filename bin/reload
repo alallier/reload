@@ -5,6 +5,7 @@ var reload = require('../lib/reload')
 var path = require('path')
 var isAbsolute = require('./isPathAbsolute.function')
 var log = require('../lib/log.function')
+var test = process.argv.indexOf('--test')>=0
 
 var help = process.argv.indexOf('-h')>=0
 if(!help)help = process.argv.indexOf('--help')>=0
@@ -38,7 +39,7 @@ if(!isAbsolute(dir)){
 options.browser = process.argv.indexOf('-b')>=0
 if(!options.browser)options.browser = process.argv.indexOf('--browser')>=0
 
-var hostArgIndex = process.argv.indexOf('-h')
+var hostArgIndex = process.argv.indexOf('-n')
 if(hostArgIndex<0)hostArgIndex = process.argv.indexOf('--hostname')
 options.hostname = hostArgIndex>=0 ? process.argv[hostArgIndex+1] : 'localhost'
 
@@ -68,10 +69,18 @@ reload(dir,options)
 if(verbose){
   log("Reload web server:")
   log("listening on port " + options.port)
-  log("monitoring dir " + options.dir)
+  log("monitoring dir " + dir)
 }
 
 function getDefaultPort(){
   if(process.env.NODE_ENV&&process.env.NODE_ENV.PORT)return process.env.NODE_ENV.PORT
   return 8080
+}
+
+log('test mode',test)
+if(test){
+  setTimeout(function(){
+    log('closing test')
+    process.exit()
+  }, 5000)
 }
