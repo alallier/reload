@@ -26,6 +26,8 @@ Once reload-server and reload-client are connected, the client side code opens a
 ### Upgrading from v1 to v2
 The following major changes have taken place
 
+> Breaking Change: v2 includes use of native Promise. NodeJs .12+ is required
+
 - EADDRINUSE prompt
   - Added EADDRINUSE catcher that starts a cli-prompt when desired port is in use. Another port can be supplied to start server on another open port.
 - Watching Files

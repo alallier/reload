@@ -1,5 +1,6 @@
 2.0.0 / 2017-02-17
 ------------------
+Breaking Change: Include use of native Promise. NodeJs .10 is no longer supported
 Removed a great amount of weight in dependencies. Package is far simpler to use and weighs far less
 Removed Express as a dependency
 Watching files is more intuitive and actually included outside of CLI
