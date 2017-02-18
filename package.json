@@ -29,7 +29,8 @@
   "main": "./lib/reload.js",
   "scripts": {
     "test": "mocha test/index.js",
-    "test:sample": "node ./bin/reload -b -d expressSampleApp/public --test",
+    "test:browser": "node ./bin/reload -b -d expressSampleApp/public",
+    "test:closes": "node ./bin/reload -b -d expressSampleApp/public --test",
     "help": "node ./bin/reload -h"
   },
   "bin": {

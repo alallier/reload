@@ -19,9 +19,19 @@ describe('reload',function(){
     .then(function(){
       return promiseRequest({host:'localhost', port:'3030', path:'/index.html'})
     })
-    .then(function(res){
-      assert(res.statusCode, 200)
-      assert(res.statusMessage, 'OK')
+    .then(function(response){
+      assert(response.statusCode, 200)
+      assert(response.statusMessage, 'OK')
+      
+      response.setEncoding('utf8');
+      return new Promise(function(res,rej){
+        response.on('data', function (chunk) {
+          res(chunk)
+        })
+      })
+    })
+    .then(function(body){
+      assert.equal(body.search(/reload\/reload\.js/)>=0, true)
     })
     .then(function(){
       config.httpServer.close(done)
