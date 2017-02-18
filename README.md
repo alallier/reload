@@ -30,6 +30,8 @@ The following major changes have taken place
 
 - EADDRINUSE prompt
   - Added EADDRINUSE catcher that starts a cli-prompt when desired port is in use. Another port can be supplied to start server on another open port.
+- Multiple connections supported
+  - Now multiple browsers and multiple web socket connections can be maintained
 - Watching Files
   - Watching files is more intuitive and actually available outside of just the CLI
 - Better Logging
@@ -39,7 +41,7 @@ The following major changes have taken place
 - More ways to implement
   - Connect to any server, not just an express server. The non-cli reload.js is far more functional and easier to integrate into other projects.
 
-> Express app v1
+Express app v1
 ```
 var app = express()
 var publicDir = path.join(__dirname, 'public')
@@ -53,7 +55,7 @@ var server = http.createServer(app)
 reload(server, app)
 ```
 
-> Express app v2
+Express app v2
 ```
 var app = express()
 var publicDir = path.join(__dirname, 'public')
