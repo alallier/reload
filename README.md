@@ -215,19 +215,15 @@ var reload = require('reload')
 var server = http.createServer( reload.middleware(publicDir) )
 
 //attaches websocket server via established http server and returns promise of a function to manually reload with
-reload.reloadSocketByHttp(publicDir, server)
-.then(reloadServer=>{
-  //force reload every 10 seconds of all browser websocket connections
-  setInterval(reloadServer, 10000);
+var reloadServer = reload.reloadSocketByHttp(publicDir, server)
 
-  //stop reload services after 30 seconds
-  setTimeout(function(){
-    server.stop()
-  }, 30000)
-})
-.catch(function(e){
-  console.error(e)
-})
+//force reload every 10 seconds of all browser websocket connections
+setInterval(reloadServer, 10000);
+
+//stop reload services after 30 seconds
+setTimeout(function(){
+  server.stop()
+}, 30000)
 ```
 
 ### Advanced Full Featured Example
