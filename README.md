@@ -199,7 +199,7 @@ reload(publicDir)
 
   //stop reload services after 30 seconds
   setTimeout(function(){
-    config.httpServer.stop()
+    config.httpServer.close()
   }, 30000)
 })
 .catch(function(e){
@@ -222,7 +222,7 @@ setInterval(reloadServer, 10000);
 
 //stop reload services after 30 seconds
 setTimeout(function(){
-  server.stop()
+  server.close()
 }, 30000)
 ```
 
@@ -239,6 +239,9 @@ require('reload')(__dirname,{
     return stat.isDirectory() || pathTo.search(/\.(js|css|html)$/)>=0
   },
   startPage:'index2.html'
+})
+.catch(function(e){
+  console.error(e)
 })
 ```
 
