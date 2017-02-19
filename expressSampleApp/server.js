@@ -23,6 +23,8 @@ var server = http.createServer(app)
 // Reload code here
 app.use( reload.middleware(publicDir) )
 
+reload.reloadSocketByHttp(publicDir, server)
+
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))
 })

@@ -77,7 +77,11 @@ Express app v2
 var app = express()
 var publicDir = path.join(__dirname, 'public')
 
+//server will just host reload software
 app.use( reload.middleware(publicDir) )
+
+//websocket to http attachment and file watching
+reload.reloadSocketByHttp(publicDir, server)
 
 http.createServer(app).listen(3000)
 ```
