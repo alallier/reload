@@ -183,17 +183,51 @@ A demo template that has a change with every reload
 
 ### Manually Reloading
 
-You can manually call a reload event by calling `reload()` yourself. An example is shown below:
+Two ways to approach:
+- Manually call returned reload function after starting a reload server
+- Integrate the reload function into running middleware
+
+Manually Reloading Application
+```
+var publicDir = path.join(__dirname, 'public')
+var reload = require('reload')
+
+reload(publicDir)
+.then(config=>{
+  //force reload every 10 seconds of all browser websocket connections
+  setInterval(config.reload, 10000);
+
+  //stop reload services after 30 seconds
+  setTimeout(function(){
+    config.httpServer.stop()
+  }, 30000)
+})
+.catch(function(e){
+  console.error(e)
+})
+```
+
+Manually Reloading With MiddleWare
 
 ```javascript
 var publicDir = path.join(__dirname, 'public')
 var reload = require('reload')
 var server = http.createServer( reload.middleware(publicDir) )
 
-var reloadServer = reload.reloadSocketByHttp(publicDir, server);
+//attaches websocket server via established http server and returns promise of a function to manually reload with
+reload.reloadSocketByHttp(publicDir, server)
+.then(reloadServer=>{
+  //force reload every 10 seconds of all browser websocket connections
+  setInterval(reloadServer, 10000);
 
-//force reload every 10 seconds of all browser websocket connections
-setInterval(reloadServer, 10000);
+  //stop reload services after 30 seconds
+  setTimeout(function(){
+    server.stop()
+  }, 30000)
+})
+.catch(function(e){
+  console.error(e)
+})
 ```
 
 ### Advanced Full Featured Example

@@ -9,19 +9,25 @@ describe('reload',function(){
     var servePath = path.join(__dirname,'../','expressSampleApp','public')
     reload(servePath,{port:3030, open:false, log:function(){}})
     .then(function(setup){
+      assert.equal(typeof setup, 'object')
+      assert.equal(typeof setup.httpServer, 'object')
+      assert.equal(typeof setup.reload, 'function')
+      assert.equal(typeof setup.port, 'number')
+      
       config = setup
+      
       return promiseRequest({host:'localhost', port:'3030', path:'/index2.html'})
     })
     .then(function(res){
-      assert(res.statusCode, 404)
-      assert(res.statusMessage, 'Not Found')
+      assert.equal(res.statusCode, 404)
+      assert.equal(res.statusMessage, 'Not Found')
     })
     .then(function(){
       return promiseRequest({host:'localhost', port:'3030', path:'/index.html'})
     })
     .then(function(response){
-      assert(response.statusCode, 200)
-      assert(response.statusMessage, 'OK')
+      assert.equal(response.statusCode, 200)
+      assert.equal(response.statusMessage, 'OK')
       
       response.setEncoding('utf8');
       return new Promise(function(res,rej){
