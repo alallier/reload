@@ -1,7 +1,18 @@
+/* This file requires you install its demo dependencies
+  1. Open a command prompt terminal
+  2. Navigate to this folder
+  3. Type "npm run install"
+  4. Type "node server"
+*/
+
 var express = require('express')
 var http = require('http')
 var path = require('path')
-var reload = require('reload')
+
+//uncomment for package inclusion
+//var reload = require('reload')
+var reload = require('../lib/reload')
+
 var bodyParser = require('body-parser')
 var logger = require('morgan')
 
@@ -21,9 +32,7 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-app.use( reload.middleware(publicDir) )
-
-reload.reloadSocketByHttp(publicDir, server)
+app.use( reload.middleware(publicDir, server) )
 
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))

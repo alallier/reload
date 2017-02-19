@@ -77,11 +77,8 @@ Express app v2
 var app = express()
 var publicDir = path.join(__dirname, 'public')
 
-//server will just host reload software
-app.use( reload.middleware(publicDir) )
-
-//websocket to http attachment and file watching
-reload.reloadSocketByHttp(publicDir, server)
+//Only host reload software. Create websocket to http attachment. File watching
+app.use( reload.middleware(publicDir, server) )
 
 http.createServer(app).listen(3000)
 ```
@@ -154,13 +151,11 @@ app.use(bodyParser.json()) //parses json, multi-part (file), url-encoded
 var server = http.createServer(app)
 
 // Reload code only on www url-path from public folder path
-app.use("/www" reload.middleware(publicDir) )
-reload.reloadSocketByHttp(publicDir, server)
+app.use("/www" reload.middleware(publicDir, server) )
 
 // Another Reload code here only on admin url-path to admin folder path
 var adminPath = path.join(__dirname,'admin')
-app.use("/admin", reload.middleware(adminPath))
-reload.reloadSocketByHttp(adminPath, server)
+app.use("/admin", reload.middleware(adminPath, server))
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
@@ -218,13 +213,15 @@ Manually Reloading With MiddleWare
 ```javascript
 var publicDir = path.join(__dirname, 'public')
 var reload = require('reload')
-var server = http.createServer( reload.middleware(publicDir) )
 
-//attaches websocket server via established http server and returns promise of a function to manually reload with
-var reloadServer = reload.reloadSocketByHttp(publicDir, server)
+var server = http.createServer(function(){
+  midware(req,res)
+})
+
+var midware = reload.middleware(publicDir,server)
 
 //force reload every 10 seconds of all browser websocket connections
-setInterval(reloadServer, 10000);
+setInterval(midware.reload, 10000);
 
 //stop reload services after 30 seconds
 setTimeout(function(){
@@ -245,6 +242,15 @@ require('reload')(__dirname,{
     return stat.isDirectory() || pathTo.search(/\.(js|css|html)$/)>=0
   },
   startPage:'index2.html'
+})
+.then(function(config){
+  //force reload every 10 seconds of all browser websocket connections
+  setInterval(config.reload, 10000);
+
+  //stop reload services after 30 seconds
+  setTimeout(function(){
+    config.httpServer.close()
+  }, 30000)  
 })
 .catch(function(e){
   console.error(e)
