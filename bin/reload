@@ -77,8 +77,8 @@ function getDefaultPort(){
   return 8080
 }
 
-log('test mode',test)
 if(test){
+  log('test mode on')
   setTimeout(function(){
     log('closing test')
     process.exit()
