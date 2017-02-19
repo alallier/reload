@@ -155,10 +155,12 @@ var server = http.createServer(app)
 
 // Reload code only on www url-path from public folder path
 app.use("/www" reload.middleware(publicDir) )
+reload.reloadSocketByHttp(publicDir, server)
 
 // Another Reload code here only on admin url-path to admin folder path
 var adminPath = path.join(__dirname,'admin')
 app.use("/admin", reload.middleware(adminPath))
+reload.reloadSocketByHttp(adminPath, server)
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
