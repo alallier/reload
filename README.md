@@ -290,6 +290,7 @@ require('http').createServer(function(req,res){
   - `port` Number = 8080 - The port to bind to. Can be set with PORT env variable as well.
   - `startPage` String - Specify a start page. Defaults to index.html.
   - `log` Function = console.log - Method to process logging info.
+  - `watch` Boolean = true - Enable/disable watching files. Manual reload will be required
 
 ## Commands
 
