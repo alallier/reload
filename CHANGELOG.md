@@ -1,3 +1,7 @@
+1.1.2 / 2017-04-16
+------------------
+Fix multiple websockets at once when using reload.reload(); See: https://github.com/jprichardson/reload/pull/57
+
 1.1.1 / 2017-01-28
 ------------------
 Fixed undefined error log on send message. See: https://github.com/jprichardson/reload/pull/59
