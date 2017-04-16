@@ -152,8 +152,8 @@ Options:
   -d, --dir [dir]                   The directory to serve up. Defaults to current dir.
   -e, --exts [extensions]           Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]                 The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -s, --start-page [start-page]	 Specify a start page. Defaults to index.html.
-  -v, --verbose					 Turns on logging on the server and client side. Defaults to false.
+  -s, --start-page [start-page]     Specify a start page. Defaults to index.html.
+  -v, --verbose                     Turns on logging on the server and client side. Defaults to false.
 ```
 
 License
