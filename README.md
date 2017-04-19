@@ -1,3 +1,6 @@
+Warning: Do not install if you are running Ubuntu. See [issue #13](https://github.com/jprichardson/reload/issues/13).
+===============
+
 reload
 =======
 
