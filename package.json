@@ -29,7 +29,7 @@
     "minimist": "~1.2.0"
   },
   "devDependencies": {
-    "standard": "^7.1.2"
+    "standard": "^10.0.2"
   },
   "main": "./lib/reload.js",
   "scripts": {
@@ -38,8 +38,5 @@
   },
   "bin": {
     "reload": "./bin/reload"
-  },
-  "plugins" : [
-    "react"
-  ]
+  }
 }
