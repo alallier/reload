@@ -38,5 +38,8 @@
   },
   "bin": {
     "reload": "./bin/reload"
-  }
+  },
+  "plugins" : [
+    "react"
+  ]
 }
