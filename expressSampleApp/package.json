@@ -21,6 +21,6 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ./node_modueles/reload/bin/reload -d ./public"
+    "start": "node ./node_modules/reload/bin/reload -d ./public"
   }
 }
