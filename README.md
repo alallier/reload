@@ -83,9 +83,7 @@ server.listen(app.get('port'), function(){
     <title>Reload Express Sample App</title>
   </head>
   <body>
-  	<h1>Reload Express Sample App12</h1>
-    <!-- All you have to do is include the reload script and have it be on every page of your project -->
-    <script src="/reload/reload.js"></script>
+  	<h1>Reload Express Sample App</h1>
   </body>
 </html>
 ```
