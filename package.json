@@ -33,8 +33,7 @@
   },
   "main": "./lib/reload.js",
   "scripts": {
-    "standard": "standard",
-    "test": "npm run standard"
+    "test": "npm run standard & standard bin/reload"
   },
   "bin": {
     "reload": "./bin/reload"
