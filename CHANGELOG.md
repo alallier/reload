@@ -1,3 +1,9 @@
+1.1.3 / 2017-04-28
+------------------
+Upgrade Standard to `~10.0.2` in order for the build to pass node `0.1` and `0.12`
+Also removed depricated `fs.exists` and replaced with `fs.access`
+See: https://github.com/jprichardson/reload/pull/75
+
 1.1.2 / 2017-04-16
 ------------------
 Fix multiple websockets at once when using reload.reload(); See: https://github.com/jprichardson/reload/pull/57
