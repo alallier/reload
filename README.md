@@ -68,7 +68,11 @@ app.get('/', function(req, res) {
 var server = http.createServer(app)
 
 // Reload code here
+// Reload attaching to server's port
 reload(server, app)
+
+// Reload using a custom port to run the websocket on
+reload(8080, app);
 
 server.listen(app.get('port'), function(){
   console.log("Web server listening on port " + app.get('port'));
@@ -107,10 +111,10 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 ### API for Express
 
 ```
-reload(httpServer, expressApp, [verbose])
+reload(httpServerOrPort, expressApp, [verbose])
 ```
 
-- `httpServer`:  The Node.js http server from the module `http`.
+- `httpServerOrPort`:  The Node.js http server from the module `http` **or** a port to run the reload websocket on (as a number). **Note**: It is important to specify a custom port if you have other websockets running in your application so they don't conflict.
 - `expressApp`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
 - `verbose`:     If set to true, will show logging on the server and client side
 
@@ -148,8 +152,8 @@ Options:
   -d, --dir [dir]                   The directory to serve up. Defaults to current dir.
   -e, --exts [extensions]           Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]                 The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -s, --start-page [start-page]		Specify a start page. Defaults to index.html.
-  -v, --verbose						Turns on logging on the server and client side. Defaults to false.
+  -s, --start-page [start-page]     Specify a start page. Defaults to index.html.
+  -v, --verbose                     Turns on logging on the server and client side. Defaults to false.
 ```
 
 License
