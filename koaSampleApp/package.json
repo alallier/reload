@@ -1,0 +1,26 @@
+{
+  "name": "reload-sample-app",
+  "version": "0.0.1",
+  "description": "Sample app for reload package https://www.npmjs.com/package/reload",
+  "author": "",
+  "license": "",
+  "main": "server.js",
+  "dependencies": {
+    "koa": "^2.2.0",
+    "koa-nunjucks-2": "^3.0.0-alpha.5",
+    "koa-router": "^7.1.1",
+    "reload": "*"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  },
+  "private": true,
+  "repository": {
+    "private-repo": "git+ssh://somewhere:port/folder/on/server"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon . -e js,json,njk"
+  }
+}
