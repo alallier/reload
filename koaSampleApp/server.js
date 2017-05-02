@@ -14,14 +14,14 @@ app.use(KoaNunjucks({
   }
 }))
 
-const router = require('koa-router')();
+const router = require('koa-router')()
 
 router.get('/', (ctx, next) => {
-  return ctx.render('index');
+  return ctx.render('index')
 })
 
 app.use(router.routes())
-app.use(router.allowedMethods());
+app.use(router.allowedMethods())
 const server = http.createServer(app.callback())
 reload(server, app, false, { koa: true })
 const port = process.env.PORT || 3000
