@@ -1,3 +1,7 @@
+1.1.4 / 2017-05-13
+------------------
+Added AppVeyor to build our tests in an Windows environment. See https://github.com/jprichardson/reload/pull/92
+
 1.1.3 / 2017-04-28
 ------------------
 Upgrade Standard to `~10.0.2` in order for the build to pass node `0.1` and `0.12`
