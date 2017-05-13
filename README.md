@@ -2,6 +2,7 @@ reload
 =======
 
 [![build status](https://api.travis-ci.org/jprichardson/reload.svg)](http://travis-ci.org/jprichardson/reload)
+[![Build status](https://ci.appveyor.com/api/projects/status/701bmcfs5hxyu7ut?svg=true)](https://ci.appveyor.com/project/alallier/reload-twupv)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![NPM version](https://img.shields.io/npm/v/reload.svg?style=flat-square)](https://www.npmjs.com/package/reload)
 
