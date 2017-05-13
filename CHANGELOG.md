@@ -1,3 +1,7 @@
+1.1.5 / 2017-05-13
+------------------
+Fixed standard call so that our bin file also got tested. See https://github.com/jprichardson/reload/pull/85
+
 1.1.4 / 2017-05-13
 ------------------
 Added AppVeyor to build our tests in an Windows environment. See https://github.com/jprichardson/reload/pull/92
