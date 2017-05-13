@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 var program = require('commander')
-  , ON_DEATH = require('death')()
-  , supervisor = require('supervisor')
-  , path = require('path')
-  , os = require('os')
-  , fs = require('fs')
-  , clc = require('cli-color')
+// var ON_DEATH = require('death')()
+var supervisor = require('supervisor')
+var path = require('path')
+var os = require('os')
+// var fs = require('fs')
+var clc = require('cli-color')
 
 program.version(require('../package.json').version)
   .option('-b, --browser', 'Open in the browser automatically.')
@@ -21,13 +21,13 @@ program.version(require('../package.json').version)
 var runFile = path.join(os.tmpdir(), 'reload-' + Math.random().toString().slice(2))
 var serverFile = path.join(__dirname, '../lib/reload-server.js')
 
-if (program.exts.indexOf(','))
-  program.exts = program.exts.replace(/\,/g,'|') //replace comma for pipe, that's what supervisor likes
+if (program.exts.indexOf(',')) {
+  program.exts = program.exts.replace(/,/g, '|') // replace comma for pipe, that's what supervisor likes
+}
 
 var args = ['-e', program.exts, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose]
 supervisor.run(args)
 
-console.log("\nReload web server:")
-console.log("listening on port " + clc.blue.bold(program.port))
-console.log("monitoring dir " + clc.green.bold(program.dir))
-
+console.log('\nReload web server:')
+console.log('listening on port ' + clc.blue.bold(program.port))
+console.log('monitoring dir ' + clc.green.bold(program.dir))
