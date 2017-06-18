@@ -1,3 +1,7 @@
+1.1.6 / 2017-06-18
+------------------
+Add Mac building in Travis. See https://github.com/jprichardson/reload/pull/98
+
 1.1.5 / 2017-05-13
 ------------------
 Fixed standard call so that our bin file also got tested. See https://github.com/jprichardson/reload/pull/85
