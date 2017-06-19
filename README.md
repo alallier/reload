@@ -8,6 +8,21 @@ reload
 
 Automatically refresh and reload your code in your browser when your code changes. No browser plugins required.
 
+Table Of Contents
+---
+* [Why](#why)
+* [How does it work?](#how-does-it-work)
+* [Installation](#installation)
+* [Two ways to use reload](#two-ways-to-use-reload)
+* [Using reload in Express](#using-reload-in-express)
+  * [Express Example](#express-example)
+  * [Manually firing server-side reload events](#manually-firing-server-side-reload-events)
+  * [API for Express](#api-for-express)
+    * [Table of reload parameters](#table-of-reload-parameters)
+* [Using reload as a command line application](#using-reload-as-a-command-line-application)
+  * [Usage for Command Line Application](#usage-for-command-line-application)
+* [License](#license)
+
 Why?
 ----
 
