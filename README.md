@@ -10,8 +10,8 @@ Automatically refresh and reload your code in your browser when your code change
 
 Table Of Contents
 ---
-* [Why](#why?)
-* [How does it work?](#how-does-it-work?)
+* [Why](#why)
+* [How does it work?](#how-does-it-work)
 * [Installation](#installation)
 * [Two ways to use reload](#two-ways-to-use-reload)
 * [Using reload in Express](#using-reload-in-express)
