@@ -69,26 +69,12 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-
-// Reload attaching to server's port
-reload(
-  {
-    server: server,
-    app: app
-  }
-)
-
-// Or Reload using a custom port to run the websocket on
-reload(
-  {
-    port: 8080,
-    app: app
-  }
-)
+reload(app);
 
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))
 })
+
 ```
 
 **`public/index.html`:**
@@ -123,14 +109,18 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 ### API for Express
 
 ```
-reload(objectOfParameters)
+reload(app, opts)
 ```
 
-`objectOfParameters` is an object containing the possible following parameters:
-- `server`: The Node.js http server from the module `http` (Optional, but if omitted port is required.)
-- `port`:  A port to run the reload websocket on (as a number). **Note**: It is important to specify a custom port if you have other websockets running in your application so they don't conflict. (Optional, but if omitted server is required.)
-- `app`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
-- `verbose`:     If set to true, will show logging on the server and client side. (Optional)
+#### Table of reload parameters
+
+| Parameter Name | Type      | Description                                                                                                                                    | Part of `opts` object | Optional | Default Value      |
+|----------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|----------|--------------------|
+| app            | {object}  | The app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.                            |                       |          | n/a                |
+| **opts**       | {object}  | Object of possible options (shown below)                                                                                                       |                       | ✓        | n/a                |
+| port           | {number}  | Port to run reload on.                                                                                                                         | ✓                     | ✓        | `9856`             |
+| route          | {string}  | Route that reload should use to serve the script file. Changing the route will require the script tag URL to change. (Recommend not modifying) | ✓                     | ✓        | `reload/reload.js` |
+| verbose        | {boolean} | If set to true, will show logging on the server and client side.                                                                               | ✓                     | ✓        | `false`            |
 
 Using reload as a command line application
 ---

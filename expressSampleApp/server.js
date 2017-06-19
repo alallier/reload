@@ -20,24 +20,7 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-
-// Reload attaching to server's port
-reload(
-  {
-    server: server,
-    app: app,
-    verbose: false
-  }
-)
-
-// Or Reload using a custom port to run the websocket on
-reload(
-  {
-    port: 8080,
-    app: app,
-    verbose: false
-  }
-)
+reload(app);
 
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))
