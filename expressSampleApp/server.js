@@ -20,7 +20,7 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-reload(app);
+reload(app)
 
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))
