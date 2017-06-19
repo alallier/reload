@@ -50,7 +50,7 @@ Reload can be used in conjunction with tools that allow for automatically restar
 var express = require('express')
 var http = require('http')
 var path = require('path')
-var reload = require('reload')
+var reload = require('../../reload')
 var bodyParser = require('body-parser')
 var logger = require('morgan')
 
@@ -60,24 +60,35 @@ var publicDir = path.join(__dirname, 'public')
 
 app.set('port', process.env.PORT || 3000)
 app.use(logger('dev'))
-app.use(bodyParser.json()) //parses json, multi-part (file), url-encoded
+app.use(bodyParser.json()) // Parses json, multi-part (file), url-encoded
 
-app.get('/', function(req, res) {
+app.get('/', function (req, res) {
   res.sendFile(path.join(publicDir, 'index.html'))
 })
 
 var server = http.createServer(app)
 
 // Reload code here
+
 // Reload attaching to server's port
-reload(server, app)
+reload(
+  {
+    server: server,
+    app: app
+  }
+)
 
-// Reload using a custom port to run the websocket on
-reload(8080, app);
+// Or Reload using a custom port to run the websocket on
+reload(
+  {
+    port: 8080,
+    app: app
+  }
+)
 
-server.listen(app.get('port'), function(){
-  console.log("Web server listening on port " + app.get('port'));
-});
+server.listen(app.get('port'), function () {
+  console.log('Web server listening on port ' + app.get('port'))
+})
 ```
 
 **`public/index.html`:**
@@ -112,12 +123,14 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 ### API for Express
 
 ```
-reload(httpServerOrPort, expressApp, [verbose])
+reload(objectOfParameters)
 ```
 
-- `httpServerOrPort`:  The Node.js http server from the module `http` **or** a port to run the reload websocket on (as a number). **Note**: It is important to specify a custom port if you have other websockets running in your application so they don't conflict.
-- `expressApp`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
-- `verbose`:     If set to true, will show logging on the server and client side
+`objectOfParameters` is an object containing the possible following parameters:
+- `server`: The Node.js http server from the module `http` (Optional, but if omitted port is required.)
+- `port`:  A port to run the reload websocket on (as a number). **Note**: It is important to specify a custom port if you have other websockets running in your application so they don't conflict. (Optional, but if omitted server is required.)
+- `app`:  The express app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.
+- `verbose`:     If set to true, will show logging on the server and client side. (Optional)
 
 Using reload as a command line application
 ---
