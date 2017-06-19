@@ -1,7 +1,7 @@
 var express = require('express')
 var http = require('http')
 var path = require('path')
-var reload = require('reload')
+var reload = require('../../reload')
 var bodyParser = require('body-parser')
 var logger = require('morgan')
 
@@ -20,7 +20,24 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-reload(server, app, true)
+
+// Reload attaching to server's port
+reload(
+  {
+    server: server,
+    app: app,
+    verbose: false
+  }
+)
+
+// Or Reload using a custom port to run the websocket on
+reload(
+  {
+    port: 8080,
+    app: app,
+    verbose: false
+  }
+)
 
 server.listen(app.get('port'), function () {
   console.log('Web server listening on port ' + app.get('port'))
