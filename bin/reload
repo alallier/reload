@@ -1,11 +1,9 @@
 #!/usr/bin/env node
 
 var program = require('commander')
-// var ON_DEATH = require('death')()
 var supervisor = require('supervisor')
 var path = require('path')
 var os = require('os')
-// var fs = require('fs')
 var clc = require('cli-color')
 
 program.version(require('../package.json').version)
