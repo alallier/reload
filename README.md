@@ -170,7 +170,8 @@ Options:
   -n, --hostname                    If -b flag is being used, this allows for custom hostnames. Defaults to localhost.
   -d, --dir [dir]                   The directory to serve up. Defaults to current dir.
   -e, --exts [extensions]           Extensions separated by commas or pipes. Defaults to html,js,css.
-  -p, --port [port]                 The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
+  -p, --server-port [server-port]   The port to bind to. Can be set with PORT env variable as well. Defaults to 9855.
+  -P, --reload-port [reload-port]   The port reload runs on. If not specified uses server port + 1. Defaults to 9856.
   -s, --start-page [start-page]     Specify a start page. Defaults to index.html.
   -v, --verbose                     Turns on logging on the server and client side. Defaults to false.
 ```

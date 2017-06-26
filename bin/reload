@@ -11,7 +11,8 @@ program.version(require('../package.json').version)
   .option('-n, --hostname [hostname]', 'If -b flag is being used, this allows for custom hostnames. Defaults to localhost.', 'localhost')
   .option('-d, --dir [dir]', 'The directory to serve up. Defaults to current dir.', process.cwd())
   .option('-e, --exts [extensions]', 'Extensions separated by commas or pipes. Defaults to html,js,css.', 'html|js|css')
-  .option('-p, --port [port]', 'The port to bind to. Can be set with PORT env variable as well. Defaults to 8080', '8080')
+  .option('-p, --server-port [server-port]', 'The port the server runs on. Can be set with PORT env variable as well. Defaults to 9855', '9855')
+  .option('-P, --reload-port [reload-port]', 'The port reload runs on. If not specified uses server port + 1. Defaults to server port + 1')
   .option('-s, --start-page [start-page]', 'Specify a start page. Defaults to index.html', 'index.html')
   .option('-v, --verbose [verbose]', 'Turning on logging on the server and client side. Defaults to false', false)
   .parse(process.argv)
@@ -23,9 +24,9 @@ if (program.exts.indexOf(',')) {
   program.exts = program.exts.replace(/,/g, '|') // replace comma for pipe, that's what supervisor likes
 }
 
-var args = ['-e', program.exts, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose]
+var args = ['-e', program.exts, '-q', '--', serverFile, program.serverPort, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose, program.reloadPort]
 supervisor.run(args)
 
 console.log('\nReload web server:')
-console.log('listening on port ' + clc.blue.bold(program.port))
+console.log('listening on port ' + clc.blue.bold(program.serverPort))
 console.log('monitoring dir ' + clc.green.bold(program.dir))
