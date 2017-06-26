@@ -24,7 +24,7 @@ if (program.exts.indexOf(',')) {
   program.exts = program.exts.replace(/,/g, '|') // replace comma for pipe, that's what supervisor likes
 }
 
-var args = ['-e', program.exts, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose, program.serverPort, program.reloadPort]
+var args = ['-e', program.exts, '-q', '--', serverFile, program.serverPort, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose, program.reloadPort]
 supervisor.run(args)
 
 console.log('\nReload web server:')
