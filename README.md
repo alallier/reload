@@ -158,4 +158,12 @@ License
 
 (MIT License)
 
-Copyright 2016, JP Richardson  <jprichardson@gmail.com>
+Copyright 2017
+
+### Orginal Author:
+
+JP Richardson  <jprichardson@gmail.com>
+
+### Owned by:
+
+Alexander J. Lallier <mralexlallier@gmail.com>
