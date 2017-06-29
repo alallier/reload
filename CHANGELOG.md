@@ -1,3 +1,12 @@
+1.1.7 / 2017-06-28
+------------------
+Repository ownership was transfered from jprichardson to alallier
+
+- Updated Travis badge after ownership change. See: https://github.com/alallier/reload/pull/116
+- Updated AppVeyor badge after ownership change. See: https://github.com/alallier/reload/pull/112
+- Updated README after owernship change. See: https://github.com/alallier/reload/pull/115
+- Changed style of npm badge to match the others. See: https://github.com/alallier/reload/pull/111
+
 1.1.6 / 2017-06-18
 ------------------
 Add Mac building in Travis. See https://github.com/jprichardson/reload/pull/98

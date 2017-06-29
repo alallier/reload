@@ -1,10 +1,10 @@
 reload
 =======
 
-[![build status](https://api.travis-ci.org/jprichardson/reload.svg)](http://travis-ci.org/jprichardson/reload)
-[![Build status](https://ci.appveyor.com/api/projects/status/701bmcfs5hxyu7ut?svg=true)](https://ci.appveyor.com/project/alallier/reload-twupv)
+[![Build Status](https://travis-ci.org/alallier/reload.svg?branch=master)](https://travis-ci.org/alallier/reload)
+[![Build status](https://ci.appveyor.com/api/projects/status/4uuui532bpht2ff7?svg=true)](https://ci.appveyor.com/project/alallier/reload)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![NPM version](https://img.shields.io/npm/v/reload.svg?style=flat-square)](https://www.npmjs.com/package/reload)
+[![NPM version](https://img.shields.io/npm/v/reload.svg)](https://www.npmjs.com/package/reload)
 
 Automatically refresh and reload your code in your browser when your code changes. No browser plugins required.
 
@@ -180,4 +180,12 @@ License
 
 (MIT License)
 
-Copyright 2016, JP Richardson  <jprichardson@gmail.com>
+Copyright 2017
+
+### Orginal Author:
+
+JP Richardson  <jprichardson@gmail.com>
+
+### Owned by:
+
+Alexander J. Lallier <mralexlallier@gmail.com>
