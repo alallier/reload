@@ -1,7 +1,7 @@
 reload
 =======
 
-[![build status](https://api.travis-ci.org/jprichardson/reload.svg)](http://travis-ci.org/jprichardson/reload)
+[![Build Status](https://travis-ci.org/alallier/reload.svg?branch=master)](https://travis-ci.org/alallier/reload)
 [![Build status](https://ci.appveyor.com/api/projects/status/4uuui532bpht2ff7?svg=true)](https://ci.appveyor.com/project/alallier/reload)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 [![NPM version](https://img.shields.io/npm/v/reload.svg)](https://www.npmjs.com/package/reload)
