@@ -30,7 +30,7 @@
   "devDependencies": {
     "standard": "^10.0.2"
   },
-  "main": "./lib/reload.js",
+  "main": "./index.js",
   "scripts": {
     "test": "npm run standard",
     "standard": "standard **/*.js bin/**/*"
