@@ -18,7 +18,10 @@ Table Of Contents
   * [Express Example](#express-example)
   * [Manually firing server-side reload events](#manually-firing-server-side-reload-events)
   * [API for Express](#api-for-express)
-    * [Table of reload parameters](#table-of-reload-parameters)
+    * [Parameters](#parameters)
+      * [Table of reload parameters](#table-of-reload-parameters)
+      * [Table of options for reload opts parameter](#table-of-options-for-reload-opts-parameter)
+      * **[Updating to version 2](#updating-to-version-2)**
 * [Using reload as a command line application](#using-reload-as-a-command-line-application)
   * [Usage for Command Line Application](#usage-for-command-line-application)
 * [License](#license)
@@ -37,6 +40,11 @@ Reload works in two different ways depending on if you're using it:
 2. As a command line tool which starts its own Express application to monitor the file you're editing for changes and to serve `reload-client.js` to the browser.
 
 Once reload-server and reload-client are connected, the client side code opens a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) to the server and waits for the WebSocket to close, once it closes, reload waits for the server to come back up (waiting for a socket on open event), once the socket opens we reload the page.
+
+Updating from version 2 from version 1
+---
+
+Looking for a quick guide to updating reload to version 2? Please refer to our update section [below](#updating-to-version-2).
 
 Installation
 ---
@@ -127,15 +135,32 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 reload(app, opts)
 ```
 
-#### Table of reload parameters
+#### Parameters
 
-| Parameter Name | Type      | Description                                                                                                                                                                                                                                                                                                                                                                                                           | Part of `opts` object | Optional | Default Value |
-|----------------|-----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------|----------|---------------|
-| app            | {object}  | The app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express.                                                                                                                                                                                                                                                                                                   |                       |          | n/a           |
-| **opts**       | {object}  | Object of possible options (shown below)                                                                                                                                                                                                                                                                                                                                                                              |                       | ✓        | n/a           |
-| port           | {number}  | Port to run reload on.                                                                                                                                                                                                                                                                                                                                                                                                | ✓                     | ✓        | `9856`        |
-| route          | {string}  | Route that reload should use to serve the client side script file. Changing the route will require the script tag URL to change. Reload will always strip any occurance of `reload.js` and append `reload.js` for you. This is to ensure case, order, and use of `/` is correct. For example specifying `newRoutePath` as the route will give reload a route of `newRoutePath/reload.js`. (Recommend not modifying).  | ✓                     | ✓        | `reload`      |
-| verbose        | {boolean} | If set to true, will show logging on the server and client side.                                                                                                                                                                                                                                                                                                                                                      | ✓                     | ✓        | `false`       |
+##### Table of reload parameters
+
+| Parameter Name | Type     | Description                                                                                                         | Optional |
+|----------------|----------|---------------------------------------------------------------------------------------------------------------------|----------|
+| app            | {object} | The app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express. |          |
+| opts           | {object} | An optional object of options for reload. Refer to table [below](#table-of-options-for-reload-opts-option) on possible options                                  | ✓        |
+
+##### Table of options for reload opts parameter
+
+| Parameter Name | Type      | Description                                                                                                                                                                                                                                                                                                                                                                                                | Optional | Default |
+|----------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
+| port           | {number}  | Port to run reload on.                                                                                                                                                                                                                                                                                                                                                                                     | ✓        | `9856`    |
+| route          | {string}  | Route that reload should use to serve the client side script file. Changing the route will require the script tag URL to change. Reload will always strip any occurance of reload.js and append reload.js for you. This is to ensure case, order, and use of / is correct. For example specifying newRoutePath as the route will give reload a route of newRoutePath/reload.js. (Recommend not modifying). | ✓        | `reload`  |
+| verbose        | {boolean} | If set to true, will show logging on the server and client side.                                                                                                                                                                                                                                                                                                                                           | ✓        | `false`   |
+
+##### Upgrading to version 2
+
+Reload dropped support for server. The only required parameter for reload is `app`.
+
+* Upgrade with required arguments: `reload(server, app)` becomes `reload(app)`
+
+* Upgrade with required arguments and the one optional argument: `reload(server, app, true)` becomes `reload(app, {verbose: true})`
+
+To read more about the API breaking changes please refer to the [changelog]().
 
 Using reload as a command line application
 ---
