@@ -21,7 +21,7 @@ Table Of Contents
     * [Parameters](#parameters)
       * [Table of reload parameters](#table-of-reload-parameters)
       * [Table of options for reload opts parameter](#table-of-options-for-reload-opts-parameter)
-      * **[Updating to version 2](#updating-to-version-2)**
+      * **[Updating to version 2](#upgrading-to-version-2)**
 * [Using reload as a command line application](#using-reload-as-a-command-line-application)
   * [Usage for Command Line Application](#usage-for-command-line-application)
 * [License](#license)
@@ -44,7 +44,7 @@ Once reload-server and reload-client are connected, the client side code opens a
 Updating from version 2 from version 1
 ---
 
-Looking for a quick guide to updating reload to version 2? Please refer to our update section [below](#updating-to-version-2).
+Looking for a quick guide to updating reload to version 2? Please refer to our update section [below](#upgrading-to-version-2).
 
 Installation
 ---
@@ -160,7 +160,7 @@ Reload dropped support for server. The only required parameter for reload is `ap
 
 * Upgrade with required arguments and the one optional argument: `reload(server, app, true)` becomes `reload(app, {verbose: true})`
 
-To read more about the API breaking changes please refer to the [changelog]().
+To read more about the API breaking changes please refer to the [changelog](CHANGELOG.md#api-breaking-changes).
 
 Using reload as a command line application
 ---

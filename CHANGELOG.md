@@ -32,7 +32,7 @@ It is important to note that reload **only** uses ports now. So upgrading using 
 
 Most people can just use the default settings allowing `reload(app)` to work in most cases.
 
-Please refer to the full API in the [README]().
+Please refer to the full API in the [README](README.md#api-for-express).
 
 1.1.7 / 2017-06-28
 ------------------
