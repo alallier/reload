@@ -142,7 +142,7 @@ reload(app, opts)
 | Parameter Name | Type     | Description                                                                                                         | Optional |
 |----------------|----------|---------------------------------------------------------------------------------------------------------------------|----------|
 | app            | {object} | The app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express. |          |
-| opts           | {object} | An optional object of options for reload. Refer to table [below](#table-of-options-for-reload-opts-option) on possible options                                  | ✓        |
+| opts           | {object} | An optional object of options for reload. Refer to table [below](#table-of-options-for-reload-opts-parameter) on possible options                                  | ✓        |
 
 ##### Table of options for reload opts parameter
 
