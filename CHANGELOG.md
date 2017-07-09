@@ -25,7 +25,7 @@ See V2.0.0 PR https://github.com/alallier/reload/pull/118
 This version makes breaking changes to the reload API. The only required argument to reload now is `app`. This makes reload a lot [easier](https://github.com/jprichardson/reload/pull/104) to use. Reload takes a maximum of two arguments `app` and an `opts` (options) object with the following optional parameters, `port`, `route`, and `verbose`. Reload runs on default port `9856` unless otherwise specified in the `opts` object.
 
 #### How to upgrade from Version 1 to Version 2
-Before Version 2 reload always attached to your server's port by passing the server in a argument to reload. We have now dropped support for server and reload runs on ports only. Reload now has two required parameters `app` and `opts` an object of reload options. Below are two upgrade examples for the only two possible 1.x configurations.
+Before Version 2 reload always attached to your server's port by passing the server in a argument to reload. We have now dropped support for server and reload runs on ports only. Reload now has one required parameter `app` and one optional parameter `opts` an object of reload options. Below are two upgrade examples for the only two possible 1.x configurations.
 
 Upgrade with required arguments: `reload(server, app)` becomes `reload(app)`
 
@@ -33,7 +33,7 @@ Upgrade with both required arguments and the one optional argument: `reload(serv
 
 It is important to note that reload **only** uses ports now. So upgrading using the examples above will have reload run on it's default port `9856`. If you want to run reload on a different port you need to specify a port in the `opts` object like: `reload(app, {port: 9852})`
 
-Most people can just use the default settings allowing `reload(app)` to work in most cases.
+Most people can just use the default settings, allowing `reload(app)` to work in most cases.
 
 Please refer to the full API in the [README](README.md#api-for-express).
 
