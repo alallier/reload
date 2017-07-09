@@ -4,8 +4,8 @@
 See V2.0.0 PR https://github.com/alallier/reload/pull/118
 
 ### Added
-* Added object based parameters (Issue [#77](https://github.com/alallier/reload/issues/77) / Orginally solved in PR [#101](https://github.com/alallier/reload/pull/101) and refactored in [#104](https://github.com/alallier/reload/pull/104))
-* Added port configuration (Issue [#60](https://github.com/alallier/reload/issues/60) / Orginally solved in PR [#68](https://github.com/alallier/reload/pull/68) and refactored in [#104](https://github.com/alallier/reload/pull/104))
+* Added object based parameters (Issue [#77](https://github.com/alallier/reload/issues/77) / Originally solved in PR [#101](https://github.com/alallier/reload/pull/101) and refactored in [#104](https://github.com/alallier/reload/pull/104))
+* Added port configuration (Issue [#60](https://github.com/alallier/reload/issues/60) / Originally solved in PR [#68](https://github.com/alallier/reload/pull/68) and refactored in [#104](https://github.com/alallier/reload/pull/104))
 * Added timestamp to reload command line reloading (Issue [#7](https://github.com/alallier/reload/issues/7) / PR [#78](https://github.com/alallier/reload/pull/78))
 * Added node 8 support (Issue [#106](https://github.com/alallier/reload/issues/106) / PR [#119](https://github.com/alallier/reload/pull/119))
 * Added table of contents to README (Issue [#103](https://github.com/alallier/reload/issues/103) / PR [#105](https://github.com/alallier/reload/pull/105))
@@ -19,7 +19,7 @@ See V2.0.0 PR https://github.com/alallier/reload/pull/118
 ### Removed
 * Drop support for server and just use ports (Issue [#102](https://github.com/alallier/reload/issues/102) / PR [#104](https://github.com/alallier/reload/pull/104))
 * Removed support of node 0.1 and 0.12 (Issue [#73](https://github.com/alallier/reload/issues/73) / PR [#86](https://github.com/alallier/reload/pull/86))
-* Separate server and app initialization into two parts. (This was orignally fixed in PR [#71](https://github.com/alallier/reload/pull/71) but was reversed in PR [#104](https://github.com/alallier/reload/pull/104) when the decision to drop server was made.)
+* Separate server and app initialization into two parts. (This was originally fixed in PR [#71](https://github.com/alallier/reload/pull/71) but was reversed in PR [#104](https://github.com/alallier/reload/pull/104) when the decision to drop server was made.)
 
 ### API Breaking Changes
 This version makes breaking changes to the reload API. The only required argument to reload now is `app`. This makes reload a lot [easier](https://github.com/jprichardson/reload/pull/104) to use. Reload takes a maximum of two arguments `app` and an `opts` (options) object with the following optional parameters, `port`, `route`, and `verbose`. Reload runs on default port `9856` unless otherwise specified in the `opts` object.
