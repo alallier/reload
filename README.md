@@ -22,6 +22,7 @@ Table Of Contents
       * [Table of reload parameters](#table-of-reload-parameters)
       * [Table of options for reload opts parameter](#table-of-options-for-reload-opts-parameter)
       * **[Updating to version 2](#upgrading-to-version-2)**
+    * [Returns](#returns)
 * [Using reload as a command line application](#using-reload-as-a-command-line-application)
   * [Usage for Command Line Application](#usage-for-command-line-application)
 * [License](#license)
@@ -122,7 +123,7 @@ server.listen(app.get('port'), function () {
 You can manually call a reload event by calling `reload()` yourself. An example is shown below:
 
 ```javascript
-reloadServer = reload(server, app);
+reloadServer = reload(app);
 watch.watchTree(__dirname + "/public", function (f, curr, prev) {
     // Fire server-side reload event
     reloadServer.reload();
@@ -161,6 +162,14 @@ Reload dropped support for server. The only required parameter for reload is `ap
 * Upgrade with required arguments and the one optional argument: `reload(server, app, true)` becomes `reload(app, {verbose: true})`
 
 To read more about the API breaking changes please refer to the [changelog](CHANGELOG.md#api-breaking-changes).
+
+#### Returns
+
+An **object** containing:
+
+| Name   | Type     | Description                                                                                                                                                                 |
+|--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reload | function | A function that when called reloads all connected clients. For more information see [manually firing server-side reload events](#manually-firing-server-side-reload-events). |
 
 Using reload as a command line application
 ---
