@@ -9,10 +9,12 @@ See V2.0.0 PR https://github.com/alallier/reload/pull/118
 * Added timestamp to reload command line reloading (Issue [#7](https://github.com/alallier/reload/issues/7) / PR [#78](https://github.com/alallier/reload/pull/78))
 * Added node 8 support (Issue [#106](https://github.com/alallier/reload/issues/106) / PR [#119](https://github.com/alallier/reload/pull/119))
 * Added table of contents to README (Issue [#103](https://github.com/alallier/reload/issues/103) / PR [#105](https://github.com/alallier/reload/pull/105))
+* Added return API to README (PR [#121](https://github.com/alallier/reload/pull/121))
 
 ### Modified
 * Abstracted reload call to an index.js file. Index file now calls `reload.js` source file. This is to abstract the reload command line calling with a third argument that is now private and not apart of the public API (PR [#117](https://github.com/alallier/reload/pull/117))
 * Update dependencies to latest and add package-lock.json files (PR [#109](https://github.com/alallier/reload/pull/109))
+* Audited and refactored return API (Issue [#120](https://github.com/alallier/reload/issues/120) / PR [#121](https://github.com/alallier/reload/pull/121))
 
 ### Removed
 * Drop support for server and just use ports (Issue [#102](https://github.com/alallier/reload/issues/102) / PR [#104](https://github.com/alallier/reload/pull/104))
