@@ -42,7 +42,7 @@ Reload works in two different ways depending on if you're using it:
 
 Once reload-server and reload-client are connected, the client side code opens a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) to the server and waits for the WebSocket to close, once it closes, reload waits for the server to come back up (waiting for a socket on open event), once the socket opens we reload the page.
 
-Updating from version 2 from version 1
+Updating to version 2 from version 1
 ---
 
 Looking for a quick guide to updating reload to version 2? Please refer to our update section [below](#upgrading-to-version-2).
@@ -109,7 +109,7 @@ server.listen(app.get('port'), function () {
     <title>Reload Express Sample App</title>
   </head>
   <body>
-  	<h1>Reload Express Sample App</h1>
+    <h1>Reload Express Sample App</h1>
     <!-- All you have to do is include the reload script and have it be on every page of your project -->
     <script src="/reload/reload.js"></script>
   </body>
