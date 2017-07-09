@@ -1,4 +1,4 @@
-2.0.0 / UPDATE DATE BEFORE FINAL MERGE
+2.0.0 / 2017-07-09
 ------------------
 
 See V2.0.0 PR https://github.com/alallier/reload/pull/118
