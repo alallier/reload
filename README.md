@@ -213,7 +213,7 @@ Options:
 License
 ---
 
-[(MIT License)](https://github.com/alallier/reload/blob/master/LICENSE)
+[(MIT License)](LICENSE)
 
 Copyright 2017
 
