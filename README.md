@@ -70,7 +70,7 @@ Reload can be used in conjunction with tools that allow for automatically restar
 ### Express Example
 
 **`server.js`:**
-```javascript
+```js
 var express = require('express')
 var http = require('http')
 var path = require('path')
@@ -122,7 +122,7 @@ server.listen(app.get('port'), function () {
 
 You can manually call a reload event by calling `reload()` yourself. An example is shown below:
 
-```javascript
+```js
 reloadServer = reload(app);
 watch.watchTree(__dirname + "/public", function (f, curr, prev) {
     // Fire server-side reload event
@@ -132,7 +132,7 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 
 ### API for Express
 
-```javascript
+```js
 reload(app, opts)
 ```
 
