@@ -116,7 +116,7 @@ server.listen(app.get('port'), function () {
 </html>
 ```
 
-**Refer to the [reload express sample app](https://github.com/jprichardson/reload/tree/master/expressSampleApp) for this working example.**
+**Refer to the [reload express sample app](expressSampleApp) for this working example.**
 
 ### Manually firing server-side reload events
 
