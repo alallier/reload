@@ -132,7 +132,7 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 
 ### API for Express
 
-```
+```javascript
 reload(app, opts)
 ```
 
