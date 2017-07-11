@@ -70,7 +70,7 @@ Reload can be used in conjunction with tools that allow for automatically restar
 ### Express Example
 
 **`server.js`:**
-```javscript
+```javascript
 var express = require('express')
 var http = require('http')
 var path = require('path')
