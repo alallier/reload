@@ -169,7 +169,7 @@ An **object** containing:
 
 | Name   | Type     | Description                                                                                                                                                                 |
 |--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reload | function | A function that when called reloads all connected clients. For more information see [manually firing server-side reload events](#manually-firing-server-side-reload-events). |
+| reload | function | A function that when called reloads all connected clients. For more information see [manually firing server-side reload events](#manually-firing-server-side-reload-events).|
 
 Using reload as a command line application
 ---
