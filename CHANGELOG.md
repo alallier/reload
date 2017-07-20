@@ -1,3 +1,10 @@
+2.0.1 / 2017-07-20
+------------------
+
+* Adjusted wording in README. See: https://github.com/alallier/reload/pull/123
+* Removed MacOS Travis Building. See: https://github.com/alallier/reload/pull/125
+* Fixed bug when running command line on port 80. See: https://github.com/alallier/reload/pull/128
+
 2.0.0 / 2017-07-09
 ------------------
 

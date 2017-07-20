@@ -1,6 +1,6 @@
 {
   "name": "reload",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Node.js module to refresh and reload your code in your browser when your code changes. No browser plugins required.",
   "repository": {
     "type": "git",
