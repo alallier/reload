@@ -42,7 +42,7 @@ Reload works in two different ways depending on if you're using it:
 
 Once reload-server and reload-client are connected, the client side code opens a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) to the server and waits for the WebSocket to close, once it closes, reload waits for the server to come back up (waiting for a socket on open event), once the socket opens we reload the page.
 
-Updating from version 2 from version 1
+Updating to version 2 from version 1
 ---
 
 Looking for a quick guide to updating reload to version 2? Please refer to our update section [below](#upgrading-to-version-2).
@@ -109,14 +109,14 @@ server.listen(app.get('port'), function () {
     <title>Reload Express Sample App</title>
   </head>
   <body>
-  	<h1>Reload Express Sample App</h1>
+    <h1>Reload Express Sample App</h1>
     <!-- All you have to do is include the reload script and have it be on every page of your project -->
     <script src="/reload/reload.js"></script>
   </body>
 </html>
 ```
 
-**Refer to the [reload express sample app](https://github.com/jprichardson/reload/tree/master/expressSampleApp) for this working example.**
+**Refer to the [reload express sample app](expressSampleApp) for this working example.**
 
 ### Manually firing server-side reload events
 
@@ -132,7 +132,7 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 
 ### API for Express
 
-```
+```javascript
 reload(app, opts)
 ```
 
@@ -142,16 +142,16 @@ reload(app, opts)
 
 | Parameter Name | Type     | Description                                                                                                         | Optional |
 |----------------|----------|---------------------------------------------------------------------------------------------------------------------|----------|
-| app            | {object} | The app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express. |          |
-| opts           | {object} | An optional object of options for reload. Refer to table [below](#table-of-options-for-reload-opts-parameter) on possible options                                  | ✓        |
+| app            | object   | The app. It may work with other frameworks, or even with Connect. At this time, it's only been tested with Express. |          |
+| opts           | object   | An optional object of options for reload. Refer to table [below](#table-of-options-for-reload-opts-parameter) on possible options                                  | ✓        |
 
 ##### Table of options for reload opts parameter
 
 | Parameter Name | Type      | Description                                                                                                                                                                                                                                                                                                                                                                                                | Optional | Default |
 |----------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
-| port           | {number}  | Port to run reload on.                                                                                                                                                                                                                                                                                                                                                                                     | ✓        | `9856`    |
-| route          | {string}  | Route that reload should use to serve the client side script file. Changing the route will require the script tag URL to change. Reload will always strip any occurrence of reload.js and append reload.js for you. This is to ensure case, order, and use of / is correct. For example specifying newRoutePath as the route will give reload a route of newRoutePath/reload.js. (Recommend not modifying). | ✓        | `reload`  |
-| verbose        | {boolean} | If set to true, will show logging on the server and client side.                                                                                                                                                                                                                                                                                                                                           | ✓        | `false`   |
+| port           | number    | Port to run reload on.                                                                                                                                                                                                                                                                                                                                                                                     | ✓        | `9856`    |
+| route          | string    | Route that reload should use to serve the client side script file. Changing the route will require the script tag URL to change. Reload will always strip any occurrence of reload.js and append reload.js for you. This is to ensure case, order, and use of / is correct. For example specifying newRoutePath as the route will give reload a route of newRoutePath/reload.js. (Recommend not modifying). | ✓        | `reload`  |
+| verbose        | boolean   | If set to true, will show logging on the server and client side.                                                                                                                                                                                                                                                                                                                                           | ✓        | `false`   |
 
 ##### Upgrading to version 2
 
@@ -169,7 +169,7 @@ An **object** containing:
 
 | Name   | Type     | Description                                                                                                                                                                 |
 |--------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reload | function | A function that when called reloads all connected clients. For more information see [manually firing server-side reload events](#manually-firing-server-side-reload-events). |
+| reload | function | A function that when called reloads all connected clients. For more information see [manually firing server-side reload events](#manually-firing-server-side-reload-events).|
 
 Using reload as a command line application
 ---
@@ -198,21 +198,22 @@ Usage: reload [options]
 
 Options:
 
-  -h, --help                        Output usage information
-  -V, --version                     Output the version number
-  -b, --browser                     Open in the browser automatically.
-  -n, --hostname                    If -b flag is being used, this allows for custom hostnames. Defaults to localhost.
-  -d, --dir [dir]                   The directory to serve up. Defaults to current dir.
-  -e, --exts [extensions]           Extensions separated by commas or pipes. Defaults to html,js,css.
-  -p, --port [port]                 The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
-  -s, --start-page [start-page]     Specify a start page. Defaults to index.html.
-  -v, --verbose                     Turns on logging on the server and client side. Defaults to false.
+  -h, --help                     output usage information
+  -V, --version                  output the version number
+  -b, --browser                  Open in the browser automatically.
+  -n, --hostname [hostname]      If -b flag is being used, this allows for custom hostnames. Defaults  to localhost.
+  -d, --dir [dir]                The directory to serve up. Defaults to current dir.
+  -e, --exts [extensions]        Extensions separated by commas or pipes. Defaults to html,js,css.
+  -p, --port [port]              The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
+  -s, --start-page [start-page]  Specify a start page. Defaults to index.html
+  -v, --verbose [verbose]        Turning on logging on the server and client side. Defaults to false
+
 ```
 
 License
 ---
 
-(MIT License)
+[(MIT License)](LICENSE)
 
 Copyright 2017
 
