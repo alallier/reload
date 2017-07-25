@@ -1,3 +1,8 @@
+2.1.0 / 2017-07-25
+------------------
+
+* Added the ability to have the WebSocket server start wait. (For more information read about the `webSocketServerWaitStart` [parameter](README.md#parameters)) See: https://github.com/alallier/reload/pull/130
+
 2.0.1 / 2017-07-20
 ------------------
 
