@@ -1,3 +1,8 @@
+2.2.0 / 2017-07-27
+------------------
+
+* Dropped express as a dependency (in reload command line). Reload now uses a vanilla node http server to achieve the same result. This update for the command line offers no changes to the end user and simply modifies the underlying code. See: https://github.com/alallier/reload/pull/132
+
 2.1.0 / 2017-07-25
 ------------------
 
