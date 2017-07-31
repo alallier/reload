@@ -27,11 +27,14 @@
     "minimist": "~1.2.0"
   },
   "devDependencies": {
-    "standard": "^10.0.2"
+    "standard": "^10.0.2",
+    "mocha": "~3.4.2",
+    "express": "~4.15.3"
   },
   "main": "./index.js",
   "scripts": {
-    "test": "npm run standard",
+    "test": "npm run standard && npm run unitTests",
+    "unitTests": "./node_modules/.bin/mocha --recursive --timeout 15000 test",
     "standard": "standard **/*.js bin/**/*"
   },
   "bin": {
