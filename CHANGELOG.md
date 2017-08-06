@@ -1,3 +1,8 @@
+2.2.1 / 2017-08-05
+------------------
+
+Fixed regression causing reload command line to only serve HTML files. See: https://github.com/alallier/reload/pull/134
+
 2.2.0 / 2017-07-27
 ------------------
 
