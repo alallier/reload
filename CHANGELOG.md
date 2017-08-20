@@ -1,3 +1,8 @@
+2.2.2 / 2017-08-20
+------------------
+
+Fixed bug that caused HTML files to not be served when using directory flag (reload command line). See: https://github.com/alallier/reload/pull/139
+
 2.2.1 / 2017-08-05
 ------------------
 
