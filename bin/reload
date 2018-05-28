@@ -25,8 +25,8 @@ if (program.exts.indexOf(',')) {
 }
 
 // Fall back to the serving directory.
-if (typeof program.watchDir == 'undefined') {
-  program.watchDir = program.dir;
+if (typeof program.watchDir === 'undefined') {
+  program.watchDir = program.dir
 }
 
 var args = ['-e', program.exts, '-w', program.watchDir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose]
