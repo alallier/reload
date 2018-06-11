@@ -1,3 +1,15 @@
+2.3.0 / 2018-06-11
+------------------
+
+* Added wss to return API. See: https://github.com/alallier/reload/pull/148
+* Added watch flag to command line. See: https://github.com/alallier/reload/pull/155
+* Security updates
+  * Updated finalhandler from `~1.0.3` to `~1.1.1`. See: https://github.com/alallier/reload/pull/154
+  * Replaced [open](https://www.npmjs.com/package/open) with [opn](https://www.npmjs.com/package/opn). See: https://github.com/alallier/reload/pull/154
+  * Updated serve-static from `~1.12.3` to `1.13.2`. See: https://github.com/alallier/reload/pull/154
+  * Updated ws from `~3.0.0` to `~5.2.0`. See: https://github.com/alallier/reload/commit/3310a66f80e04e48247e5c2ca4a2f4f12780294f
+  * Updated standard from `^10.0.2` to `^11.0.1`. See: https://github.com/alallier/reload/commit/073e91b33a00dcb37c7eb5fa7601cd71f7ea34e9
+
 2.2.2 / 2017-08-20
 ------------------
 
