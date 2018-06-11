@@ -10,6 +10,7 @@ program.version(require('../package.json').version)
   .option('-b, --browser', 'Open in the browser automatically.')
   .option('-n, --hostname [hostname]', 'If -b flag is being used, this allows for custom hostnames. Defaults to localhost.', 'localhost')
   .option('-d, --dir [dir]', 'The directory to serve up. Defaults to current dir.', process.cwd())
+  .option('-w, --watch-dir [watch-dir]', 'The directory to watch. Defaults the serving directory.')
   .option('-e, --exts [extensions]', 'Extensions separated by commas or pipes. Defaults to html,js,css.', 'html|js|css')
   .option('-p, --port [port]', 'The port to bind to. Can be set with PORT env variable as well. Defaults to 8080', '8080')
   .option('-s, --start-page [start-page]', 'Specify a start page. Defaults to index.html', 'index.html')
@@ -23,7 +24,12 @@ if (program.exts.indexOf(',')) {
   program.exts = program.exts.replace(/,/g, '|') // replace comma for pipe, that's what supervisor likes
 }
 
-var args = ['-e', program.exts, '-w', program.dir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose]
+// Fall back to the serving directory.
+if (typeof program.watchDir === 'undefined') {
+  program.watchDir = program.dir
+}
+
+var args = ['-e', program.exts, '-w', program.watchDir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose]
 supervisor.run(args)
 
 console.log('\nReload web server:')
