@@ -172,12 +172,7 @@ An **object** containing:
 |----------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | reload               | function | A function that when called reloads all connected clients. For more information see [manually firing server-side reload events](#manually-firing-server-side-reload-events).                                               |
 | startWebSocketServer | function | Starts and opens the WebSocket server required for reload. Only active when using the optional parameter `webSocketServerWaitStart`. Read the [parameters](#table-of-options-for-reload-opts-parameter) for more information |
-| wss                  | object   | Web socket server used for hot reload.  |
-
-You need `reloadReturn.wss.close()`, if you want automatic rebuild and restart of server code 
-independently, while preserving a front-end bundle already built by [WebPack](https://webpack.js.org/), for example.
-To make it happen, old _express app_ should be discarded, a new one instantiated and bound to _reload_ again.
-But without closing _wss_ first, an `EADDRINUSE` exception would be thrown.
+| wss                  | object   | Web socket server |
 
 Using reload as a command line application
 ---
