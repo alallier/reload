@@ -1,3 +1,8 @@
+2.3.1 / 2018-08-06
+------------------
+
+* Fixed url-parse vulnerability. See: https://github.com/alallier/reload/pull/160
+
 2.3.0 / 2018-06-11
 ------------------
 
