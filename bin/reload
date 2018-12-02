@@ -14,6 +14,7 @@ program.version(require('../package.json').version)
   .option('-e, --exts [extensions]', 'Extensions separated by commas or pipes. Defaults to html,js,css.', 'html|js|css')
   .option('-p, --port [port]', 'The port to bind to. Can be set with PORT env variable as well. Defaults to 8080', '8080')
   .option('-s, --start-page [start-page]', 'Specify a start page. Defaults to index.html', 'index.html')
+  .option('-f, --fallback [fallback]', 'Fallback to the start page when route is not found')
   .option('-v, --verbose [verbose]', 'Turning on logging on the server and client side. Defaults to false', false)
   .parse(process.argv)
 
@@ -29,7 +30,7 @@ if (typeof program.watchDir === 'undefined') {
   program.watchDir = program.dir
 }
 
-var args = ['-e', program.exts, '-w', program.watchDir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.verbose]
+var args = ['-e', program.exts, '-w', program.watchDir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.fallback, program.verbose]
 supervisor.run(args)
 
 console.log('\nReload web server:')
