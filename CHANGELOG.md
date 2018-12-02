@@ -1,3 +1,8 @@
+2.4.0 / 2018-12-02
+------------------
+* Added new `-f` or `--fallback` command-line flag. See: MR https://github.com/alallier/reload/pull/167. Issue: https://github.com/alallier/reload/issues/164
+* Allow HTML pages to be routed with `.html`. See: MR https://github.com/alallier/reload/pull/167. Issue: https://github.com/alallier/reload/issues/166
+
 2.3.1 / 2018-08-06
 ------------------
 
