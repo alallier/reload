@@ -33,7 +33,7 @@ async function makeRequest (path, app, options) {
 
         https.get(optionsHTTPS, function (response) {
           httpOrHttpServer.close(function () {
-            resolve(response.statusCode)
+            resolve(response)
           })
         }).on('error', (e) => {
           console.error('ERROR: ', e)
@@ -45,7 +45,7 @@ async function makeRequest (path, app, options) {
           port: 8080
         }, function (response) {
           httpOrHttpServer.close(function () {
-            resolve(response.statusCode)
+            resolve(response)
           })
         })
       }

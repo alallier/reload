@@ -75,7 +75,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(response, 200)
+    assert.equal(response.statusCode, 200)
   })
 
   it('Should create (custom) `/something/reload.js` route for reload file', async () => {
@@ -92,7 +92,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(response, 200)
+    assert.equal(response.statusCode, 200)
   })
 
   it('Should create (custom) `/something/reload.js` route for reload file', async () => {
@@ -109,7 +109,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(response, 200)
+    assert.equal(response.statusCode, 200)
   })
 
   it('Should create WebSocket on default port', async () => {
@@ -213,5 +213,31 @@ describe('API', function () {
     var reloadReturnedClientCodeFirstLine = reloadReturned.reloadClientCode().split('\n')[0]
 
     assert.equal(reloadClientCodeFromFileFirstLine, reloadReturnedClientCodeFirstLine)
+  })
+
+  it('Should force wss on client with forceWss set to true', async () => {
+    var app = express()
+
+    try {
+      var reloadReturned = await reload(app, { forceWss: true })
+    } catch (err) {
+
+    }
+
+    var response = await helperFunction.makeRequest('/reload/reload.js', app)
+
+    var reloadClientCode
+
+    response.on('data', function (chunk) {
+      reloadClientCode = chunk
+    })
+
+    response.on('end', function () {
+      var testRegex = RegExp('wss:\/\/', 'gm')
+
+      assert(testRegex.test(reloadClientCode))
+
+      helperFunction.closeReloadSocket(reloadReturned)
+    })
   })
 })
