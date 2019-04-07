@@ -40,9 +40,9 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(typeof (reloadReturned.reload), 'function')
+    assert.strictEqual(typeof (reloadReturned.reload), 'function')
     // assert.equal(typeof (reloadReturned.startWebSocketServer), 'function')
-    assert.equal(typeof (reloadReturned.closeServer), 'function')
+    assert.strictEqual(typeof (reloadReturned.closeServer), 'function')
   })
 
   it('Should return private object (private, command line only)', async () => {
@@ -56,10 +56,10 @@ describe('API', function () {
       console.log(err)
     }
 
-    assert.equal(typeof (reloadReturned.reload), 'function')
-    assert.equal(typeof (reloadReturned.reloadClientCode), 'function')
+    assert.strictEqual(typeof (reloadReturned.reload), 'function')
+    assert.strictEqual(typeof (reloadReturned.reloadClientCode), 'function')
     // assert.equal(typeof (reloadReturned.startWebSocketServer), 'function')
-    assert.equal(typeof (reloadReturned.closeServer), 'function')
+    assert.strictEqual(typeof (reloadReturned.closeServer), 'function')
   })
 
   it('Should create (default) `/reload/reload.js` route for reload file', async () => {
@@ -75,7 +75,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(response.statusCode, 200)
+    assert.strictEqual(response.statusCode, 200)
   })
 
   it('Should create (custom) `/something/reload.js` route for reload file', async () => {
@@ -92,7 +92,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(response.statusCode, 200)
+    assert.strictEqual(response.statusCode, 200)
   })
 
   it('Should create (custom) `/something/reload.js` route for reload file', async () => {
@@ -109,7 +109,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(response.statusCode, 200)
+    assert.strictEqual(response.statusCode, 200)
   })
 
   it('Should create WebSocket on default port', async () => {
@@ -125,7 +125,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(result, true, 'Could not connect to WebSocket')
+    assert.strictEqual(result, true, 'Could not connect to WebSocket')
   })
 
   it('Should error if unable to attach route to express app', async () => {
@@ -149,7 +149,7 @@ describe('API', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    assert.equal(result, true)
+    assert.strictEqual(result, true)
   })
 
   it('Should error if specified port is not a number', async () => {
@@ -234,7 +234,7 @@ describe('API', function () {
 
     var reloadReturnedClientCodeFirstLine = reloadReturned.reloadClientCode().split('\n')[0]
 
-    assert.equal(reloadClientCodeFromFileFirstLine, reloadReturnedClientCodeFirstLine)
+    assert.strictEqual(reloadClientCodeFromFileFirstLine, reloadReturnedClientCodeFirstLine)
   })
 
   it('Should force wss on client with forceWss set to true', async () => {
@@ -255,7 +255,7 @@ describe('API', function () {
     })
 
     response.on('end', function () {
-      var testRegex = RegExp('wss:\/\/', 'gm')
+      var testRegex = RegExp('wss://', 'gm')
 
       assert(testRegex.test(reloadClientCode))
 
