@@ -1,3 +1,50 @@
+3.0.0 / 2019-04-07
+------------------
+
+# Version 3.0.0
+
+Consult [Migration Guide](MIGRATION_GUIDE.md) for help with updating from Version 2.x to 3.x
+
+## Breaking/Removed
+
+* Removed deprecated parameters (Reload no longer takes the server argument and will error if you provide it)
+* Removed support for Node versions 4, 5, 6, 7, 8, and 9
+
+## Breaking/Added
+
+* Reload now returns a promise
+    * Functions in the return API also return promises
+        * `closerServer`
+        * `startWebSocketServer`
+    * Reload returns errors in promises
+
+## Added
+
+* Added unit tests. (See: https://github.com/alallier/reload/issues/42)
+* Added coverage analyzer
+    * Coverage 100% on `reload.js` file
+* Added node 10 and 11 to the official supported list
+* Added support for HTTPS
+    * Cert and Key or PFX/P12
+    * Note: This was available in version 1 and then was dropped in Version 2
+* Added [sample app README](expressSampleApp/README.md) (See: https://github.com/alallier/reload/issues/45)
+* Added [MIGRATION_GUIDE](MIGRATION_GUIDE.md) to help with migrating across major versions of reload
+* Added force wss option
+* CI jobs now use [npm ci isntall](https://docs.npmjs.com/cli/ci.html) (See: https://github.com/alallier/reload/issues/158)
+
+## Changed
+
+* Updates dependencies
+
+## Closed these issues
+
+* HTTPS - https://github.com/alallier/reload/issues/143
+* Unit tests - https://github.com/alallier/reload/issues/42
+* Document Fallback flag - https://github.com/alallier/reload/issues/169
+* Drop Node 4 support - https://github.com/alallier/reload/issues/156
+* Documentation on how to use sample app - https://github.com/alallier/reload/issues/45
+* Use npm ci install - https://github.com/alallier/reload/issues/158
+
 2.4.0 / 2018-12-02
 ------------------
 * Added new `-f` or `--fallback` command-line flag. See: MR https://github.com/alallier/reload/pull/167. Issue: https://github.com/alallier/reload/issues/164
