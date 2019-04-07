@@ -4,6 +4,7 @@ reload
 [![Build Status](https://travis-ci.org/alallier/reload.svg?branch=master)](https://travis-ci.org/alallier/reload)
 [![Build status](https://ci.appveyor.com/api/projects/status/4uuui532bpht2ff7/branch/master?svg=true)](https://ci.appveyor.com/project/alallier/reload/branch/master)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![codecov](https://codecov.io/gh/alallier/reload/branch/master/graph/badge.svg)](https://codecov.io/gh/alallier/reload)
 [![NPM version](https://img.shields.io/npm/v/reload.svg)](https://www.npmjs.com/package/reload)
 
 Automatically refresh and reload your code in your browser when your code changes. No browser plugins required.
