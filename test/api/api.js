@@ -41,8 +41,8 @@ describe('API', function () {
     await helperFunction.closeReloadSocket(reloadReturned)
 
     assert.strictEqual(typeof (reloadReturned.reload), 'function')
-    // assert.equal(typeof (reloadReturned.startWebSocketServer), 'function')
     assert.strictEqual(typeof (reloadReturned.closeServer), 'function')
+    assert.strictEqual(typeof (reloadReturned.wss), 'object')
   })
 
   it('Should return private object (private, command line only)', async () => {
@@ -58,8 +58,8 @@ describe('API', function () {
 
     assert.strictEqual(typeof (reloadReturned.reload), 'function')
     assert.strictEqual(typeof (reloadReturned.reloadClientCode), 'function')
-    // assert.equal(typeof (reloadReturned.startWebSocketServer), 'function')
     assert.strictEqual(typeof (reloadReturned.closeServer), 'function')
+    assert.strictEqual(typeof (reloadReturned.wss), 'object')
   })
 
   it('Should create (default) `/reload/reload.js` route for reload file', async () => {
@@ -189,6 +189,32 @@ describe('API', function () {
         assert(false, 'WebSocket did not start after calling webSocketServerWaitStart function')
       }
     }
+  })
+
+  it('Should return startWebSocketServer with webSocketServerWaitStart option enabled', async () => {
+    var app = express()
+
+    try {
+      var reloadReturned = await reload(app, { webSocketServerWaitStart: true })
+    } catch (err) {
+
+    }
+
+    assert.strictEqual(typeof (reloadReturned.startWebSocketServer), 'function')
+  })
+
+  it('Should not return startWebSocketServer with webSocketServerWaitStart option disabled', async () => {
+    var app = express()
+
+    try {
+      var reloadReturned = await reload(app, { webSocketServerWaitStart: false })
+    } catch (err) {
+
+    }
+
+    await helperFunction.closeReloadSocket(reloadReturned)
+
+    assert.strictEqual(typeof (reloadReturned.startWebSocketServer), 'undefined')
   })
 
   it('Should error if webSocketServerWaitStart not of type boolean', async () => {
