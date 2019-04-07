@@ -6,3 +6,4 @@ coverage
 renovate.json
 expressSampleApp
 CHANGELOG.md
+MIGRATION_GUIDE.md
