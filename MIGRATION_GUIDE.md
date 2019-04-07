@@ -29,7 +29,7 @@ Follow this guide to help you migrate your reload use across [major versions](ht
           }
         }
         ```
-* Reload no longer supports Node versions 4, 5, and 6. Please upgrade your node versions to continue using Reload.
+* Reload no longer supports Node versions 4, 5, and 6. Please upgrade your node version to continue using Reload.
 
 ## Version 1.x -> 2.x
 

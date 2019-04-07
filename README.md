@@ -57,7 +57,7 @@ There are two different ways to use reload.
 
 Using reload in Express
 ---
-When used with Express reload creates a new Express route for reload. When you restart the server, the client will detect the server being restarted and automatically refresh the page.
+When used with Express **reload creates** a new Express route for reload. When you restart the server, the client will detect the server being restarted and automatically refresh the page.
 
 Reload can be used in conjunction with tools that allow for automatically restarting the server such as [supervisor](https://github.com/isaacs/node-supervisor) (recommended), [nodemon](https://github.com/remy/nodemon), [forever](https://github.com/nodejitsu/forever), etc.
 
@@ -109,6 +109,7 @@ reload(app).then(function () {
   <body>
     <h1>Reload Express Sample App</h1>
     <!-- All you have to do is include the reload script and have it be on every page of your project -->
+    <!-- You do not create this route, reload creates it for you automatically -->
     <script src="/reload/reload.js"></script>
   </body>
 </html>
@@ -130,9 +131,26 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 
 ### API for Express
 
-```javascript
-reload(app, opts)
-```
+Reload returns a promise. The API takes a required express application and an optional options object.
+
+* To call Reload you should use a `then/catch` to call reload.
+    * ```javascript
+      reload(app [,opts]).then(function () {
+        // Reload started
+      }).catch(function (err) {
+        // Reload did not start correctly, handle error
+      })
+      ```
+* If you are in an [asynchronous function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) you can call Reload with [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+    * ```javascript
+      async function asyncCall() {
+        try {
+          var reloadReturned = await reload(app [,opts])
+        } catch (err) {
+          // Handle error
+        }
+      }
+      ```
 
 _Consult the [migration guide](MIGRATION_GUIDE.md) for help updating reload across major versions._
 
