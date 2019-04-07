@@ -20,21 +20,21 @@
   "license": "MIT",
   "dependencies": {
     "cli-color": "~1.4.0",
-    "commander": "~2.19.0",
+    "commander": "~2.20.0",
     "finalhandler": "~1.1.1",
-    "mocha": "5.2.0",
+    "mocha": "6.1.0",
     "minimist": "~1.2.0",
-    "opn": "^5.4.0",
+    "open": "^6.1.0",
     "serve-static": "~1.13.2",
     "supervisor": "~0.12.0",
     "url-parse": "~1.4.4",
-    "ws": "~6.1.2"
+    "ws": "~6.2.1"
   },
   "devDependencies": {
-    "sinon": "7.2.2",
+    "sinon": "7.3.1",
     "standard": "12.0.1",
     "express": "4.16.4",
-    "nyc": "13.1.0",
+    "nyc": "13.3.0",
     "tree-kill": "1.2.1"
   },
   "main": "./index.js",
