@@ -1,7 +1,7 @@
 var express = require('express')
 var http = require('http')
 var path = require('path')
-var reload = require('../index') // Calls reload relative locally. If you are using this sample app outside of the reload directory you should require it normally like `var reload = require('reload')`
+var reload = require('reload')
 var bodyParser = require('body-parser')
 var logger = require('morgan')
 
