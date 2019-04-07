@@ -152,11 +152,22 @@ describe('API', function () {
     assert.equal(result, true)
   })
 
+  it('Should error if specified port is not a number', async () => {
+    var app = express()
+
+    try {
+      await reload(app, { port: 'NOTANUMBER' })
+      assert.fail('Not supposed to pass')
+    } catch (err) {
+      assert.strictEqual(err.message, 'Specified port is not of type number')
+    }
+  })
+
   it('Should make WebSocket server start wait with webSocketServerWaitStart option enabled', async () => {
     var app = express()
 
     try {
-      var reloadReturned = await reload(app, {webSocketServerWaitStart: true})
+      var reloadReturned = await reload(app, { webSocketServerWaitStart: true })
     } catch (err) {
 
     }
@@ -177,6 +188,17 @@ describe('API', function () {
       } else {
         assert(false, 'WebSocket did not start after calling webSocketServerWaitStart function')
       }
+    }
+  })
+
+  it('Should error if webSocketServerWaitStart not of type boolean', async () => {
+    var app = express()
+
+    try {
+      await reload(app, { webSocketServerWaitStart: 'true' })
+      assert.fail('Not supposed to pass')
+    } catch (err) {
+      assert.strictEqual(err.message, 'webSocketServerWaitStart option specified is not of type boolean')
     }
   })
 
@@ -239,5 +261,16 @@ describe('API', function () {
 
       helperFunction.closeReloadSocket(reloadReturned)
     })
+  })
+
+  it('Should error if force wss option is not a boolean', async () => {
+    var app = express()
+
+    try {
+      await reload(app, { forceWss: 'true' })
+      assert.fail('Not supposed to pass')
+    } catch (err) {
+      assert.strictEqual(err.message, 'forceWss option specified is not of type boolean')
+    }
   })
 })

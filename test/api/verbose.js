@@ -76,4 +76,15 @@ describe('Verbose', function () {
     console.log.restore()
     console.error.restore()
   })
+
+  it('Should error if verbose logging option is not a boolean', async () => {
+    var app = express()
+
+    try {
+      await reload(app, { verbose: 'true' })
+      assert.fail('Not supposed to pass')
+    } catch (err) {
+      assert.strictEqual(err.message, 'verboseLogging option specified is not of type boolean')
+    }
+  })
 })
