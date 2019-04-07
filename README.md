@@ -21,7 +21,6 @@ Table Of Contents
     * [Parameters](#parameters)
       * [Table of reload parameters](#table-of-reload-parameters)
       * [Table of options for reload opts parameter](#table-of-options-for-reload-opts-parameter)
-      * **[Updating to version 2](#upgrading-to-version-2)**
     * [Returns](#returns)
 * [Using reload as a command line application](#using-reload-as-a-command-line-application)
   * [Usage for Command Line Application](#usage-for-command-line-application)
@@ -42,11 +41,6 @@ Reload works in two different ways depending on if you're using it:
 
 Once reload-server and reload-client are connected, the client side code opens a [WebSocket](https://en.wikipedia.org/wiki/WebSocket) to the server and waits for the WebSocket to close, once it closes, reload waits for the server to come back up (waiting for a socket on open event), once the socket opens we reload the page.
 
-Updating to version 2 from version 1
----
-
-Looking for a quick guide to updating reload to version 2? Please refer to our update section [below](#upgrading-to-version-2).
-
 Installation
 ---
 
@@ -63,7 +57,7 @@ There are two different ways to use reload.
 
 Using reload in Express
 ---
-When used with Express reload creates a new Express route for reload. When you restart the server, the client will detect the server being restarted and automatically refresh the page.
+When used with Express **reload creates** a new Express route for reload. When you restart the server, the client will detect the server being restarted and automatically refresh the page.
 
 Reload can be used in conjunction with tools that allow for automatically restarting the server such as [supervisor](https://github.com/isaacs/node-supervisor) (recommended), [nodemon](https://github.com/remy/nodemon), [forever](https://github.com/nodejitsu/forever), etc.
 
@@ -74,7 +68,7 @@ Reload can be used in conjunction with tools that allow for automatically restar
 var express = require('express')
 var http = require('http')
 var path = require('path')
-var reload = require('../../reload')
+var reload = require('reload')
 var bodyParser = require('body-parser')
 var logger = require('morgan')
 
@@ -93,11 +87,15 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-reload(app);
-
-server.listen(app.get('port'), function () {
-  console.log('Web server listening on port ' + app.get('port'))
+reload(app).then(function () {
+  // Reload started, start web server
+  server.listen(app.get('port'), function () {
+    console.log('Web server listening on port ' + app.get('port'))
+  })
+}).catch(function (err) {
+  console.error('Reload could not start, could not start server/sample app', err)
 })
+
 
 ```
 
@@ -111,6 +109,7 @@ server.listen(app.get('port'), function () {
   <body>
     <h1>Reload Express Sample App</h1>
     <!-- All you have to do is include the reload script and have it be on every page of your project -->
+    <!-- You do not create this route, reload creates it for you automatically -->
     <script src="/reload/reload.js"></script>
   </body>
 </html>
@@ -132,9 +131,28 @@ watch.watchTree(__dirname + "/public", function (f, curr, prev) {
 
 ### API for Express
 
-```javascript
-reload(app, opts)
-```
+Reload returns a promise. The API takes a required express application and an optional options object.
+
+* To call Reload you should use a `then/catch` to call reload.
+    * ```javascript
+      reload(app [,opts]).then(function () {
+        // Reload started
+      }).catch(function (err) {
+        // Reload did not start correctly, handle error
+      })
+      ```
+* If you are in an [asynchronous function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) you can call Reload with [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+    * ```javascript
+      async function asyncCall() {
+        try {
+          var reloadReturned = await reload(app [,opts])
+        } catch (err) {
+          // Handle error
+        }
+      }
+      ```
+
+_Consult the [migration guide](MIGRATION_GUIDE.md) for help updating reload across major versions._
 
 #### Parameters
 
@@ -147,32 +165,31 @@ reload(app, opts)
 
 ##### Table of options for reload opts parameter
 
-| Parameter Name           | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                 | Optional | Default  |
-|--------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|----------|
-| port                     | number  | Port to run reload on.                                                                                                                                                                                                                                                                                                                                                                                      | ✓        | `9856`   |
-| webSocketServerWaitStart | boolean | When enabled will delay starting and opening WebSocket server when requiring reload. After enabling use the `startWebSocketServer` function returned in the object provided by the API to start the WebSocket. **_Note_**: Failing to call the returned function with this option enabled will cause reload not to work. See [return API](Returns) for more information                                     | ✓        | `false`  |
-| route                    | string  | Route that reload should use to serve the client side script file. Changing the route will require the script tag URL to change. Reload will always strip any occurrence of reload.js and append reload.js for you. This is to ensure case, order, and use of / is correct. For example specifying newRoutePath as the route will give reload a route of newRoutePath/reload.js. (Recommend not modifying). | ✓        | `reload` |
-| verbose                  | boolean | If set to true, will show logging on the server and client side.                                                                                                                                                                                                                                                                                                                                            | ✓        | `false`  |
-
-##### Upgrading to version 2
-
-Reload dropped support for server. The only required parameter for reload is `app`.
-
-* Upgrade with required arguments: `reload(server, app)` becomes `reload(app)`
-
-* Upgrade with required arguments and the one optional argument: `reload(server, app, true)` becomes `reload(app, {verbose: true})`
-
-To read more about the API breaking changes please refer to the [changelog](CHANGELOG.md#api-breaking-changes).
+| Parameter Name           | Type    | Description                                                                                                                                                                                                                                                                                                                                                                                                 | Optional | Default |
+|--------------------------|---------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------|---------|
+| port                     | number  | Port to run reload on.                                                                                                                                                                                                                                                                                                                                                                                      | ✓        | 9856    |
+| webSocketServerWaitStart | boolean | When enabled will delay starting and opening WebSocket server when requiring reload. After enabling use the startWebSocketServer function returned in the object provided by the API to start the WebSocket. Note: Failing to call the returned function with this option enabled will cause reload not to work. See return API for more information                                                        | ✓        | FALSE   |
+| route                    | string  | Route that reload should use to serve the client side script file. Changing the route will require the script tag URL to change. Reload will always strip any occurrence of reload.js and append reload.js for you. This is to ensure case, order, and use of / is correct. For example specifying newRoutePath as the route will give reload a route of newRoutePath/reload.js. (Recommend not modifying). | ✓        | reload  |
+| forceWss                 | boolean | Forces reload client connections to always use `wss` (secure websockerts) even when the window location is HTTP                                                                                                                                                                                                                                                                                             | ✓        | FALSE   |
+| https                    | object  | HTTP options object. When defined runs reload in HTTPS mode                                                                                                                                                                                                                                                                                                                                                 | ✓        | {}      |
+| https.certAndKey         | object  | Object that holds configuration for HTTPS key and cert configuration                                                                                                                                                                                                                                                                                                                                        | ✓        | {}      |
+| https.certAndKey.key     | string  | File path to HTTP key (not optional when defining an HTTPS object)                                                                                                                                                                                                                                                                                                                                          |          | null    |
+| https.certAndKey.cert    | string  | File path to HTTP cert (not optional when defining an HTTPS object)                                                                                                                                                                                                                                                                                                                                         |          | null    |
+| https.p12                | object  | Object that holds configuration for HTTPS P12 configuration                                                                                                                                                                                                                                                                                                                                                 | ✓        | {}      |
+| https.p12.p12Path        | string  | File path or file contents as string (Not optional when using P12 configuration                                                                                                                                                                                                                                                                                                                             |          | null    |
+| https.p12.passphrase     | string  | P12 passphrase                                                                                                                                                                                                                                                                                                                                                                                              | ✓        | null    |
+| verbose                  | boolean | If set to true, will show logging on the server and client side.                                                                                                                                                                                                                                                                                                                                            | ✓        | FALSE   |
 
 #### Returns
 
 An **object** containing:
 
-| Name                 | Type     | Description                                                                                                                                                                                                                |
-|----------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| reload               | function | A function that when called reloads all connected clients. For more information see [manually firing server-side reload events](#manually-firing-server-side-reload-events).                                               |
-| startWebSocketServer | function | Starts and opens the WebSocket server required for reload. Only active when using the optional parameter `webSocketServerWaitStart`. Read the [parameters](#table-of-options-for-reload-opts-parameter) for more information |
-| wss                  | object   | Web socket server |
+| Name                 | Type     | Description                                                                                                                                                                                                          |
+|----------------------|----------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| reload               | function | A function that when called reloads all connected clients. For more information see manually firing server-side reload events.                                                                                       |
+| startWebSocketServer | function | Returns a promise. Starts and opens the WebSocket server required for reload. Only **defined** when using the optional parameter `webSocketServerWaitStart`. Read the [parameters](#parameters) for more information |
+| closeServer          | function | Returns a promise. Closes Reload WebSocket server                                                                                                                                                                    |
+| wss                  | object   | Web socket server                                                                                                                                                                                                    |
 
 Using reload as a command line application
 ---
@@ -210,6 +227,7 @@ Options:
   -e, --exts [extensions]        Extensions separated by commas or pipes. Defaults to html,js,css.
   -p, --port [port]              The port to bind to. Can be set with PORT env variable as well. Defaults to 8080
   -s, --start-page [start-page]  Specify a start page. Defaults to index.html
+  -f, --fallback [fallback]      Fallback to the start page when route is not found
   -v, --verbose [verbose]        Turning on logging on the server and client side. Defaults to false
 
 ```
@@ -219,7 +237,7 @@ License
 
 [(MIT License)](LICENSE)
 
-Copyright 2017
+Copyright 2019
 
 ### Orginal Author:
 

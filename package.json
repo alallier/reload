@@ -19,23 +19,31 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "cli-color": "~1.2.0",
-    "commander": "~2.9.0",
+    "cli-color": "~1.4.0",
+    "commander": "~2.20.0",
     "finalhandler": "~1.1.1",
+    "mocha": "6.1.0",
     "minimist": "~1.2.0",
-    "opn": "^5.3.0",
+    "open": "^6.1.0",
     "serve-static": "~1.13.2",
     "supervisor": "~0.12.0",
-    "url-parse": "~1.4.3",
-    "ws": "~5.2.0"
+    "url-parse": "~1.4.4",
+    "ws": "~6.2.1"
   },
   "devDependencies": {
-    "standard": "^11.0.1"
+    "sinon": "7.3.1",
+    "standard": "12.0.1",
+    "express": "4.16.4",
+    "nyc": "13.3.0",
+    "tree-kill": "1.2.1"
   },
   "main": "./index.js",
   "scripts": {
-    "test": "npm run standard",
-    "standard": "standard **/*.js bin/**/*"
+    "test": "npm run standard && npm run unitTests",
+    "unitTests": "./node_modules/.bin/mocha --recursive --timeout 5000 test",
+    "standard": "standard **/*.js bin/**/*",
+    "cover": "nyc --reporter=html --reporter=text mocha --timeout 5000 --recursive test",
+    "coverage": "npm run cover"
   },
   "bin": {
     "reload": "./bin/reload"
