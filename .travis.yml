@@ -4,4 +4,5 @@ node_js:
   - 11
 sudo: false
 script:
+  - npm run standard
   - npm run report-coverage
