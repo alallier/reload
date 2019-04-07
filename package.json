@@ -39,7 +39,7 @@
   },
   "main": "./index.js",
   "scripts": {
-    "test": "npm run unitTests",
+    "test": "npm run standard && npm run unitTests",
     "unitTests": "./node_modules/.bin/mocha --recursive --timeout 5000 test",
     "standard": "standard **/*.js bin/**/*",
     "cover": "nyc --reporter=html --reporter=text mocha --timeout 5000 --recursive test",

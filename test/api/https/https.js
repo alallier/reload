@@ -37,7 +37,7 @@ describe('HTTPS', function () {
       console.log.restore()
       console.error.restore()
 
-      assert.equal(err.message, 'Could not initialize reload HTTPS setup incorrectly. Make sure to define a `p12` or `certAndKey` in the HTTPS options')
+      assert.strictEqual(err.message, 'Could not initialize reload HTTPS setup incorrectly. Make sure to define a `p12` or `certAndKey` in the HTTPS options')
     }
   })
 
@@ -55,7 +55,7 @@ describe('HTTPS', function () {
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
-      assert.equal(response.statusCode, 200)
+      assert.strictEqual(response.statusCode, 200)
     })
 
     it('Should accept HTTPS key as file contents', async () => {
@@ -71,7 +71,7 @@ describe('HTTPS', function () {
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
-      assert.equal(response.statusCode, 200)
+      assert.strictEqual(response.statusCode, 200)
     })
 
     it('Should accept HTTPS cert as file contents', async () => {
@@ -87,7 +87,7 @@ describe('HTTPS', function () {
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
-      assert.equal(response.statusCode, 200)
+      assert.strictEqual(response.statusCode, 200)
     })
 
     it('Should error with bad key file', async () => {
@@ -129,7 +129,7 @@ describe('HTTPS', function () {
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
-      assert.equal(result, true)
+      assert.strictEqual(result, true)
     })
   })
 
@@ -147,7 +147,7 @@ describe('HTTPS', function () {
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
-      assert.equal(response.statusCode, 200)
+      assert.strictEqual(response.statusCode, 200)
     })
 
     it('Should accept pfx as file contents', async () => {
@@ -163,7 +163,7 @@ describe('HTTPS', function () {
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
-      assert.equal(response.statusCode, 200)
+      assert.strictEqual(response.statusCode, 200)
     })
 
     it('Should error with bad pxf file', async () => {
@@ -192,7 +192,7 @@ describe('HTTPS', function () {
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
-      assert.equal(result, true)
+      assert.strictEqual(result, true)
     })
   })
 })
