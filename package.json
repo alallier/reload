@@ -22,7 +22,7 @@
     "cli-color": "~1.4.0",
     "commander": "~2.20.0",
     "finalhandler": "~1.1.1",
-    "mocha": "6.1.0",
+    "mocha": "6.1.4",
     "minimist": "~1.2.0",
     "open": "^6.1.0",
     "serve-static": "~1.13.2",
