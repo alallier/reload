@@ -18,7 +18,11 @@ Table Of Contents
 * [Using reload in Express](#using-reload-in-express)
   * [Express Example](#express-example)
   * [Manually firing server-side reload events](#manually-firing-server-side-reload-events)
+    * [Manual fire with promises](#manual-fire-with-promises)
+    * [Manual fire with async/await](#manual-fire-with-asyncawait)
   * [API for Express](#api-for-express)
+    * [With try/catch](#with-trycatch)
+    * [With async/await](#with-asyncawait)
     * [Parameters](#parameters)
       * [Table of reload parameters](#table-of-reload-parameters)
       * [Table of options for reload opts parameter](#table-of-options-for-reload-opts-parameter)
@@ -88,7 +92,9 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-reload(app).then(function () {
+reload(app).then(function (reloadReturned) {
+  // reloadReturned is documented in the returns API in the README
+
   // Reload started, start web server
   server.listen(app.get('port'), function () {
     console.log('Web server listening on port ' + app.get('port'))
@@ -96,8 +102,6 @@ reload(app).then(function () {
 }).catch(function (err) {
   console.error('Reload could not start, could not start server/sample app', err)
 })
-
-
 ```
 
 **`public/index.html`:**
@@ -122,36 +126,61 @@ reload(app).then(function () {
 
 You can manually call a reload event by calling `reload()` yourself. An example is shown below:
 
+#### Manual fire with promises
 ```javascript
-reloadServer = reload(app);
-watch.watchTree(__dirname + "/public", function (f, curr, prev) {
+reload(app).then((reloadReturned) => {
+  watch.watchTree(__dirname + "/public", function (f, curr, prev) {
     // Fire server-side reload event
-    reloadServer.reload();
-});
+    reloadReturned.reload();
+  });
+})
+```
+
+#### Manual fire with async/await
+
+```js
+const startServer = async () => {
+    const reloadReturned = await reload(app);
+
+    watch.watchTree(__dirname + "/public", function (f, curr, prev) {
+        // Fire server-side reload event
+        reloadReturned.reload();
+    })
+}
 ```
 
 ### API for Express
 
-Reload returns a promise. The API takes a required express application and an optional options object.
+Reload returns a promise. The API takes a required express application and an optional options object. The promise returns an object (for information on the returned object [see below](#returns)).
 
-* To call Reload you should use a `then/catch` to call reload.
-    * ```javascript
-      reload(app [,opts]).then(function () {
-        // Reload started
-      }).catch(function (err) {
-        // Reload did not start correctly, handle error
-      })
-      ```
-* If you are in an [asynchronous function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) you can call Reload with [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
-    * ```javascript
-      async function asyncCall() {
-        try {
-          var reloadReturned = await reload(app [,opts])
-        } catch (err) {
-          // Handle error
-        }
-      }
-      ```
+#### With try/catch
+
+To call Reload you should use a then/catch to call reload.
+
+* ```javascript
+    reload(app [,opts]).then(function (reloadReturned) {
+      // reloadReturned object see returns documentation below for what is returned
+
+      // Reload started
+    }).catch(function (err) {
+      // Reload did not start correctly, handle error
+    })
+  ```
+
+#### With async/await
+
+If you are in an [asynchronous function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) you can call Reload with [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await)
+
+* ```javascript
+  async function asyncCall() {
+    try {
+      var reloadReturned = await reload(app [,opts])
+      // reloadReturned object see returns documentation below for what is returned.
+    } catch (err) {
+      // Handle error
+    }
+  }
+  ```
 
 _Consult the [migration guide](MIGRATION_GUIDE.md) for help updating reload across major versions._
 

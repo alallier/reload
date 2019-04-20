@@ -20,7 +20,9 @@ app.get('/', function (req, res) {
 var server = http.createServer(app)
 
 // Reload code here
-reload(app).then(function () {
+reload(app).then(function (reloadReturned) {
+  // reloadReturned is documented in the returns API in the README
+
   // Reload started, start web server
   server.listen(app.get('port'), function () {
     console.log('Web server listening on port ' + app.get('port'))
