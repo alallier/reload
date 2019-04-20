@@ -4,7 +4,6 @@
 
 - Be sure all tests pass: `npm t`.
 - Ensure code coverage does not decrease and write new tests if necessary: `npm run coverage`.
-- Add your changes to `CHANGELOG.md`.
 
 ## Release process
 
