@@ -35,7 +35,7 @@
     "sinon": "7.3.2",
     "standard": "12.0.1",
     "express": "4.16.4",
-    "nyc": "13.3.0",
+    "nyc": "14.0.0",
     "tree-kill": "1.2.1"
   },
   "main": "./index.js",
