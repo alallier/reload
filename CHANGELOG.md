@@ -1,3 +1,38 @@
+3.0.1 / 2019-04-20
+------------------
+
+# Version 3.0.1
+
+## Added
+
+* Renovate for auto dependency updating
+  * https://github.com/alallier/reload/pull/173
+  * https://github.com/alallier/reload/pull/178
+* Codecov for coverage reports
+  * https://github.com/alallier/reload/pull/174
+* npmignore
+  * https://github.com/alallier/reload/pull/176
+* Contributing Document
+  * https://github.com/alallier/reload/pull/177
+
+## Fixed
+
+* Updated documentation to better reflect new API with promises
+  * https://github.com/alallier/reload/pull/189
+* Added reload as dependency to sample app
+  * https://github.com/alallier/reload/pull/188
+* Moved Mocha to dev dependencies
+  * https://github.com/alallier/reload/pull/187
+
+## Updated
+
+* mocha to v6.1.4
+  * https://github.com/alallier/reload/pull/179
+* nyc to v14
+  * https://github.com/alallier/reload/pull/183
+* sinon to v7.3.2
+  * https://github.com/alallier/reload/pull/184
+
 3.0.0 / 2019-04-07
 ------------------
 
