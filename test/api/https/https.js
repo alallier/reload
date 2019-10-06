@@ -26,7 +26,7 @@ console.log(typeof testKey)
 
 describe('HTTPS', function () {
   it('Should error if `certAndKey` and `p12` are not defined in HTTPS options', async () => {
-    sinon.stub(console, 'log').returns(void 0) // eslint-disable-line
+    sinon.stub(console, 'log').returns(0)
     sinon.stub(console, 'error').returns(void 0) // eslint-disable-line
 
     var app = express()
