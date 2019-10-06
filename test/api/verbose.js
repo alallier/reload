@@ -8,8 +8,8 @@ const sinon = require('sinon')
 
 describe('Verbose', function () {
   it('Should verbose log \'Starting WebSocket Server\'', async () => {
-    sinon.stub(console, 'log').returns(void 0) // eslint-disable-line
-    sinon.stub(console, 'error').returns(void 0) // eslint-disable-line
+    sinon.stub(console, 'log').returns(0)
+    sinon.stub(console, 'error').returns(0)
 
     var app = express()
 
@@ -30,8 +30,8 @@ describe('Verbose', function () {
   })
 
   it('Should verbose log \'Reload client connected to server\' when a one client connects\' when client is connected', async () => {
-    sinon.stub(console, 'log').returns(void 0) // eslint-disable-line
-    sinon.stub(console, 'error').returns(void 0) // eslint-disable-line
+    sinon.stub(console, 'log').returns(0)
+    sinon.stub(console, 'error').returns(0)
 
     var app = express()
 
@@ -54,8 +54,8 @@ describe('Verbose', function () {
   })
 
   it('Should verbose log \'Sending message to 1 connection(s): reload\' when `reload` is called from return API', async () => {
-    sinon.stub(console, 'log').returns(void 0) // eslint-disable-line
-    sinon.stub(console, 'error').returns(void 0) // eslint-disable-line
+    sinon.stub(console, 'log').returns(0)
+    sinon.stub(console, 'error').returns(0)
 
     var app = express()
 
