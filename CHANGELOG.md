@@ -1,3 +1,20 @@
+3.0.2 / 2019-10-06
+------------------
+
+* Updated express sample app's body-parser from 1.18.3 to 1.19.0 - See: https://github.com/alallier/reload/pull/193
+* Updated ws from ~6.2.1 to ~7.1.0 - See: https://github.com/alallier/reload/pull/194
+* Updated nyc from 14.0.0 to 14.1.1 - See: https://github.com/alallier/reload/pull/195
+* Updated serve-static from ~1.13.2 to ~1.14.0 - See: https://github.com/alallier/reload/pull/196
+* Updated codecov from 3.3.0 to 3.6.1 - See: https://github.com/alallier/reload/pull/197
+* Updated express in reload and sample from 4.16.4 to 4.17.1 - See: https://github.com/alallier/reload/pull/198
+* Updated mocha from 6.1.4 to 6.2.1 - See: https://github.com/alallier/reload/pull/203
+* Updated sinon from 7.3.2 to 7.5.0 - See: https://github.com/alallier/reload/pull/204
+* Updated commander from ~2.20.0 to ~3.0.0 - See: https://github.com/alallier/reload/pull/205
+* Updated standard from 12.0.1 to 14.3.1 - See: https://github.com/alallier/reload/pull/206
+* Use package.json files instead of `.npmignore`. See: https://github.com/alallier/reload/pull/209
+* Update CONTRIBUTING.md file for collaborators to ensure the sample app's reload version matches reload upstream. See: https://github.com/alallier/reload/pull/210
+
+
 3.0.1 / 2019-04-20
 ------------------
 
