@@ -13,7 +13,7 @@ async function makeRequest (path, app, options) {
   var requestOptions = options || {}
 
   if (requestOptions.https) {
-    httpOrHttpServer = https.createServer({ key: requestOptions.https.key, cert: requestOptions.https.cert, ca: [ requestOptions.https.ca ] }, app)
+    httpOrHttpServer = https.createServer({ key: requestOptions.https.key, cert: requestOptions.https.cert, ca: [requestOptions.https.ca] }, app)
   } else {
     httpOrHttpServer = http.createServer(app)
   }
@@ -27,7 +27,7 @@ async function makeRequest (path, app, options) {
           port: 8080,
           key: requestOptions.https.key,
           cert: requestOptions.https.cert,
-          ca: [ requestOptions.https.ca ]
+          ca: [requestOptions.https.ca]
         }
 
         https.get(optionsHTTPS, function (response) {
@@ -58,7 +58,7 @@ async function testWebSocket (port, secure, httpOptions) {
     ws = new WebSocket((secure === true ? 'wss' : 'ws') + '://localhost:' + (port || '9856'), {
       key: httpOptions.key,
       cert: httpOptions.cert,
-      ca: [ httpOptions.ca ]
+      ca: [httpOptions.ca]
     })
   } else {
     ws = new WebSocket((secure === true ? 'wss' : 'ws') + '://localhost:' + (port || '9856'))
