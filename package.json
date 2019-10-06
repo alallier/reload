@@ -1,6 +1,11 @@
 {
   "name": "reload",
   "version": "3.0.1",
+  "files": [
+    "bin",
+    "lib",
+    "index.js"
+  ],
   "description": "Node.js module to refresh and reload your code in your browser when your code changes. No browser plugins required.",
   "repository": {
     "type": "git",
