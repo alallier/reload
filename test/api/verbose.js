@@ -8,8 +8,8 @@ const sinon = require('sinon')
 
 describe('Verbose', function () {
   it('Should verbose log \'Starting WebSocket Server\'', async () => {
-    sinon.stub(console, 'log').returns(void 0)
-    sinon.stub(console, 'error').returns(void 0)
+    sinon.stub(console, 'log').returns(void 0) // eslint-disable-line
+    sinon.stub(console, 'error').returns(void 0) // eslint-disable-line
 
     var app = express()
 
@@ -21,7 +21,7 @@ describe('Verbose', function () {
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
-    let logFound = helperFunction.checkForConsoleLog(console.log.args, 'Starting WebSocket Server')
+    const logFound = helperFunction.checkForConsoleLog(console.log.args, 'Starting WebSocket Server')
 
     assert(logFound, '\'Starting WebSocket Server\' not found in console logging')
 
@@ -30,8 +30,8 @@ describe('Verbose', function () {
   })
 
   it('Should verbose log \'Reload client connected to server\' when a one client connects\' when client is connected', async () => {
-    sinon.stub(console, 'log').returns(void 0)
-    sinon.stub(console, 'error').returns(void 0)
+    sinon.stub(console, 'log').returns(void 0) // eslint-disable-line
+    sinon.stub(console, 'error').returns(void 0) // eslint-disable-line
 
     var app = express()
 
@@ -43,7 +43,7 @@ describe('Verbose', function () {
 
     await helperFunction.testWebSocket(9856)
 
-    let foundLog = helperFunction.checkForConsoleLog(console.log.args, 'Reload client connected to server')
+    const foundLog = helperFunction.checkForConsoleLog(console.log.args, 'Reload client connected to server')
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -54,8 +54,8 @@ describe('Verbose', function () {
   })
 
   it('Should verbose log \'Sending message to 1 connection(s): reload\' when `reload` is called from return API', async () => {
-    sinon.stub(console, 'log').returns(void 0)
-    sinon.stub(console, 'error').returns(void 0)
+    sinon.stub(console, 'log').returns(void 0) // eslint-disable-line
+    sinon.stub(console, 'error').returns(void 0) // eslint-disable-line
 
     var app = express()
 
@@ -67,7 +67,7 @@ describe('Verbose', function () {
 
     await helperFunction.websocketConnectionMessageHelper(reloadReturned)
 
-    let foundLog = helperFunction.checkForConsoleLog(console.log.args, 'Sending message to 1 connection(s): reload')
+    const foundLog = helperFunction.checkForConsoleLog(console.log.args, 'Sending message to 1 connection(s): reload')
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
