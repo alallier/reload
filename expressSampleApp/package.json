@@ -7,7 +7,7 @@
   "main": "server.js",
   "dependencies": {
     "express": "4.17.1",
-    "body-parser": "1.18.3",
+    "body-parser": "1.19.0",
     "morgan": "1.9.1",
     "reload": "^3.0.0",
     "supervisor": "0.12.0"
