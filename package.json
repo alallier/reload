@@ -33,7 +33,7 @@
     "codecov": "3.6.1",
     "sinon": "7.5.0",
     "standard": "12.0.1",
-    "express": "4.16.4",
+    "express": "4.17.1",
     "mocha": "6.2.1",
     "nyc": "14.1.1",
     "tree-kill": "1.2.1"
