@@ -1,3 +1,11 @@
+3.0.3 / 2019-10-20
+------------------
+
+* Updated cli-color from ~1.4.0 to ~2.0.0 - See: https://github.com/alallier/reload/pull/212
+* Updated open from ^6.1.0 to ^7.0.0 - See: https://github.com/alallier/reload/pull/213
+* Updated mocha from 6.2.1 to 6.2.2 - See: https://github.com/alallier/reload/pull/214
+* Updated ws from ~7.1.0 to ~7.2.0 - See: https://github.com/alallier/reload/pull/215
+
 3.0.2 / 2019-10-06
 ------------------
 
