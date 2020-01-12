@@ -1,3 +1,8 @@
+Next version
+------------------
+
+* Migrated CI to GitHub Actions
+
 3.0.3 / 2019-10-20
 ------------------
 
