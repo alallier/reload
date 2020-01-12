@@ -20,8 +20,7 @@
   ],
   "author": "JP Richardson <jprichardson@gmail.com>",
   "contributors": [
-    "Alexander J. Lallier <alexanderlallier@aol.com>",
-    "Eric Newport <kethinov@gmail.com>"
+    "Alexander J. Lallier <alexanderlallier@aol.com>"
   ],
   "license": "MIT",
   "dependencies": {
