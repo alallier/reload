@@ -119,7 +119,7 @@ reload(app).then(function (reloadReturned) {
 </html>
 ```
 
-**Refer to the [reload express sample app](expressSampleApp) for this working example.**
+**Refer to the [reload express sample app](https://github.com/alallier/reload-sample-app) for this working example.**
 
 ### Manually firing server-side reload events
 
