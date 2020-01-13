@@ -1,7 +1,16 @@
 Next version
 ------------------
 
-* Migrated CI to GitHub Actions
+3.0.4 / 2019-01-13
+------------------
+
+* Migrated CI to GitHub Actions - See: https://github.com/alallier/reload/pull/222
+* Moved sample app to a new project - See: https://github.com/alallier/reload/pull/229
+* Updated nyc from 14.1.1 to 15.0.0 - See: https://github.com/alallier/reload/pull/224
+* Updated sinon from 7.5.0 to 8.0.4 - See: https://github.com/alallier/reload/pull/225
+* Updated mocha from 6.2.2 to 7.0.0 - See: https://github.com/alallier/reload/pull/226
+* Updated commander from ~3.0.0 to ~4.1.0 - See: https://github.com/alallier/reload/pull/220
+* Removed tree-kill dependency - See: https://github.com/alallier/reload/pull/223
 
 3.0.3 / 2019-10-20
 ------------------
