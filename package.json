@@ -41,7 +41,7 @@
     "express": "4.17.1",
     "mocha": "6.2.2",
     "nyc": "15.0.0",
-    "tree-kill": "1.2.1"
+    "tree-kill": "1.2.2"
   },
   "main": "./index.js",
   "scripts": {
