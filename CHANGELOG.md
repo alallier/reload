@@ -1,6 +1,23 @@
 Next version
 ------------------
 
+3.0.5 / 2020-05-25
+------------------
+
+* Fixed bug where command line Reload where reload was writing to a file properly that broke on Node 14.x - See: https://github.com/alallier/reload/pull/245
+* GitHub Actions - See: https://github.com/alallier/reload/pull/247
+  * Added Node 14.x to GitHub Actions CI
+  * Removed Node 13.x from GitHub Actions due to end of life
+* Dependency Updates
+  * Updated codecov from 3.6.1 to 3.7.0 - See: https://github.com/alallier/reload/pull/235 and https://github.com/alallier/reload/pull/246
+  * Updated commander from 4.1.0 to 5.1.0 - See: https://github.com/alallier/reload/pull/246
+  * Updated minimist from 1.2.0 to 1.2.3 (Security package-lock.json) - See: https://github.com/alallier/reload/pull/236
+  * Updated mocha from 7.0.0 to 7.1.2 - See: https://github.com/alallier/reload/pull/233
+  * Updated sinon from 8.0.4 to 9.0.2 - See: https://github.com/alallier/reload/pull/231 and https://github.com/alallier/reload/pull/234
+  * Updated standard from 14.3.1 to 14.3.4 - See: https://github.com/alallier/reload/pull/238
+  * Updated nyc from 15.0.0 to 15.0.1 - See: https://github.com/alallier/reload/pull/242
+  * Updated ws from 7.2.0 to 7.3.0 - See: https://github.com/alallier/reload/pull/244
+
 3.0.4 / 2019-01-13
 ------------------
 
