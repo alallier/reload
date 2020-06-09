@@ -1,6 +1,8 @@
 Next version
 ------------------
 
+* Move `passphrase` option from `https.p12.passphrase` to `https.passphrase` so it can be used for certAndKey configurations as well.
+
 3.0.5 / 2020-05-25
 ------------------
 
