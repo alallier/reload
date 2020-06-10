@@ -1,7 +1,13 @@
 Next version
 ------------------
 
-* Move `passphrase` option from `https.p12.passphrase` to `https.passphrase` so it can be used for certAndKey configurations as well.
+3.0.6 / 2020-06-10
+------------------
+
+* Changed `passphrase` option from `https.p12.passphrase` to `https.passphrase` so it can be used for certAndKey configurations as well - See: https://github.com/alallier/reload/pull/251
+* Tweaked CI configuration file so GitHub Actions CI will also run on pull requests - See: https://github.com/alallier/reload/pull/250
+* Updated nyc from 15.0.1 to 15.1.0 - See: https://github.com/alallier/reload/pull/249
+* Fix the repository URL in package.json - See: https://github.com/alallier/reload/pull/252
 
 3.0.5 / 2020-05-25
 ------------------
