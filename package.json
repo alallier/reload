@@ -9,7 +9,7 @@
   "description": "Node.js module to refresh and reload your code in your browser when your code changes. No browser plugins required.",
   "repository": {
     "type": "git",
-    "url": "git@github.com:jprichardson/reload.git"
+    "url": "git@github.com:alallier/reload.git"
   },
   "keywords": [
     "reload",
@@ -20,7 +20,7 @@
   ],
   "author": "JP Richardson <jprichardson@gmail.com>",
   "contributors": [
-    "Alexander J. Lallier <alexanderlallier@aol.com>"
+    "Alexander J. Lallier <alexanderlallier@gmail.com>"
   ],
   "license": "MIT",
   "dependencies": {
