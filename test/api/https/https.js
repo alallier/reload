@@ -138,7 +138,7 @@ describe('HTTPS', function () {
       var app = express()
 
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location, passphrase: '1234' } } })
+        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location }, passphrase: '1234' } })
       } catch (err) {
         assert(false, err)
       }
@@ -154,7 +154,7 @@ describe('HTTPS', function () {
       var app = express()
 
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12, passphrase: '1234' } } })
+        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12 }, passphrase: '1234' } })
       } catch (err) {
         assert(false, err)
       }
@@ -170,7 +170,7 @@ describe('HTTPS', function () {
       var app = express()
 
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: path.join('/somethingElse', testP12Location), passphrase: '1234' } } })
+        var reloadReturned = await reload(app, { https: { p12: { p12Path: path.join('/somethingElse', testP12Location) }, passphrase: '1234' } })
       } catch (err) {
         return assert(true)
       }
@@ -183,7 +183,7 @@ describe('HTTPS', function () {
       var app = express()
 
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location, passphrase: '1234' } } })
+        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location }, passphrase: '1234' } })
       } catch (err) {
         assert(false, err)
       }
