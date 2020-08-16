@@ -30,9 +30,18 @@ if (typeof program.watchDir === 'undefined') {
   program.watchDir = program.dir
 }
 
-var args = ['-e', program.exts, '-w', program.watchDir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.fallback, program.verbose]
-supervisor.run(args)
+var args
+var start = function () {
+  args = ['-e', program.exts, '-w', program.watchDir, '-n', 'exit', '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.fallback, program.verbose]
+  supervisor.run(args)
 
-console.log('\nReload web server:')
-console.log('listening on port ' + clc.blue.bold(program.port))
-console.log('monitoring dir ' + clc.green.bold(program.dir))
+  console.log('\nReload web server:')
+  console.log('listening on port ' + clc.blue.bold(program.port))
+  console.log('monitoring dir ' + clc.green.bold(program.dir))
+
+  supervisor.child.on('exit', function () {
+    program.port++
+    start()
+  })
+}
+start()
