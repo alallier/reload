@@ -1,6 +1,14 @@
 Next version
 ------------------
 
+3.1.1 / 2020-09-29
+------------------
+
+* Updated mocha from 7.1.2 to 8.1.3 - See: https://github.com/alallier/reload/pull/255
+* Updated codecov from 3.7.0 to 3.7.2 - See: https://github.com/alallier/reload/pull/258 and https://github.com/alallier/reload/pull/266
+* Updated commander from 5.1.0 to 6.1.0 - See: https://github.com/alallier/reload/pull/259 and https://github.com/alallier/reload/pull/265
+* Updated sinon from 9.0.2 to 9.1.0 - See: https://github.com/alallier/reload/pull/264
+
 3.1.0 / 2020-06-10
 ------------------
 
