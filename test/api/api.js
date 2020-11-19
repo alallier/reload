@@ -128,6 +128,50 @@ describe('API', function () {
     assert.strictEqual(result, true, 'Could not connect to WebSocket')
   })
 
+  it('Should increment if default/specified port is unavailable', async () => {
+    const net = require('net')
+    const server = net.createServer()
+
+    server.listen(9856)
+
+    var app = express()
+
+    try {
+      var reloadReturned = await reload(app)
+    } catch (err) {
+
+    }
+
+    var result = await helperFunction.testWebSocket(reloadReturned.port)
+
+    await helperFunction.closeReloadSocket(reloadReturned)
+
+    assert.strictEqual(result, true, 'Could not connect to WebSocket')
+
+    server.close()
+  })
+
+  it('Should *not* increment if default/specified port is unavailable and autoIncrementOption is set to false', async () => {
+    const net = require('net')
+    const server = net.createServer()
+
+    server.listen(9856)
+
+    var app = express()
+
+    try {
+      var reloadReturned = await reload(app, { autoIncrementPort: false })
+    } catch (err) {
+
+    }
+
+    await helperFunction.closeReloadSocket(reloadReturned)
+
+    assert.strictEqual(reloadReturned.port, 9856, 'Should not increment')
+
+    server.close()
+  })
+
   it('Should error if unable to attach route to express app', async () => {
     try {
       await reload(function () {})
