@@ -160,14 +160,10 @@ describe('API', function () {
     var app = express()
 
     try {
-      var reloadReturned = await reload(app, { autoIncrementPort: false })
+      await reload(app, { autoIncrementPort: false })
     } catch (err) {
-
+      assert(err)
     }
-
-    await helperFunction.closeReloadSocket(reloadReturned)
-
-    assert.strictEqual(reloadReturned.port, 9856, 'Should not increment')
 
     server.close()
   })
