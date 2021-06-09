@@ -6,11 +6,11 @@ function closeReloadSocket (reloadReturned) {
 }
 
 async function makeRequest (path, app, options) {
-  var http = require('http')
-  var https = require('https')
-  var httpOrHttpServer
+  const http = require('http')
+  const https = require('https')
+  let httpOrHttpServer
 
-  var requestOptions = options || {}
+  const requestOptions = options || {}
 
   if (requestOptions.https) {
     httpOrHttpServer = https.createServer({ key: requestOptions.https.key, cert: requestOptions.https.cert, ca: [requestOptions.https.ca] }, app)
@@ -21,7 +21,7 @@ async function makeRequest (path, app, options) {
   return new Promise(function (resolve, reject) {
     httpOrHttpServer.listen(8080, function () {
       if (requestOptions.https) { // HTTPS
-        var optionsHTTPS = {
+        const optionsHTTPS = {
           host: 'localhost',
           path: path,
           port: 8080,
@@ -53,7 +53,7 @@ async function makeRequest (path, app, options) {
 }
 
 async function testWebSocket (port, secure, httpOptions) {
-  var ws
+  let ws
   if (secure) {
     ws = new WebSocket((secure === true ? 'wss' : 'ws') + '://localhost:' + (port || '9856'), {
       key: httpOptions.key,
