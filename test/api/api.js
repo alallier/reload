@@ -7,8 +7,8 @@ const privateReload = require('../../lib/reload')
 const fs = require('fs')
 const path = require('path')
 
-var helperFunction = require('../helper')
-var assert = require('assert')
+const helperFunction = require('../helper')
+const assert = require('assert')
 
 describe('API', function () {
   it('Should reject if argument length is 0', async () => {
@@ -30,10 +30,11 @@ describe('API', function () {
   })
 
   it('Should return public object', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app)
+      reloadReturned = await reload(app)
     } catch (err) {
       console.log(err)
     }
@@ -46,12 +47,13 @@ describe('API', function () {
   })
 
   it('Should return private object (private, command line only)', async () => {
-    var app = express()
+    const app = express()
 
-    var server = http.createServer(app)
+    const server = http.createServer(app)
 
+    let reloadReturned
     try {
-      var reloadReturned = await privateReload(app, {}, server)
+      reloadReturned = await privateReload(app, {}, server)
     } catch (err) {
       console.log(err)
     }
@@ -63,15 +65,16 @@ describe('API', function () {
   })
 
   it('Should create (default) `/reload/reload.js` route for reload file', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app)
+      reloadReturned = await reload(app)
     } catch (err) {
 
     }
 
-    var response = await helperFunction.makeRequest('/reload/reload.js', app)
+    const response = await helperFunction.makeRequest('/reload/reload.js', app)
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -79,16 +82,17 @@ describe('API', function () {
   })
 
   it('Should create (custom) `/something/reload.js` route for reload file', async () => {
-    var assert = require('assert')
-    var app = express()
+    const assert = require('assert')
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { route: '/something' })
+      reloadReturned = await reload(app, { route: '/something' })
     } catch (err) {
 
     }
 
-    var response = await helperFunction.makeRequest('/something/reload.js', app)
+    const response = await helperFunction.makeRequest('/something/reload.js', app)
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -96,16 +100,17 @@ describe('API', function () {
   })
 
   it('Should create (custom) `/something/reload.js` route for reload file', async () => {
-    var assert = require('assert')
-    var app = express()
+    const assert = require('assert')
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { route: '/reload/reLoad.js' })
+      reloadReturned = await reload(app, { route: '/reload/reLoad.js' })
     } catch (err) {
 
     }
 
-    var response = await helperFunction.makeRequest('/reload/reload.js', app)
+    const response = await helperFunction.makeRequest('/reload/reload.js', app)
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -113,15 +118,16 @@ describe('API', function () {
   })
 
   it('Should create WebSocket on default port', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app)
+      reloadReturned = await reload(app)
     } catch (err) {
 
     }
 
-    var result = await helperFunction.testWebSocket(9856)
+    const result = await helperFunction.testWebSocket(9856)
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -137,15 +143,16 @@ describe('API', function () {
   })
 
   it('Should create WebSocket on custom port', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { port: 9000 })
+      reloadReturned = await reload(app, { port: 9000 })
     } catch (err) {
 
     }
 
-    var result = await helperFunction.testWebSocket(9000)
+    const result = await helperFunction.testWebSocket(9000)
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -153,7 +160,7 @@ describe('API', function () {
   })
 
   it('Should error if specified port is not a number', async () => {
-    var app = express()
+    const app = express()
 
     try {
       await reload(app, { port: 'NOTANUMBER' })
@@ -164,22 +171,23 @@ describe('API', function () {
   })
 
   it('Should make WebSocket server start wait with webSocketServerWaitStart option enabled', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { webSocketServerWaitStart: true })
+      reloadReturned = await reload(app, { webSocketServerWaitStart: true })
     } catch (err) {
 
     }
 
-    var socketBeforeResult = await helperFunction.testWebSocket(9856)
+    const socketBeforeResult = await helperFunction.testWebSocket(9856)
 
     if (socketBeforeResult) {
       assert(false)
     } else {
       reloadReturned.startWebSocketServer()
 
-      var socketAfterResult = await helperFunction.testWebSocket(9856)
+      const socketAfterResult = await helperFunction.testWebSocket(9856)
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -192,10 +200,11 @@ describe('API', function () {
   })
 
   it('Should return startWebSocketServer with webSocketServerWaitStart option enabled', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { webSocketServerWaitStart: true })
+      reloadReturned = await reload(app, { webSocketServerWaitStart: true })
     } catch (err) {
 
     }
@@ -204,10 +213,11 @@ describe('API', function () {
   })
 
   it('Should not return startWebSocketServer with webSocketServerWaitStart option disabled', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { webSocketServerWaitStart: false })
+      reloadReturned = await reload(app, { webSocketServerWaitStart: false })
     } catch (err) {
 
     }
@@ -218,7 +228,7 @@ describe('API', function () {
   })
 
   it('Should error if webSocketServerWaitStart not of type boolean', async () => {
-    var app = express()
+    const app = express()
 
     try {
       await reload(app, { webSocketServerWaitStart: 'true' })
@@ -229,15 +239,16 @@ describe('API', function () {
   })
 
   it('Should send message when calling from return API', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app)
+      reloadReturned = await reload(app)
     } catch (err) {
 
     }
 
-    var result = await helperFunction.websocketConnectionMessageHelper(reloadReturned)
+    const result = await helperFunction.websocketConnectionMessageHelper(reloadReturned)
 
     await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -245,43 +256,45 @@ describe('API', function () {
   })
 
   it('Should return private object reloadClientCode function should return client code', async () => {
-    var app = express()
-    var server = http.createServer(app)
+    const app = express()
+    const server = http.createServer(app)
 
-    var reloadClientCodeFromFile = fs.readFileSync(path.join(__dirname, '../../lib/reload-client.js'), 'utf8')
+    const reloadClientCodeFromFile = fs.readFileSync(path.join(__dirname, '../../lib/reload-client.js'), 'utf8')
 
-    var reloadClientCodeFromFileFirstLine = reloadClientCodeFromFile.split('\n')[0]
+    const reloadClientCodeFromFileFirstLine = reloadClientCodeFromFile.split('\n')[0]
 
+    let reloadReturned
     try {
-      var reloadReturned = await privateReload(app, {}, server)
+      reloadReturned = await privateReload(app, {}, server)
     } catch (err) {
       // console.log(err)
     }
 
-    var reloadReturnedClientCodeFirstLine = reloadReturned.reloadClientCode().split('\n')[0]
+    const reloadReturnedClientCodeFirstLine = reloadReturned.reloadClientCode().split('\n')[0]
 
     assert.strictEqual(reloadClientCodeFromFileFirstLine, reloadReturnedClientCodeFirstLine)
   })
 
   it('Should force wss on client with forceWss set to true', async () => {
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { forceWss: true })
+      reloadReturned = await reload(app, { forceWss: true })
     } catch (err) {
 
     }
 
-    var response = await helperFunction.makeRequest('/reload/reload.js', app)
+    const response = await helperFunction.makeRequest('/reload/reload.js', app)
 
-    var reloadClientCode
+    let reloadClientCode
 
     response.on('data', function (chunk) {
       reloadClientCode = chunk
     })
 
     response.on('end', function () {
-      var testRegex = RegExp('wss://', 'gm')
+      const testRegex = /wss:\/\//gm
 
       assert(testRegex.test(reloadClientCode))
 
@@ -290,7 +303,7 @@ describe('API', function () {
   })
 
   it('Should error if force wss option is not a boolean', async () => {
-    var app = express()
+    const app = express()
 
     try {
       await reload(app, { forceWss: 'true' })

@@ -11,10 +11,11 @@ describe('Verbose', function () {
     sinon.stub(console, 'log').returns(0)
     sinon.stub(console, 'error').returns(0)
 
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { verbose: true })
+      reloadReturned = await reload(app, { verbose: true })
     } catch (err) {
 
     }
@@ -33,10 +34,11 @@ describe('Verbose', function () {
     sinon.stub(console, 'log').returns(0)
     sinon.stub(console, 'error').returns(0)
 
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { verbose: true })
+      reloadReturned = await reload(app, { verbose: true })
     } catch (err) {
 
     }
@@ -57,10 +59,11 @@ describe('Verbose', function () {
     sinon.stub(console, 'log').returns(0)
     sinon.stub(console, 'error').returns(0)
 
-    var app = express()
+    const app = express()
 
+    let reloadReturned
     try {
-      var reloadReturned = await reload(app, { verbose: true })
+      reloadReturned = await reload(app, { verbose: true })
     } catch (err) {
 
     }
@@ -78,7 +81,7 @@ describe('Verbose', function () {
   })
 
   it('Should error if verbose logging option is not a boolean', async () => {
-    var app = express()
+    const app = express()
 
     try {
       await reload(app, { verbose: 'true' })
