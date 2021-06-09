@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-var program = require('commander')
-var supervisor = require('supervisor')
-var path = require('path')
-var os = require('os')
-var clc = require('cli-color')
+const program = require('commander')
+const supervisor = require('supervisor')
+const path = require('path')
+const os = require('os')
+const clc = require('cli-color')
 
 program.version(require('../package.json').version)
   .option('-b, --browser', 'Open in the browser automatically.')
@@ -18,8 +18,8 @@ program.version(require('../package.json').version)
   .option('-v, --verbose [verbose]', 'Turning on logging on the server and client side. Defaults to false', false)
   .parse(process.argv)
 
-var runFile = path.join(os.tmpdir(), 'reload-' + Math.random().toString().slice(2))
-var serverFile = path.join(__dirname, '../lib/reload-server.js')
+const runFile = path.join(os.tmpdir(), 'reload-' + Math.random().toString().slice(2))
+const serverFile = path.join(__dirname, '../lib/reload-server.js')
 
 if (program.exts.indexOf(',')) {
   program.exts = program.exts.replace(/,/g, '|') // replace comma for pipe, that's what supervisor likes
@@ -30,7 +30,7 @@ if (typeof program.watchDir === 'undefined') {
   program.watchDir = program.dir
 }
 
-var args = ['-e', program.exts, '-w', program.watchDir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.fallback, program.verbose]
+const args = ['-e', program.exts, '-w', program.watchDir, '-q', '--', serverFile, program.port, program.dir, !!program.browser, program.hostname, runFile, program.startPage, program.fallback, program.verbose]
 supervisor.run(args)
 
 console.log('\nReload web server:')
