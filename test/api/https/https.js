@@ -29,7 +29,7 @@ describe('HTTPS', function () {
     sinon.stub(console, 'log').returns(0)
     sinon.stub(console, 'error').returns(0)
 
-    var app = express()
+    const app = express()
 
     try {
       await reload(app, { https: { } })
@@ -43,15 +43,16 @@ describe('HTTPS', function () {
 
   describe('HTTPS - Cert and Key', function () {
     it('Should create (default) `/reload/reload.js` route for reload file', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { certAndKey: { key: testKeyLocation, cert: testCrtLocation } } })
+        reloadReturned = await reload(app, { https: { certAndKey: { key: testKeyLocation, cert: testCrtLocation } } })
       } catch (err) {
         console.error('IN ERROR', err)
       }
 
-      var response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
+      const response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -59,15 +60,16 @@ describe('HTTPS', function () {
     })
 
     it('Should accept HTTPS key as file contents', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { certAndKey: { key: testKey, cert: testCrtLocation } } })
+        reloadReturned = await reload(app, { https: { certAndKey: { key: testKey, cert: testCrtLocation } } })
       } catch (err) {
         console.error('IN ERROR', err)
       }
 
-      var response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
+      const response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -75,15 +77,16 @@ describe('HTTPS', function () {
     })
 
     it('Should accept HTTPS cert as file contents', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { certAndKey: { key: testKey, cert: testCrt } } })
+        reloadReturned = await reload(app, { https: { certAndKey: { key: testKey, cert: testCrt } } })
       } catch (err) {
         console.error('IN ERROR', err)
       }
 
-      var response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
+      const response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -91,10 +94,11 @@ describe('HTTPS', function () {
     })
 
     it('Should error with bad key file', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { certAndKey: { key: path.join('/somethingElse', testKeyLocation), cert: testCrtLocation } } })
+        reloadReturned = await reload(app, { https: { certAndKey: { key: path.join('/somethingElse', testKeyLocation), cert: testCrtLocation } } })
       } catch (err) {
         return assert(true)
       }
@@ -104,10 +108,11 @@ describe('HTTPS', function () {
     })
 
     it('Should error with bad cert file', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { certAndKey: { key: testKeyLocation, cert: path.join('/somethingElse', testCrtLocation) } } })
+        reloadReturned = await reload(app, { https: { certAndKey: { key: testKeyLocation, cert: path.join('/somethingElse', testCrtLocation) } } })
       } catch (err) {
         return assert(true)
       }
@@ -117,15 +122,16 @@ describe('HTTPS', function () {
     })
 
     it('Should create secure WebSocket on default port', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { certAndKey: { key: testKeyLocation, cert: testCrtLocation } } })
+        reloadReturned = await reload(app, { https: { certAndKey: { key: testKeyLocation, cert: testCrtLocation } } })
       } catch (err) {
         assert(false, err)
       }
 
-      var result = await helperFunction.testWebSocket(9856, true, { key: testKey, cert: testCrt, ca: testCaPem })
+      const result = await helperFunction.testWebSocket(9856, true, { key: testKey, cert: testCrt, ca: testCaPem })
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -135,15 +141,16 @@ describe('HTTPS', function () {
 
   describe('HTTPS - PFX', function () {
     it('Should create (default) `/reload/reload.js` route for reload file', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location }, passphrase: '1234' } })
+        reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location }, passphrase: '1234' } })
       } catch (err) {
         assert(false, err)
       }
 
-      var response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
+      const response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -151,15 +158,16 @@ describe('HTTPS', function () {
     })
 
     it('Should accept pfx as file contents', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12 }, passphrase: '1234' } })
+        reloadReturned = await reload(app, { https: { p12: { p12Path: testP12 }, passphrase: '1234' } })
       } catch (err) {
         assert(false, err)
       }
 
-      var response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
+      const response = await helperFunction.makeRequest('/reload/reload.js', app, { https: { key: testKey, cert: testCrt, ca: testCaPem } })
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
@@ -167,10 +175,11 @@ describe('HTTPS', function () {
     })
 
     it('Should error with bad pxf file', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: path.join('/somethingElse', testP12Location) }, passphrase: '1234' } })
+        reloadReturned = await reload(app, { https: { p12: { p12Path: path.join('/somethingElse', testP12Location) }, passphrase: '1234' } })
       } catch (err) {
         return assert(true)
       }
@@ -180,15 +189,16 @@ describe('HTTPS', function () {
     })
 
     it('Should create secure WebSocket on default port', async () => {
-      var app = express()
+      const app = express()
 
+      let reloadReturned
       try {
-        var reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location }, passphrase: '1234' } })
+        reloadReturned = await reload(app, { https: { p12: { p12Path: testP12Location }, passphrase: '1234' } })
       } catch (err) {
         assert(false, err)
       }
 
-      var result = await helperFunction.testWebSocket(9856, true, { key: testKey, cert: testCrt, ca: testCaPem })
+      const result = await helperFunction.testWebSocket(9856, true, { key: testKey, cert: testCrt, ca: testCaPem })
 
       await helperFunction.closeReloadSocket(reloadReturned)
 
