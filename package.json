@@ -45,11 +45,11 @@
   "main": "./index.js",
   "scripts": {
     "test": "npm run standard && npm run unitTests",
-    "unitTests": "./node_modules/.bin/mocha --recursive --timeout 5000 test",
+    "unitTests": "mocha --recursive --timeout 5000 test",
     "standard": "standard **/*.js bin/**/*",
     "cover": "nyc --reporter=html --reporter=text mocha --timeout 5000 --recursive test",
     "coverage": "npm run cover",
-    "report-coverage": "./node_modules/.bin/nyc npm run unitTests && nyc report --reporter=text-lcov > coverage.lcov && \"./node_modules/.bin/codecov\""
+    "report-coverage": "nyc npm run unitTests && nyc report --reporter=text-lcov > coverage.lcov && \"./node_modules/.bin/codecov\""
   },
   "bin": {
     "reload": "./bin/reload"
