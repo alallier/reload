@@ -1,6 +1,22 @@
 Next version
 ------------------
 
+3.2.0 / 2021-06-09
+------------------
+
+* CI Updates
+  * Dropped Node 10.x and added 16.x from CI - See: https://github.com/alallier/reload/pull/298
+  * Update actions/checkout action to v2 - See: https://github.com/alallier/reload/pull/276
+  * Update actions/setup-node action to v2 - https://github.com/alallier/reload/pull/282
+* Dependency Updates
+  * Update commander from ~6.1.0 to ~7.2.0 - See: https://github.com/alallier/reload/pull/283
+  * Update url-parse from ~1.4.4 to ~1.5.0 - See: https://github.com/alallier/reload/pull/291
+  * Update open from ^7.0.0 to ^8.0.0 - See: https://github.com/alallier/reload/pull/292/files
+  * Update ws from ~7.3.0 to ~7.4.6 - See: https://github.com/alallier/reload/pull/294
+  * Update sinon from 9.1.0 to 11.1.1 - See: https://github.com/alallier/reload/pull/295/files
+  * Update mocha from 8.4.0 to 9.0.0 - See: https://github.com/alallier/reload/pull/297/files
+  * Update downstream y18n from 4.0.0 to 4.0.1 - See: https://github.com/alallier/reload/pull/288
+
 3.1.1 / 2020-09-29
 ------------------
 
