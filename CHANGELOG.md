@@ -1,5 +1,24 @@
 Next version
 ------------------
+3.2.1 / 2023-01-02
+------------------
+
+Happy New Year!
+
+* Drop 12.x and add 18.x on CI - See: <https://github.com/alallier/reload/pull/328>
+* Update CI actions/checkout to v3 - See: <https://github.com/alallier/reload/pull/318>
+* Update CI actions/setup-node to v3 - See: <https://github.com/alallier/reload/pull/319>
+
+* Dependency Updates
+  * Update ws from ~7.4.0 to ~8.11.0 - See: <https://github.com/alallier/reload/pull/307>
+  * Update express from 4.17.1 to 4.18.2 - See: <https://github.com/alallier/reload/pull/315>
+  * Update finalhandler from ~1.1.1 to ~1.2.0 - See: <https://github.com/alallier/reload/pull/316>
+  * Update serve-static from ~1.14.0 to ~1.15.0 - See: <https://github.com/alallier/reload/pull/317>
+  * Update commander from ~7.2.0 to ~9.4.0 - See: <https://github.com/alallier/reload/pull/332>
+  * Update mocha from 9.0.0 to 10.2.0 - See: <https://github.com/alallier/reload/pull/333>
+  * Update sinon from 11.1.1 to 15.0.1 - See: <https://github.com/alallier/reload/pull/334>
+  * Update standard from 16.0.3 to 17.0.0 - See: <https://github.com/alallier/reload/pull/335>
+  * Remove url-parse dependency in favor of built in function - See: <https://github.com/alallier/reload/pull/325>
 
 3.2.0 / 2021-06-09
 ------------------
