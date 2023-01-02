@@ -23,7 +23,7 @@ async function makeRequest (path, app, options) {
       if (requestOptions.https) { // HTTPS
         const optionsHTTPS = {
           host: 'localhost',
-          path: path,
+          path,
           port: 8080,
           key: requestOptions.https.key,
           cert: requestOptions.https.cert,
@@ -40,7 +40,7 @@ async function makeRequest (path, app, options) {
       } else { // HTTP
         http.get({
           host: 'localhost',
-          path: path,
+          path,
           port: 8080
         }, function (response) {
           httpOrHttpServer.close(function () {
