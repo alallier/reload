@@ -25,13 +25,12 @@
   "license": "MIT",
   "dependencies": {
     "cli-color": "~2.0.0",
-    "commander": "~7.2.0",
-    "finalhandler": "~1.1.1",
+    "commander": "~9.4.0",
+    "finalhandler": "~1.2.0",
     "minimist": "~1.2.0",
     "open": "^8.0.0",
-    "serve-static": "~1.14.0",
+    "serve-static": "~1.15.0",
     "supervisor": "~0.12.0",
-    "url-parse": "~1.5.0",
     "ws": "~8.11.0"
   },
   "devDependencies": {
