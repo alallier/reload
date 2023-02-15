@@ -259,13 +259,16 @@ describe('API', function () {
     const app = express()
     const server = http.createServer(app)
 
-    const reloadClientCodeFromFile = fs.readFileSync(path.join(__dirname, '../../lib/reload-client.js'), 'utf8')
+    let reloadClientCodeFromFile = fs.readFileSync(path.join(__dirname, '../../lib/reload-client.js'), 'utf8')
+    const ADDON_FILE = path.join(__dirname, 'reload-addon.js')
+    const addonCode = fs.readFileSync(ADDON_FILE, 'utf8')
+    reloadClientCodeFromFile += '\n\n// Add-on code\n' + addonCode
 
     const reloadClientCodeFromFileFirstLine = reloadClientCodeFromFile.split('\n')[0]
 
     let reloadReturned
     try {
-      reloadReturned = await privateReload(app, {}, server)
+      reloadReturned = await privateReload(app, { addon: ADDON_FILE }, server)
     } catch (err) {
       // console.log(err)
     }
@@ -273,6 +276,20 @@ describe('API', function () {
     const reloadReturnedClientCodeFirstLine = reloadReturned.reloadClientCode().split('\n')[0]
 
     assert.strictEqual(reloadClientCodeFromFileFirstLine, reloadReturnedClientCodeFirstLine)
+  })
+
+  it('Should throw error if addon script file can not be opened', async () => {
+    const app = express()
+    const server = http.createServer(app)
+    const ADDON_FILE = 'does_not_exist.js'
+    const rejection = 'Unable to open the add-on file: ' + ADDON_FILE
+
+    try {
+      await privateReload(app, { addon: ADDON_FILE }, server)
+      assert.fail('Error not thrown')
+    } catch (err) {
+      assert.strictEqual(err.message, rejection)
+    }
   })
 
   it('Should force wss on client with forceWss set to true', async () => {
