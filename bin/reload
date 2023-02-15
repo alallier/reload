@@ -16,6 +16,7 @@ program.version(require('../package.json').version)
   .option('-s, --start-page [start-page]', 'Specify a start page. Defaults to index.html', 'index.html')
   .option('-f, --fallback [fallback]', 'Fallback to the start page when route is not found')
   .option('-v, --verbose [verbose]', 'Turning on logging on the server and client side. Defaults to false', false)
+  .option('-a, --addon [file]', 'Add-on script file path')
   .parse(process.argv)
 
 const options = program.opts()
@@ -32,7 +33,7 @@ if (typeof options.watchDir === 'undefined') {
   options.watchDir = options.dir
 }
 
-const args = ['-e', options.exts, '-w', options.watchDir, '-q', '--', serverFile, options.port, options.dir, !!options.browser, options.hostname, runFile, options.startPage, options.fallback, options.verbose]
+const args = ['-e', options.exts, '-w', options.watchDir, '-q', '--', serverFile, options.port, options.dir, !!options.browser, options.hostname, runFile, options.startPage, options.fallback, options.verbose, options.addon]
 supervisor.run(args)
 
 console.log('\nReload web server:')
