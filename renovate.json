@@ -1,6 +1,14 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "config:recommended",
+    "npm:unpublishSafe",
+    ":maintainLockFilesWeekly",
+    ":disableDependencyDashboard",
+    ":automergeMinor",
+    ":automergePr",
+    ":automergeRequireAllStatusChecks"
   ],
-  "labels": ["renovate"]
+  "prHourlyLimit": 20,
+  "timezone": "Europe/Paris"
 }

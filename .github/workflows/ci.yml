@@ -1,20 +1,99 @@
-on: [push, pull_request]
-name: CI
+name: Node CI
+
+on:
+  push:
+    tags:
+      - '*'
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
 jobs:
-  test:
+  build-linux:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version:
+          - 18
+          - 20
+          - 22
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: ${{ matrix.node-version }}
+      - name: node check
+        run: |
+          npm ci
+          npm test
+          npm run coverage
+        env:
+          CI: true
+
+  build-windows-mac:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node-version: [14.x, 16.x, 18.x]
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [macos-latest, windows-latest]
     steps:
-      - uses: actions/checkout@v3
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
         with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm ci
-      - run: npm test
-      - run: npm run report-coverage
+          cache: 'npm'
+          node-version: 'lts/*'
+      - name: node check
+        run: |
+          npm ci
+          npm test
+          npm run coverage
         env:
-          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+          CI: true
+  # Summary job that allow checking for workflow status
+  # This job is used as required status check to pass before merging to the main branch
+  status-checks:
+    name: status-checks
+    needs: [ build-windows-mac, build-linux ]
+    permissions:
+      contents: none
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Validation Status checks
+        run: |
+          echo 'Configuration for Status checks that are required'
+          echo '${{ toJSON(needs) }}'
+          if [[ (('skipped' == '${{ needs.build-linux.result }}') || ('success' == '${{ needs.build-linux.result }}')) && (('skipped' == '${{ needs.build-windows-mac.result }}') || ('success' == '${{ needs.build-windows-mac.result }}')) ]]; then
+            exit 0
+          fi
+          exit 1
+
+  deploy:
+    if: startsWith(github.event.ref, 'refs/tags/')
+    needs: [ "status-checks" ]
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js LTS
+        uses: actions/setup-node@v4
+        with:
+          cache: 'npm'
+          node-version: 'lts/*'
+          registry-url: 'https://registry.npmjs.org'
+      - name: deploy
+        run: |
+          PACKAGE_VERSION=$(cat package.json|grep version|head -1|awk -F: '{ print $2 }'|sed 's/[", ]//g')
+          echo "Package: $PACKAGE_VERSION"
+          echo "Tag: $GITHUB_REF_NAME"
+          if [ "$PACKAGE_VERSION" != "$GITHUB_REF_NAME" ]; then echo "$PACKAGE_VERSION and $GITHUB_REF_NAME are not the same, skipping"; exit 1; fi
+          echo "Publishing $PACKAGE_VERSION …"
+          npm ci
+          npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

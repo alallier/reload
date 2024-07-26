@@ -1,10 +1,10 @@
-reload
+@tikui/reload
 =======
 
-[![Build Status](https://github.com/alallier/reload/workflows/CI/badge.svg)](https://github.com/alallier/reload/actions?query=workflow%3ACI)
+It's a fork of [reload](https://github.com/alallier/reload). If the original repo become active again, this repository will be deleted.
+
+[![Build Status](https://github.com/tikui/reload/workflows/CI/badge.svg)](https://github.com/tikui/reload/actions?query=workflow%3ACI)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-[![codecov](https://codecov.io/gh/alallier/reload/branch/master/graph/badge.svg)](https://codecov.io/gh/alallier/reload)
-[![NPM version](https://img.shields.io/npm/v/reload.svg)](https://www.npmjs.com/package/reload)
 
 Automatically refresh and reload your code in your browser when your code changes. No browser plugins required.
 
@@ -48,7 +48,7 @@ Once reload-server and reload-client are connected, the client side code opens a
 Installation
 ---
 
-    npm install [-g] [--save-dev] reload
+    npm install [-g] [--save-dev] @tikui/reload
 
 
 Two ways to use reload
@@ -230,7 +230,7 @@ There are two ways to use the command line application.
 
 Each will require different modes of installing.
 
-In case one you should install reload globally with `npm install reload -g`. Also with reload installed globally you can go to any directory with an HTML file and use the command reload to constantly watch it and reload it while you make changes.
+In case one you should install reload globally with `npm install @tikui/reload -g`. Also with reload installed globally you can go to any directory with an HTML file and use the command reload to constantly watch it and reload it while you make changes.
 
 In case two you should install locally with `npm install --save-dev`, since this tool is to aid in development you should install it as a dev dependency.
 
@@ -272,6 +272,10 @@ Copyright 2023
 
 JP Richardson  <jprichardson@gmail.com>
 
-### Owned by:
+### Owned until 2023 by:
 
 Alexander J. Lallier <mralexlallier@gmail.com>
+
+### Owned by:
+
+[Tikui members](https://github.com/orgs/tikui/people) since 2024.
