@@ -1,5 +1,26 @@
 Next version
 ------------------
+
+3.2.2 / 2024-08-12
+------------------
+
+A bunch of dependency updates and some project maintenance
+
+* Fixed tests and updated CI (drop 14.x and 16.x | added 20.x and 22.x)  - See: https://github.com/alallier/reload/pull/356
+* Updated actions/setup-node action to v4 - See: https://github.com/alallier/reload/pull/350
+* Updated actions/checkout action to v4 - See: https://github.com/alallier/reload/pull/347
+* Updated ws from ~8.11.0 to ~8.18.0 - See: https://github.com/alallier/reload/pull/354 and https://github.com/alallier/reload/pull/360
+* Updated sinon from 15.0.1 to 18.0.0 - See: https://github.com/alallier/reload/pull/343 and https://github.com/alallier/reload/pull/364
+* Updated standard from 17.0.0 to 17.1.0 - See: https://github.com/alallier/reload/pull/345
+* Updated mocha from 10.2.0 to 10.7.3 - See: https://github.com/alallier/reload/pull/359
+* Updated codecov from 3.8.2 to 3.8.3 - See: https://github.com/alallier/reload/pull/358
+* Updated open from 8.4.0 to 8.4.2 - See: https://github.com/alallier/reload/pull/358
+* Updated minimist from 1.2.7 to 1.2.8 - See: https://github.com/alallier/reload/pull/341
+* Updated commander from ~9.4.0 to ~12.1.0 - See: https://github.com/alallier/reload/pull/351
+* Updated cli-color from 2.0.3 to 2.0.4 - See: https://github.com/alallier/reload/pull/357
+* Updated express from 4.18.2 to 4.19.2 - See: https://github.com/alallier/reload/pull/352
+* Updated nyc from 15.1.0 to 17.0.0 - See: https://github.com/alallier/reload/pull/362
+
 3.2.1 / 2023-01-02
 ------------------
 
