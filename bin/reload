@@ -8,6 +8,7 @@ const clc = require('cli-color')
 
 program
   .version(require('../package.json').version)
+  .showHelpAfterError()
   .option('-b, --browser', 'Open in the browser automatically.')
   .option('-n, --hostname [hostname]', 'If -b flag is being used, this allows for custom hostnames. Defaults to localhost.', 'localhost')
   .option('-d, --dir [dir]', 'The directory to serve up. Defaults to current dir.', process.cwd())
