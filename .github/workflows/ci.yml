@@ -20,4 +20,5 @@ jobs:
         with:
           fail_ci_if_error: true
           verbose: true
+          files: ./coverage.lcov
           token: ${{ secrets.CODECOV_TOKEN }}
