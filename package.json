@@ -34,7 +34,6 @@
     "ws": "~8.18.0"
   },
   "devDependencies": {
-    "codecov": "3.8.3",
     "sinon": "18.0.0",
     "standard": "17.1.0",
     "express": "4.19.2",
