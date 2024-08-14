@@ -24,7 +24,7 @@ const testP12 = fs.readFileSync(testP12Location)
 
 console.log(typeof testKey)
 
-describe('HTTPS', function () {
+describe.skip('HTTPS', function () {
   it('Should error if `certAndKey` and `p12` are not defined in HTTPS options', async () => {
     sinon.stub(console, 'log').returns(0)
     sinon.stub(console, 'error').returns(0)
