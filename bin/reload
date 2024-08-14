@@ -13,6 +13,7 @@ program
   .option('-n, --hostname [hostname]', 'If -b flag is being used, this allows for custom hostnames. Defaults to localhost.', 'localhost')
   .option('-d, --dir [dir]', 'The directory to serve up. Defaults to current dir.', process.cwd())
   .option('-w, --watch-dir [watch-dir]', 'The directory to watch. Defaults the serving directory.')
+  .option('-i, --ignore [ignore]', 'Directories/files to ignore as a comma delimited list, glob supported. Default none', '')
   .option('-e, --exts [extensions]', 'Extensions separated by commas or pipes. Defaults to html,js,css.', 'html|js|css')
   .option('-p, --port [port]', 'The port to bind to. Can be set with PORT env variable as well. Defaults to 8080.', process.env.PORT || '8080')
   .option('-s, --start-page [start-page]', 'Specify a start page. Defaults to index.html', 'index.html')
@@ -37,6 +38,7 @@ if (typeof options.watchDir === 'undefined') {
 nodemon({
   ext: options.exts,
   watch: path.join(options.watchDir, '/**/*'), // Watch all subdirectories
+  ignore: options.ignore.split(','),
   script: `${serverFile}`,
   args: [`${options.port}`, `${options.dir}`, !!`${options.browser}`, `${options.hostname}`, `${runFile}`, `${options.startPage}`, `${options.fallback}`, `${options.verbose}`]
 })
@@ -45,6 +47,7 @@ nodemon.on('start', function () {
   console.log('\nReload web server:')
   console.log('listening on port ' + clc.blue.bold(options.port))
   console.log('monitoring dir ' + clc.green.bold(options.dir))
+  console.log('ignoring: ' + clc.red.bold(options.ignore === '' ? 'None' : options.ignore))
 }).on('restart', function (files) {
   console.log('App restarted due to: ', files)
 })
