@@ -1,6 +1,19 @@
 Next version
 ------------------
 
+3.3.0 / 2024-08-14
+------------------
+
+Reload command line quality of life enhancements
+
+* Reload command line now supports serving `.html` files when only `/` is present in the browser. See: https://github.com/alallier/reload/pull/326
+* Reload command line now uses supervisor instead of nodemon for server side file watching - See: https://github.com/alallier/reload/pull/367
+* Reload command line now watches sub-directories - See: https://github.com/alallier/reload/pull/367
+* Reload command line now supports ignoring directories and files. See: https://github.com/alallier/reload/pull/370
+* Reload command line now shows help if invalid flag is provided. See: https://github.com/alallier/reload/pull/369
+* Refactored how file serving works in reload-server to make it more performant and easier to read. See: https://github.com/alallier/reload/pull/326
+* Removed codecov dependency for coverage reporting in favor of native GitHub Action. See: https://github.com/alallier/reload/pull/366
+
 3.2.2 / 2024-08-12
 ------------------
 
