@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 const { program } = require('commander')
-const supervisor = require('supervisor')
+const nodemon = require('nodemon')
 const path = require('path')
 const os = require('os')
 const clc = require('cli-color')
@@ -24,8 +24,8 @@ const options = program.opts()
 const runFile = path.join(os.tmpdir(), 'reload-' + Math.random().toString().slice(2))
 const serverFile = path.join(__dirname, '../lib/reload-server.js')
 
-if (options.exts.indexOf(',')) {
-  options.exts = options.exts.replace(/,/g, '|') // replace comma for pipe, that's what supervisor likes
+if (options.exts.indexOf('|')) {
+  options.exts = options.exts.replace(/\|/g, ',') // replace pipes for commas, that's what nodemon likes
 }
 
 // Fall back to the serving directory.
@@ -33,9 +33,17 @@ if (typeof options.watchDir === 'undefined') {
   options.watchDir = options.dir
 }
 
-const args = ['-e', options.exts, '-w', options.watchDir, '-q', '--', serverFile, options.port, options.dir, !!options.browser, options.hostname, runFile, options.startPage, options.fallback, options.verbose]
-supervisor.run(args)
+nodemon({
+  ext: options.exts,
+  watch: path.join(options.watchDir, '/**/*'), // Watch all subdirectories
+  script: `${serverFile}`,
+  args: [`${options.port}`, `${options.dir}`, !!`${options.browser}`, `${options.hostname}`, `${runFile}`, `${options.startPage}`, `${options.fallback}`, `${options.verbose}`]
+})
 
-console.log('\nReload web server:')
-console.log('listening on port ' + clc.blue.bold(options.port))
-console.log('monitoring dir ' + clc.green.bold(options.dir))
+nodemon.on('start', function () {
+  console.log('\nReload web server:')
+  console.log('listening on port ' + clc.blue.bold(options.port))
+  console.log('monitoring dir ' + clc.green.bold(options.dir))
+}).on('restart', function (files) {
+  console.log('App restarted due to: ', files)
+})
