@@ -258,6 +258,7 @@ Options:
   -s, --start-page [start-page]  Specify a start page. Defaults to index.html
   -f, --fallback [fallback]      Fallback to the start page when route is not found
   -v, --verbose [verbose]        Turning on logging on the server and client side. Defaults to false
+  -a, --addon [file]             Add-on script file path
 
 ```
 

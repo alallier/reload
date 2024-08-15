@@ -19,6 +19,7 @@ program
   .option('-s, --start-page [start-page]', 'Specify a start page. Defaults to index.html', 'index.html')
   .option('-f, --fallback [fallback]', 'Fallback to the start page when route is not found')
   .option('-v, --verbose [verbose]', 'Turning on logging on the server and client side. Defaults to false', false)
+  .option('-a, --addon [file]', 'Add-on script file path')
   .parse(process.argv)
 
 const options = program.opts()
@@ -40,7 +41,7 @@ nodemon({
   watch: path.join(options.watchDir, '/**/*'), // Watch all subdirectories
   ignore: options.ignore.split(','),
   script: `${serverFile}`,
-  args: [`${options.port}`, `${options.dir}`, !!`${options.browser}`, `${options.hostname}`, `${runFile}`, `${options.startPage}`, `${options.fallback}`, `${options.verbose}`]
+  args: [`${options.port}`, `${options.dir}`, !!`${options.browser}`, `${options.hostname}`, `${runFile}`, `${options.startPage}`, `${options.fallback}`, `${options.verbose}`, `${options.addon}`]
 })
 
 nodemon.on('start', function () {
