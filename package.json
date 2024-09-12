@@ -36,7 +36,7 @@
   "devDependencies": {
     "sinon": "18.0.0",
     "standard": "17.1.0",
-    "express": "4.19.2",
+    "express": "4.21.0",
     "mocha": "10.7.3",
     "nyc": "17.0.0"
   },
