@@ -302,6 +302,33 @@ describe('API', function () {
     })
   })
 
+  it('Should force ws on client with forceWs set to true', async () => {
+    const app = express()
+
+    let reloadReturned
+    try {
+      reloadReturned = await reload(app, { forceWs: true })
+    } catch (err) {
+
+    }
+
+    const response = await helperFunction.makeRequest('/reload/reload.js', app)
+
+    let reloadClientCode
+
+    response.on('data', function (chunk) {
+      reloadClientCode = chunk
+    })
+
+    response.on('end', function () {
+      const testRegex = /ws:\/\//gm
+
+      assert(testRegex.test(reloadClientCode))
+
+      helperFunction.closeReloadSocket(reloadReturned)
+    })
+  })
+
   it('Should error if force wss option is not a boolean', async () => {
     const app = express()
 
@@ -310,6 +337,17 @@ describe('API', function () {
       assert.fail('Not supposed to pass')
     } catch (err) {
       assert.strictEqual(err.message, 'forceWss option specified is not of type boolean')
+    }
+  })
+
+  it('Should error if force ws option is not a boolean', async () => {
+    const app = express()
+
+    try {
+      await reload(app, { forceWs: 'true' })
+      assert.fail('Not supposed to pass')
+    } catch (err) {
+      assert.strictEqual(err.message, 'forceWs option specified is not of type boolean')
     }
   })
 })
