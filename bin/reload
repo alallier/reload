@@ -4,7 +4,7 @@ const { program } = require('commander')
 const nodemon = require('nodemon')
 const path = require('path')
 const os = require('os')
-const clc = require('cli-color')
+const colors = require('picocolors')
 
 program
   .version(require('../package.json').version)
@@ -45,9 +45,9 @@ nodemon({
 
 nodemon.on('start', function () {
   console.log('\nReload web server:')
-  console.log('listening on port ' + clc.blue.bold(options.port))
-  console.log('monitoring dir ' + clc.green.bold(options.dir))
-  console.log('ignoring: ' + clc.red.bold(options.ignore === '' ? 'None' : options.ignore))
+  console.log('listening on port ' + colors.blue(colors.bold(options.port)))
+  console.log('monitoring dir ' + colors.green(colors.bold(options.dir)))
+  console.log('ignoring: ' + colors.red(colors.bold(options.ignore === '' ? 'None' : options.ignore)))
 }).on('restart', function (files) {
   console.log('App restarted due to: ', files)
 })
