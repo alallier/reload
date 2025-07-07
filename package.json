@@ -34,7 +34,7 @@
     "ws": "~8.18.0"
   },
   "devDependencies": {
-    "sinon": "18.0.1",
+    "sinon": "21.0.0",
     "standard": "17.1.2",
     "express": "4.20.0",
     "mocha": "10.8.2",
