@@ -40,7 +40,7 @@ nodemon({
   watch: path.join(options.watchDir, '/**/*'), // Watch all subdirectories
   ignore: options.ignore.split(','),
   script: `${serverFile}`,
-  args: [`${options.port}`, `${options.dir}`, !!`${options.browser}`, `${options.hostname}`, `${runFile}`, `${options.startPage}`, `${options.fallback}`, `${options.verbose}`]
+  args: [`${options.port}`, `${options.dir}`, `${!!options.browser}`, `${options.hostname}`, `${runFile}`, `${options.startPage}`, `${options.fallback}`, `${options.verbose}`]
 })
 
 nodemon.on('start', function () {
