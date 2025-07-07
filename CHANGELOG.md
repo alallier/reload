@@ -1,6 +1,11 @@
 Next version
 ------------------
 
+3.3.1 / 2025-05-23
+------------------
+
+* Fixed handling of non-ASCII characters in URLs. See: https://github.com/alallier/reload/pull/390
+
 3.3.0 / 2024-08-14
 ------------------
 
