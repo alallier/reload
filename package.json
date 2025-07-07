@@ -37,7 +37,7 @@
     "sinon": "18.0.1",
     "standard": "17.1.2",
     "express": "5.1.0",
-    "mocha": "10.8.2",
+    "mocha": "11.7.1",
     "nyc": "17.1.0"
   },
   "main": "./index.js",
