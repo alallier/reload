@@ -1,6 +1,11 @@
 Next version
 ------------------
 
+3.4.1 / 2025-07-07
+------------------
+
+* Fix command line bug in Reload where the browser always opened even with lack of command line argument - See: https://github.com/alallier/reload/pull/402
+
 3.4.0 / 2025-07-07
 ------------------
 
