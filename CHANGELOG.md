@@ -1,10 +1,27 @@
 Next version
 ------------------
 
-3.3.1 / 2025-05-23
+3.4.0 / 2025-07-07
 ------------------
 
-* Fixed handling of non-ASCII characters in URLs. See: https://github.com/alallier/reload/pull/390
+* Fixed handling of non-ASCII characters in URLs - See: https://github.com/alallier/reload/pull/390
+
+* Dependency Updates
+  * Updated sinon from 18.0.0 to 18.0.1 - See: https://github.com/alallier/reload/pull/377
+  * Updated standard from 17.1.0 to 17.1.2 - See: https://github.com/alallier/reload/pull/378
+  * Updated sinon from 18.0.0 to 21.0.0 - See: https://github.com/alallier/reload/pull/377 & https://github.com/alallier/reload/pull/400
+  * Updated nodemon from 3.1.4 to 3.1.10 - See: https://github.com/alallier/reload/pull/380
+  * Updated serve-static from 1.15.0 to 2.2.0 - See: https://github.com/alallier/reload/pull/381 & https://github.com/alallier/reload/pull/399
+  * Updated nyc from 17.0.0 to 17.1.0 - See: https://github.com/alallier/reload/pull/382
+  * Updated express from 4.19.2 to 5.1.0 - See: https://github.com/alallier/reload/pull/383 & https://github.com/alallier/reload/pull/396
+  * Updated mocha from 10.7.3 to 11.7.1 - See: https://github.com/alallier/reload/pull/385 & https://github.com/alallier/reload/pull/398
+  * Updated ws from 8.18.0 to 8.18.3 - See: https://github.com/alallier/reload/pull/387
+  * Updated commander from 12.1.0 to 14.0.0 - See: https://github.com/alallier/reload/pull/393
+  * Updated finalhandler from 1.2.0 to 2.1.0 - See: https://github.com/alallier/reload/pull/397
+  * Updated open from 8.0.0 to 10.0.0 - See: https://github.com/alallier/reload/pull/363
+* CI Updates
+  * Dropped support for 18.x and added support for 24.x - See: https://github.com/alallier/reload/pull/394
+  * Updated codecov/codecov-action action from v4 to v5 - See: https://github.com/alallier/reload/pull/391
 
 3.3.0 / 2024-08-14
 ------------------
