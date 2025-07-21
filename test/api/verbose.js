@@ -80,6 +80,35 @@ describe('Verbose', function () {
     console.error.restore()
   })
 
+  it('Should verbose log if increment was required if default/specified port is unavailable', async () => {
+    sinon.stub(console, 'log').returns(0)
+    sinon.stub(console, 'error').returns(0)
+
+    const net = require('net')
+    const server = net.createServer()
+
+    server.listen(9856)
+
+    var app = express()
+
+    try {
+      var reloadReturned = await reload(app, { verbose: true })
+    } catch (err) {
+
+    }
+
+    const foundLog = helperFunction.checkForConsoleLog(console.log.args, 'Incremented port number. Server running on:', reloadReturned.port)
+
+    await helperFunction.closeReloadSocket(reloadReturned)
+
+    server.close()
+
+    assert(foundLog, 'Incremented port number. Server running on: ' + reloadReturned.port + ' not found in console logging')
+
+    console.log.restore()
+    console.error.restore()
+  })
+
   it('Should error if verbose logging option is not a boolean', async () => {
     const app = express()
 
