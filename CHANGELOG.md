@@ -1,6 +1,13 @@
 Next version
 ------------------
 
+3.4.2 / 2025-07-21
+------------------
+
+* Fixed bug in 3.4.x versions where open was broken on the command line tool. See: https://github.com/alallier/reload/pull/407
+* Updated open from 10.1.2 to 10.2.0 - See: https://github.com/alallier/reload/pull/405
+  * _Note: this dependency updated unrelated to above bug_
+
 3.4.1 / 2025-07-07
 ------------------
 
