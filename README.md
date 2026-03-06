@@ -59,7 +59,7 @@ There are two different ways to use reload.
 1. In an [Express](http://expressjs.com/) application, allowing your whole project to utilize reload when the code is altered
 2. As a command line application to serve up static HTML files and be able to reload when the code is altered
 
-Each will require different modes of installing. Please see the respective section below
+Each will require different modes of installing. Please see the respective sections below
 
 Using reload in Express
 ---
