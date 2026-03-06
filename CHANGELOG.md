@@ -1,6 +1,25 @@
 Next version
 ------------------
 
+3.4.3 / 2026-03-06
+------------------
+
+* Fix Reload command line tool to support HTTPS connections - See: https://github.com/alallier/reload/pull/423
+* Bump CI to use the following Node versions: 22x, 24.x, 25.x - See: https://github.com/alallier/reload/pull/424
+* Dependency Updates
+  * Update actions/setup-node action from v4 to v6 - See: https://github.com/alallier/reload/pull/413
+  * Update actions/checkout action from v4 to v6 - See: https://github.com/alallier/reload/pull/416
+  * Update dependency mocha from 11.7.1 to 11.7.5 - See: https://github.com/alallier/reload/pull/410
+  * Update dependency sinon from 21.0.0 to 21.0.2 - See: https://github.com/alallier/reload/pull/421
+  * Update dependency nyc from 17.1.0 to 18.0.0 - See: https://github.com/alallier/reload/pull/426
+  * Update dependency ws from ~8.18.0 to ~8.19.0 - See: https://github.com/alallier/reload/pull/425
+  * Update dependency commander from 14.0.0 to 14.0.3 - See: https://github.com/alallier/reload/pull/412
+  * Update dependency nodemon from 3.1.10 to 3.1.14 - See: https://github.com/alallier/reload/pull/414
+  * Update dependency finalhandler from 2.1.0 to 2.1.1 - See: https://github.com/alallier/reload/pull/417
+  * Update dependency open from ^10.0.0 to ^11.0.0 - See: https://github.com/alallier/reload/pull/415
+  * Update dependency express from 5.1.0 to 5.2.1 - See: https://github.com/alallier/reload/pull/418
+  * Update dependency serve-static from 2.2.0 to 2.2.1 - See: https://github.com/alallier/reload/pull/420
+
 3.4.2 / 2025-07-21
 ------------------
 
