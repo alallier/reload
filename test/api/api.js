@@ -294,9 +294,7 @@ describe('API', function () {
     })
 
     response.on('end', function () {
-      const testRegex = /wss:\/\//gm
-
-      assert(testRegex.test(reloadClientCode))
+      assert(reloadClientCode.includes('const forceWss = true'))
 
       helperFunction.closeReloadSocket(reloadReturned)
     })
