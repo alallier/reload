@@ -38,7 +38,7 @@
     "standard": "17.1.2",
     "express": "5.1.0",
     "mocha": "11.7.5",
-    "nyc": "17.1.0"
+    "nyc": "18.0.0"
   },
   "main": "./index.js",
   "scripts": {
