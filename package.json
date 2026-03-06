@@ -29,7 +29,7 @@
     "finalhandler": "~2.1.0",
     "minimist": "~1.2.0",
     "nodemon": "~3.1.4",
-    "open": "^10.0.0",
+    "open": "^11.0.0",
     "serve-static": "~2.2.0",
     "ws": "~8.19.0"
   },
