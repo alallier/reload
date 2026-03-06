@@ -59,6 +59,8 @@ There are two different ways to use reload.
 1. In an [Express](http://expressjs.com/) application, allowing your whole project to utilize reload when the code is altered
 2. As a command line application to serve up static HTML files and be able to reload when the code is altered
 
+Each will require different modes of installing. Please see the respective section below
+
 Using reload in Express
 ---
 When used with Express **reload creates** a new Express route for reload. When you restart the server, the client will detect the server being restarted and automatically refresh the page.
@@ -223,16 +225,13 @@ An **object** containing:
 Using reload as a command line application
 ---
 
-There are two ways to use the command line application.
+The reload command tool is great for serving up static HTML content, which will reload the server and web browser automatically for you.
 
-1. In a directory serving blank static HTML files or
-2. In a project with a `package.json` file
+This is great for **local development** and **remote development** like GitHub Codespaces
 
-Each will require different modes of installing.
+Globally install reload
 
-In case one you should install reload globally with `npm install reload -g`. Also with reload installed globally you can go to any directory with an HTML file and use the command reload to constantly watch it and reload it while you make changes.
-
-In case two you should install locally with `npm install --save-dev`, since this tool is to aid in development you should install it as a dev dependency.
+    npm i -g reload
 
 Navigate to your html directory:
 
